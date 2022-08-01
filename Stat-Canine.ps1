@@ -5,7 +5,7 @@ Develops a set of functions useful in evaluating a canine
 #>
 function Get-EvalText {
     param ()
-    $evalText = Get-Content -Path C:\Users\winnd\OneDrive\Documents\Scripts\CertainStat.txt
+    $evalText = Get-Content -Path .\CertainStat.txt
     return $evalText
 }
 
