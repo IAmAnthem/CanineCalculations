@@ -1,0 +1,26 @@
+Mulapin
+A large silver trained fox comes bouncing into the room.
+Ringo jumps up on you and licks you happily!
+compare fox 2 to petname
+You look hard at a very large merle grey trained fox comparing to a large
+silver trained fox ...
+You are certain that fox 2 is:
+ Alertness seems slightly inferior.
+ Appetite seems marginally inferior.
+ Brutality seems barely better.
+ Development seems marginally inferior.
+ Eluding seems marginally better.
+ Energy seems marginally inferior.
+ Evasion seems barely inferior.
+ Ferocity seems marginally inferior.
+ Fortitude seems marginally inferior.
+ Insight seems marginally inferior.
+ Might seems marginally inferior.
+ Nimbleness seems marginally inferior.
+ Patience seems barely inferior.
+ Procreation seems barely better.
+ Sufficiency seems slightly inferior.
+ Targeting seems marginally better.
+ Toughness seems marginally better.
+Overall he seems to be very inferior.
+They seem to be partially related.

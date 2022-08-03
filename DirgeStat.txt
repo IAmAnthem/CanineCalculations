@@ -1,0 +1,32 @@
+Dirge
+A very large merle grey trained fox.
+Prince Angrynerd the Angriest of the Despicable Nerds of Chaos (chaotic evil).
+A player usage graph.
+166/166:172/182> 
+*Frosty* Brave Dirge enters the game.
+A huge merle grey trained fox comes bouncing into the room.
+Fluid jumps up on you and licks you happily!
+compare fox 2 to petname
+You look hard at a very large merle grey trained fox comparing to a huge
+merle grey trained fox ...
+You are certain that fox 2 is:
+ Alertness seems marginally inferior.
+ Appetite seems slightly inferior.
+ Brutality seems marginally better.
+ Development seems slightly inferior.
+ Eluding seems marginally better.
+ Energy seems slightly better.
+ Evasion seems slightly better.
+ Ferocity seems barely inferior.
+ Fortitude seems slightly better.
+ Insight seems slightly inferior.
+ Might seems marginally better.
+ Nimbleness seems barely better.
+ Patience seems marginally better.
+ Procreation seems marginally inferior.
+ Sufficiency seems similar.
+ Targeting seems slightly better.
+ Toughness seems marginally better.
+Overall he seems to be better.
+They seem to be unrelated.
+
