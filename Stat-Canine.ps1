@@ -5,7 +5,34 @@ Develops a set of functions useful in evaluating a canine
 #>
 Function Read-Database {
     Param()
+    # The default behaviour of Import-CSV to import everything as strings
+    # Cast the integers!
     $petDB = Import-CSV -Path .\KNOWNS.csv
+    $petDB = $petDB | ForEach-Object {
+        #Cast things to integer explicitly
+        $_.Alertness   = [int]$_.Alertness
+        $_.Appetite	   = [int]$_.Appetite
+        $_.Brutality   = [int]$_.Brutality
+        $_.Development = [int]$_.Development
+        $_.Eluding     = [int]$_.Eluding
+        $_.Energy      = [int]$_.Energy
+        $_.Evasion     = [int]$_.Evasion
+        $_.Ferocity    = [int]$_.Ferocity
+        $_.Fortitude   = [int]$_.Fortitude
+        $_.Insight     = [int]$_.Insight
+        $_.Might       = [int]$_.Might
+        $_.Nimbleness  = [int]$_.Nimbleness
+        $_.Patience    = [int]$_.Patience
+        $_.Procreation = [int]$_.Procreation
+        $_.Sufficiency = [int]$_.Sufficiency
+        $_.Targeting   = [int]$_.Targeting
+        $_.Toughness   = [int]$_.Toughness
+        $_.TOTAL       = [int]$_.TOTAL
+
+        # Output object
+        $_
+        }
+
     return $petDB
     }
 
@@ -91,14 +118,15 @@ function Get-TraitText {
 function Get-EvalLowRange {
     param(
     $traitName,
-    $evalText
+    $traitText
     )
-    $traitText = Get-TraitText $traitName
     #DEBUG    
     Write-Host "Get-EvalLowRange is looking for $traitText"
     foreach ($row in $baseArray){
         if($row.evalText -eq $traitText){$evalLowRange = $row.low}	
         }
+    #$evalLowRange = $evalLowRange.ToInt32($null)
+    #don't need to change types because I changed types in $baseArray
     return $evalLowRange
 }
 
@@ -111,6 +139,7 @@ function Get-EvalHighRange {
     foreach ($row in $baseArray){
         if($row.evalText -eq $traitText){$evalHighRange = $row.high}	
         }
+    $evalHighRange = $evalHighRange.ToInt(32)
     return $evalHighRange
 
     }
@@ -147,7 +176,7 @@ Function Get-EvalLowValue {
     $traitName,
     $knownPet
     )
-    $evalLowRange = Get-EvalLowRange $traitName
+    $evalLowRange = Get-EvalLowRange $traitName $traitText
     $knownValue = $knownPet.$traitName
     $evalLowValue = $knownValue + $evalLowRange
     return $evalLowValue
@@ -159,7 +188,7 @@ Function Get-EvalHighValue {
     $traitName,
     $knownPet
     )
-    $evalHighRange = Get-EvalHighRange $traitName
+    $evalHighRange = Get-EvalHighRange $traitName $traitText
     $knownValue = $knownPet.$traitName
     $evalHighValue = $knownValue + $evalHighRange
     return $evalHighValue
@@ -324,21 +353,23 @@ $highPet = [ordered]@{
         Name        ="highPet"
         }
 
+# Aha, passing a hashtable with a number in quotes casts the value as a string
+# So don't do that!
 $baseArray = @(
-    [PSCustomObject]@{evalText="totally inferior";low="-1700";high="-71"}
-	[PSCustomObject]@{evalText="very inferior";low="-70";high="-21"}
-    [PSCustomObject]@{evalText="inferior";low="-20";high="-10"}
-    [PSCustomObject]@{evalText="slightly inferior";low="-9";high="-5"}
-    [PSCustomObject]@{evalText="marginally inferior";low="-4";high="-2"}
-    [PSCustomObject]@{evalText="barely inferior";low="-1";high="-1"}
-    [PSCustomObject]@{evalText="similar";low="0";high="0"}
-    [PSCustomObject]@{evalText="barely better";low="1";high="1"}
-    [PSCustomObject]@{evalText="marginally better";low="2";high="4"}
-    [PSCustomObject]@{evalText="slightly better";low="5";high="9"}
-    [PSCustomObject]@{evalText="better";low="10";high="20"}
-   	[PSCustomObject]@{evalText="much better";low="21";high="70"}
-    [PSCustomObject]@{evalText="outstandingly better";low="71";high="1700"}
-	)
+    [PSCustomObject]@{evalText="totally inferior";low=-1700;high=-71}
+    [PSCustomObject]@{evalText="very inferior";low=-70;high=-21}
+    [PSCustomObject]@{evalText="inferior";low=-20;high=-10}
+    [PSCustomObject]@{evalText="slightly inferior";low=-9;high=-5}
+    [PSCustomObject]@{evalText="marginally inferior";low=-4;high=-2}
+    [PSCustomObject]@{evalText="barely inferior";low=-1;high=-1}
+    [PSCustomObject]@{evalText="similar";low=0;high=0}
+    [PSCustomObject]@{evalText="barely better";low=1;high=1}
+    [PSCustomObject]@{evalText="marginally better";low=2;high=4}
+    [PSCustomObject]@{evalText="slightly better";low=5;high=9}
+    [PSCustomObject]@{evalText="better";low=10;high=20}
+    [PSCustomObject]@{evalText="much better";low=21;high=70}
+    [PSCustomObject]@{evalText="outstandingly better";low=71;high=1700}
+    )
 
 
 $traits = @(
