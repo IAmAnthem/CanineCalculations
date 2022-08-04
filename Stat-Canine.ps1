@@ -19,7 +19,7 @@ function Get-EvalText {
         # Don't do anything
         # Write-Host "You entered the following text: $multiLineText" 
         }
-    
+    $evalText = $evalText.Split([Environment]::NewLine, [System.StringSplitOptions]::RemoveEmptyEntries)
     return $evalText
 }
 
@@ -56,16 +56,21 @@ function Get-TraitText {
     $traitName,
     $evalText
     )
-    # DEBUG:         Write-Host "Get-TraitText is looking for $traitName"
-    $evalText = Get-EvalText
-    if($evalText -match $traitName){
-        # DEBUG:         Write-Host "Get-TraitText found $traitName in evaltext"
-        $evalString = $evalText -match $traitName
-        # DEBUG: Write-Host "Get-TraitText created evalString: $evalString"
-        $stripText = $traitName + " seems"
-        $traitText = $evalString.Replace($stripText,"").Replace(".","").Substring(2)
-        # DEBUG:        Write-Host "Get-TraitText calculated $traitName as $traitText"
-        return $traitText
+    # DEBUG:         
+    Write-Host "Get-TraitText is looking for $traitName"  
+        if($evalText -match $traitName){
+            # DEBUG:         
+            Write-Host "Get-TraitText found $traitName in evaltext"
+            $evalString = foreach ($str in $evalText){
+                Select-String -InputObject $str -Pattern $traitName
+                }
+            # DEBUG: 
+            Write-Host "Get-TraitText created evalString: $evalString"
+            $stripText = $traitName + " seems"
+            $traitText = $evalString.Replace($stripText,"").Replace(".","").Substring(2)
+            # DEBUG:        
+            Write-Host "Get-TraitText calculated $traitName as $traitText"
+            return $traitText
         } else {
         if ($traitName -eq "Total"){
             $evalString = $evalText -match "Overall"
@@ -85,8 +90,9 @@ function Get-EvalLowRange {
     $traitName,
     $evalText
     )
-    # $traitText = Get-TraitText $traitName
-    # DEBUG    Write-Host "Get-EvalLowRange is looking for $traitText"
+    $traitText = Get-TraitText $traitName
+    #DEBUG    
+    Write-Host "Get-EvalLowRange is looking for $traitText"
     foreach ($row in $baseArray){
         if($row.evalText -eq $traitText){$evalLowRange = $row.low}	
         }
@@ -135,9 +141,9 @@ Function Get-KnownPet{
 
 Function Get-EvalLowValue {
     param(
-    $traitName
+    $traitName,
+    $knownPet
     )
-    $knownPet = Get-KnownPet
     $evalLowRange = Get-EvalLowRange $traitName
     $knownValue = $knownPet.$traitName
     $evalLowValue = $knownValue + $evalLowRange
@@ -147,9 +153,9 @@ Function Get-EvalLowValue {
 
 Function Get-EvalHighValue {
     param(
-    $traitName
+    $traitName,
+    $knownPet
     )
-    $knownPet = Get-KnownPet
     $evalHighRange = Get-EvalHighRange $traitName
     $knownValue = $knownPet.$traitName
     $evalHighValue = $knownValue + $evalHighRange
