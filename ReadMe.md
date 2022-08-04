@@ -18,9 +18,16 @@ Check the relationship level?
 * Futureproofing for some other need
 
 Update-LowPet and Update-HighPet seem to be working correctly now.
-* Add an evaluation of TOTAL
+* Add an evaluation of OVERALL
+  * overAll for the low estimate is the floor, rarely this low
+  * overAll for the high estimate is the ceiling, rarely this high
+* Add a subTotal all traits and include in hashtable
+    * for low estimate, this is the true floor (usually higher than Overall)
+	* for the high estimate, this is the true ceiling (usually lower than Overall)
 * What do we care about here?
-  * known vs unknown OVERALL can really help
+  * knowing overAll and subtotals could resolve the last point or two
+    * humans can eyeball that (fairly common to recognize trait MUST be x because of this)
+	* I'd have to figure out the logic to calculate that
   * Complicated logic to use an overall SIMILAR to resolve unknowns
   * Take a stab and see how useful OVERALL is as you cycle
 

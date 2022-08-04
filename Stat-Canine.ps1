@@ -103,11 +103,11 @@ function Get-TraitText {
             return $traitText
         } else {
         if ($traitName -eq "TOTAL"){
-            Write-Host "Get-TraitText is going to look for Overall"
+            # DEBUG: Write-Host "Get-TraitText is going to look for Overall"
             $evalString = $evalText -match "Overall"
             $traitText = $evalString -replace '(^(?:\S+\s+\n?){1,5})',''
             $traitText = $traitText.Replace(".","")
-            Write-Host "Get-TraitText found the Overall to be: $traitText"
+            # DEBUG: Write-Host "Get-TraitText found the Overall to be: $traitText"
             return $traitText
         } else {
         Write-Host "FUBAR! I can't match $traitName - exiting script"
@@ -346,7 +346,11 @@ Function Get-Status {
         }
     }
     $total = $traits.Count
-    Write-Host "Solved $i of $total"
+    $lowTOTAL  = ($lowPet.TOTAL  | Out-String).Replace("`n","") # force to string
+    $highTOTAL = ($highPet.TOTAL | Out-String).Replace("`n","") # remove newline in string
+    
+    Write-Host "STATUS: Solved $i of $total"
+    Write-Output "Unknown Pet TOTAL is between $lowTOTAL and $highTOTAL"
     if($i -eq $total){$solved = $true}
     else{$solved = $false}
     return $solved
@@ -367,7 +371,7 @@ Function Get-Response {
 ########## END OF FUNCTIONS ##########
 ########## Setting up vars  #########
 
-# Setting up low pet hashtable, don't need all keys, will add as calculated
+# Setting up hashtables for results, don't need all keys, will add as calculated
 $lowPet = [ordered]@{    
         Name        ="dummy"
         }
@@ -398,7 +402,8 @@ $baseArray = @(
 $traits = @(
     'Alertness','Appetite','Brutality','Development','Eluding','Energy',
     'Evasion','Ferocity','Fortitude','Insight','Might','Nimbleness',
-    'Patience','Procreation','Sufficiency','Targeting','Toughness'
+    'Patience','Procreation','Sufficiency','Targeting','Toughness',
+    'TOTAL'
     )
 
 
@@ -444,3 +449,4 @@ Update-HighPet -evalText $evalText
 
 #>
 
+## TESTING
