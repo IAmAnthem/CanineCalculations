@@ -38,10 +38,12 @@ Function Read-Database {
 
 function Get-EvalText {
     param ()
-    # $evalText = Get-Content -Path .\CertainStat.txt
     # Ok prompt for some text, we need an input box
-    $evalText = Read-MultiLineInputBoxDialog -Message "Please enter a CERTAIN eval, KNOWN to UNKNOWN" -WindowTitle "Compare Known to Unknown" -DefaultText "Enter some text here..."
-    if ($evalText -eq $null) { Write-Host "You clicked Cancel - ending script";break }
+    $message = "Please enter a CERTAIN eval, KNOWN to UNKNOWN"
+    $windowTitle = "Compare Known to Unknown"
+    $defaultText = "Enter some text here..."
+    $evalText = Read-MultiLineInputBoxDialog -Message $message -WindowTitle $windowTitle -DefaultText $defaultText
+    if ($null -eq $evalText) { Write-Host "You clicked Cancel - ending script";break }
     else { 
         # Don't do anything
         # Write-Host "You entered the following text: $multiLineText" 
@@ -72,9 +74,10 @@ function Get-Relationship {
     if($evalText -match $relationshipPattern){
         $relationship = $evalText -match $relationshipPattern
         $relationship = $relationship.Replace($relationshipPattern,"").Replace(".","").Replace(" ","")
-    } else {
+        }
+    else{
         $relationship = "UNKNOWN"
-    }
+        }
     return $relationship
 }
 
@@ -83,9 +86,8 @@ function Get-TraitText {
     $traitName,
     $evalText
     )
-    # DEBUG:         
-    Write-Host "Get-TraitText is looking for $traitName"
-    # Write-Host "Get-TraitText should know what evalText is: $evalText"  
+    # DEBUG: Write-Host "Get-TraitText is looking for $traitName"
+    # DEBUG: Write-Host "Get-TraitText should know what evalText is: $evalText"  
         if($evalText -match $traitName){
             # DEBUG: Write-Host "Get-TraitText found $traitName in evaltext"
             $evalString = foreach ($str in $evalText){
@@ -97,14 +99,15 @@ function Get-TraitText {
             $stripText = $traitName + " seems"
             $traitText = $evalString.Replace($stripText,"").Replace(".","")
             $traitText = $traitText.TrimEnd().TrimStart()
-            # DEBUG:        
-            Write-Host "Get-TraitText calculated $traitName as $traitText"
+            # DEBUG: Write-Host "Get-TraitText calculated $traitName as $traitText"
             return $traitText
         } else {
-        if ($traitName -eq "Total"){
+        if ($traitName -eq "TOTAL"){
+            Write-Host "Get-TraitText is going to look for Overall"
             $evalString = $evalText -match "Overall"
             $traitText = $evalString -replace '(^(?:\S+\s+\n?){1,5})',''
             $traitText = $traitText.Replace(".","")
+            Write-Host "Get-TraitText found the Overall to be: $traitText"
             return $traitText
         } else {
         Write-Host "FUBAR! I can't match $traitName - exiting script"
@@ -118,13 +121,12 @@ function Get-EvalLowRange {
     param(
     $traitName
     )
-    #DEBUG    
     $traitText = Get-TraitText $traitName $evalText
-    Write-Host "Get-EvalLowRange is looking for $traitText"
+    # DEBUG: Write-Host "Get-EvalLowRange is looking for $traitText"
     foreach ($row in $baseArray){
         if($row.evalText -eq $traitText){$evalLowRange = $row.low}	
         }
-    Write-Host "Get-EvalLowRange is returning $traitName modifier $evalLowRange from a known pet"
+    # DEBUG: Write-Host "Get-EvalLowRange is returning $traitName modifier $evalLowRange from a known pet"
     return $evalLowRange
 }
 
@@ -138,7 +140,6 @@ function Get-EvalHighRange {
         if($row.evalText -eq $traitText){$evalHighRange = $row.high}	
         }
     return $evalHighRange
-
     }
 
 Function Get-KnownPet{
@@ -173,14 +174,13 @@ Function Get-EvalLowValue {
     $traitName,
     $knownPet
     )
-    Write-Host "Entering Get-EvalLowValue"
+    # DEBUG: Write-Host "Entering Get-EvalLowValue"
     $evalLowRange = Get-EvalLowRange $traitName $traitText
-    Write-Host "Get-EvalLowValue should now know to modify knownPet by $evalLowRange"
+    # DEBUG: Write-Host "Get-EvalLowValue should now know to modify knownPet by $evalLowRange"
     $knownValue = $knownPet.$traitName
-    Write-Host "Get-EvalLowValue should know knownpet $traitName is $knownValue"
+    # DEBUG: Write-Host "Get-EvalLowValue should know knownpet $traitName is $knownValue"
     $evalLowValue = $knownValue + $evalLowRange
     return $evalLowValue
-
 }
 
 Function Get-EvalHighValue {
@@ -192,21 +192,20 @@ Function Get-EvalHighValue {
     $knownValue = $knownPet.$traitName
     $evalHighValue = $knownValue + $evalHighRange
     return $evalHighValue
-
 }
 
 Function Get-TraitValueRange {
     Param(
     $traitName
     )
-    Write-Host "Entering Get-TraitValueRange"
-    Write-Host "Get-TraitValueRange should know $traitName is being processed"
+    # DEBUG: Write-Host "Entering Get-TraitValueRange"
+    # DEBUG: Write-Host "Get-TraitValueRange should know $traitName is being processed"
     $traitValueHashTable = @{
         traitName = $traitName
         Low       = Get-EvalLowValue $traitName $knownPet
         High      = Get-EvalHighValue $traitName $knownPet
         }
-    Write-Host "Get-TraitValueRange is returning $traitValueHashTable"
+    # DEBUG: Write-Host "Get-TraitValueRange is returning $traitValueHashTable"
     return $traitValueHashTable
 }
 
@@ -214,32 +213,32 @@ Function Update-LowPet {
     Param(
         $evalText
     )
-    Write-Host "Entering Update-LowPet"
+    # DEBUG: Write-Host "Entering Update-LowPet"
     foreach ($traitName in $traits){
         $traitValueHashTable = Get-TraitValueRange $traitName
         $currentValue = $lowPet.$traitName
         $potentialValue = $traitValueHashTable['Low']
-        Write-Host "Update-LowPet Looking for $traitName in traits array"
-        Write-Host "Update-LowPet currentValue is $currentValue"
-        Write-Host "Update-LowPet potentialValue is $potentialValue"
+        # DEBUG: Write-Host "Update-LowPet Looking for $traitName in traits array"
+        # DEBUG: Write-Host "Update-LowPet currentValue is $currentValue"
+        # DEBUG: Write-Host "Update-LowPet potentialValue is $potentialValue"
 
         if($null -eq $currentValue){
-            Write-Host "Update-Lowpet creating key for $traitName value $potentialValue" 
+            # DEBUG: Write-Host "Update-Lowpet creating key for $traitName value $potentialValue" 
             $lowPet.$traitName += $traitValueHashTable.Low
             $currentValue = $potentialValue
             }
         elseif((0+ $currentValue) -lt $potentialValue){  # not necessary i think, but ($null -lt 0) = $true otherwise
             # The low range should continue to 'rise' as we refine
             # Since our lowPet low is less than calculated low, Update
-            Write-Host "Update-Lowpet $traitName curr $currentValue change to $potentialValue"
+            # DEBUG: Write-Host "Update-Lowpet $traitName curr $currentValue change to $potentialValue"
             $lowPet.$traitName = $potentialValue
             }
         elseif($currentValue -ge $potentialValue){
             # his value is fine, don't change it
-            Write-Host "Update-Lowpet $traitName doesn't need change"
+            # DEBUG: Write-Host "Update-Lowpet $traitName doesn't need change"
             }
     }
-    Write-Host "Exiting Update-LowPet"
+    # DEBUG: Write-Host "Exiting Update-LowPet"
     return
 }
 
@@ -251,25 +250,25 @@ Function Update-HighPet {
         $traitValueHashTable = Get-TraitValueRange $traitName
         $currentValue = $highPet.$traitName
         $potentialValue = $traitValueHashTable['High']
-        Write-Host "Update-HighPet Looking for $traitName in traits array"
-        Write-Host "Update-HighPet currentValue is $currentValue"
-        Write-Host "Update-HighPet potentialValue is $potentialValue"
+        # DEBUG: Write-Host "Update-HighPet Looking for $traitName in traits array"
+        # DEBUG: Write-Host "Update-HighPet currentValue is $currentValue"
+        # DEBUG: Write-Host "Update-HighPet potentialValue is $potentialValue"
         if($null -eq $currentValue){
-            Write-Host "Update-HighPet creating key for $traitName value $potentialValue"
+            # DEBUG: Write-Host "Update-HighPet creating key for $traitName value $potentialValue"
             $highPet.$traitName += $traitValueHashTable.High
             $currentValue = $potentialValue
             }
         elseif($currentValue -le $potentialValue){
-            Write-Host "Update-HighPet curr $traitName $currentValue is lower than $potentialValue - do nothing"
+            # DEBUG: Write-Host "Update-HighPet curr $traitName $currentValue is lower than $potentialValue - do nothing"
 #            $highPet.TraitName = $traitValueHashTable.High
             }
         elseif($currentValue -gt $potentialValue){
             # The high range should continue to 'sink' as we refine
-            Write-Host "Update-HighPet curr $traitName curr $currentValue change to $potentialValue"
+            # DEBUG: Write-Host "Update-HighPet curr $traitName curr $currentValue change to $potentialValue"
             $highPet.$traitName = $potentialValue
             }
     }
-    Write-Host "Exiting Update-HighPet"            
+    # DEBUG: Write-Host "Exiting Update-HighPet"            
     return
 }
 
@@ -335,7 +334,7 @@ function Read-MultiLineInputBoxDialog([string]$Message, [string]$WindowTitle, [s
         return $form.Tag
     }
 
-Function Report-Status {
+Function Get-Status {
     Param(
         $lowPet,
         $highPet
@@ -353,18 +352,16 @@ Function Report-Status {
     return $solved
 }
 
+Function Get-Response {
+    Param(
+        $solved,
+        $lowPet,
+        $highPet
+        )
+    # Do Stuff
+    Write-Host "Build a menuing system here:"
+}
 
-<# Placeholder - something like this?, need multiple pets to compare against
-    Make a better CSV-replica
-    Need to loop through compare-pet until low=high or user says stop
-    Spit out the result
-    John likes hashtable but we need array for database-like operations
-
-Function Compare-Pet(
-    Param($name)
-    Update-LowPet
-    Update-HighPet
-#>
 
 
 ########## END OF FUNCTIONS ##########
@@ -422,15 +419,11 @@ $knowledge = Get-Knowledge $evalText
 if($knowledge -ne "certain"){
     Write-Host "Comparison not certain, breaking run!";break
     }
-    else{
-    Write-Host "Yup, good eval"
-    }
-
 
 Update-LowPet -evalText $evalText
 Update-HighPet -evalText $evalText
-
-Report-Status $lowPet $highPet
+Get-Status $lowPet $highPet
+Get-Response $solved $lowPet $highPet
 
 <#
 

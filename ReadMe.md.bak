@@ -1,10 +1,10 @@
 workflow
 
 Pick a known pet:		Get-KnownPet
-*	returns $knownPet
+* returns $knownPet
 
 Ask for an evaluation	Get-EvalText
-*	returns $evalText
+* returns $evalText
 
 Check the knowledge level
 *		if $knowledge -ne certain, abort
@@ -14,17 +14,18 @@ Check the knowledge level
 
 
 Check the relationship level?
-*	not really relevant at this point
-*	Futureproofing for some other need
+* not really relevant at this point
+* Futureproofing for some other need
 
 Update-LowPet and Update-HighPet seem to be working correctly now.
 
-Compare the two hashtables somehow
-*	Ingest them into an array like our PetDB?
+Report-Status checks count of solutions and returns a boolean $solved
+* Loops through traits and compare low/high hashtables
+* Present the option to [C]ontinue [R]eport [E]xit
 
+Run-Comparisons function?
 ```
-	foreach($trait in $traitnames){
-	if array.lowpet.traitname -eq array.highpet.traitname
-		Solved $traitname
-		spit to solution.$traitName
+while $solved = $false
+ do the things
 ```
+
