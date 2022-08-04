@@ -84,16 +84,15 @@ function Get-TraitText {
     $evalText
     )
     # DEBUG:         
-    Write-Host "Get-TraitText is looking for $traitName"  
+    Write-Host "Get-TraitText is looking for $traitName"
+    # Write-Host "Get-TraitText should know what evalText is: $evalText"  
         if($evalText -match $traitName){
-            # DEBUG:         
-            Write-Host "Get-TraitText found $traitName in evaltext"
+            # DEBUG: Write-Host "Get-TraitText found $traitName in evaltext"
             $evalString = foreach ($str in $evalText){
                 Select-String -InputObject $str -Pattern $traitName
                 }
-            # DEBUG: 
             $evalString = $evalString.ToString()
-            Write-Host "Get-TraitText created evalString: $evalString"
+            # DEBUG: Write-Host "Get-TraitText created evalString: $evalString"
             $evalString = $evalString.TrimStart().TrimEnd()
             $stripText = $traitName + " seems"
             $traitText = $evalString.Replace($stripText,"").Replace(".","")
@@ -117,16 +116,15 @@ function Get-TraitText {
 
 function Get-EvalLowRange {
     param(
-    $traitName,
-    $traitText
+    $traitName
     )
     #DEBUG    
+    $traitText = Get-TraitText $traitName $evalText
     Write-Host "Get-EvalLowRange is looking for $traitText"
     foreach ($row in $baseArray){
         if($row.evalText -eq $traitText){$evalLowRange = $row.low}	
         }
-    #$evalLowRange = $evalLowRange.ToInt32($null)
-    #don't need to change types because I changed types in $baseArray
+    Write-Host "Get-EvalLowRange is returning $traitName modifier $evalLowRange from a known pet"
     return $evalLowRange
 }
 
@@ -135,11 +133,10 @@ function Get-EvalHighRange {
     $traitName,
     $traitText
     )
-    # $traitText = Get-TraitText $traitName
+    $traitText = Get-TraitText $traitName $evalText
     foreach ($row in $baseArray){
         if($row.evalText -eq $traitText){$evalHighRange = $row.high}	
         }
-    $evalHighRange = $evalHighRange.ToInt(32)
     return $evalHighRange
 
     }
@@ -176,8 +173,11 @@ Function Get-EvalLowValue {
     $traitName,
     $knownPet
     )
+    Write-Host "Entering Get-EvalLowValue"
     $evalLowRange = Get-EvalLowRange $traitName $traitText
+    Write-Host "Get-EvalLowValue should now know to modify knownPet by $evalLowRange"
     $knownValue = $knownPet.$traitName
+    Write-Host "Get-EvalLowValue should know knownpet $traitName is ($knownPet).$traitName"
     $evalLowValue = $knownValue + $evalLowRange
     return $evalLowValue
 
@@ -199,11 +199,14 @@ Function Get-TraitValueRange {
     Param(
     $traitName
     )
+    Write-Host "Entering Get-TraitValueRange"
+    Write-Host "Get-TraitValueRange should know $traitName is being processed"
     $traitValueHashTable = @{
         traitName = $traitName
-        Low       = Get-EvalLowValue $traitName
-        High      = Get-EvalHighValue $traitName
+        Low       = Get-EvalLowValue $traitName $knownPet
+        High      = Get-EvalHighValue $traitName $knownPet
         }
+    Write-Host "Get-TraitValueRange is returning $traitValueHashTable"
     return $traitValueHashTable
 }
 
@@ -211,7 +214,9 @@ Function Update-LowPet {
     Param(
         $evalText
     )
+    Write-Host "Entering Update-LowPet"
     foreach ($traitName in $traits){
+        Write-Host "Looking for $traitName in traits array"
         $traitValueHashTable = Get-TraitValueRange $traitName
         if($null -eq $lowPet.$traitName){
             $lowPet.$traitName += $traitValueHashTable.Low
@@ -236,7 +241,7 @@ Function Update-LowPet {
 
 Function Update-HighPet {
     Param(
-        $name # add $name here to lookup against something other than the zeropet
+        $evalText
     )
     foreach ($traitName in $traits){
         $traitValueHashTable = Get-TraitValueRange $traitName
