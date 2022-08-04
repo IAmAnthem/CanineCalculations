@@ -7,10 +7,10 @@ Ask for an evaluation	Get-EvalText
 * returns $evalText
 
 Check the knowledge level
-*		if $knowledge -ne certain, abort
-*		Future development: Determine the variations in think/feel
-*			Is this predictable?
-*			redshift/blueshift the results based on (whatever)
+* `if $knowledge -ne certain, abort`
+* Future development: Determine the variations in think/feel
+  * Is this predictable?
+  * redshift/blueshift the results based on (whatever)
 
 
 Check the relationship level?
