@@ -14,7 +14,7 @@ function Get-EvalText {
     # $evalText = Get-Content -Path .\CertainStat.txt
     # Ok prompt for some text, we need an input box
     $evalText = Read-MultiLineInputBoxDialog -Message "Please enter a CERTAIN eval, KNOWN to UNKNOWN" -WindowTitle "Compare Known to Unknown" -DefaultText "Enter some text here..."
-    if ($evalText -eq $null) { Write-Host "You clicked Cancel" }
+    if ($evalText -eq $null) { Write-Host "You clicked Cancel - ending script";break }
     else { 
         # Don't do anything
         # Write-Host "You entered the following text: $multiLineText" 
@@ -65,9 +65,12 @@ function Get-TraitText {
                 Select-String -InputObject $str -Pattern $traitName
                 }
             # DEBUG: 
+            $evalString = $evalString.ToString()
             Write-Host "Get-TraitText created evalString: $evalString"
+            $evalString = $evalString.TrimStart().TrimEnd()
             $stripText = $traitName + " seems"
-            $traitText = $evalString.Replace($stripText,"").Replace(".","").Substring(2)
+            $traitText = $evalString.Replace($stripText,"").Replace(".","")
+            $traitText = $traitText.TrimEnd().TrimStart()
             # DEBUG:        
             Write-Host "Get-TraitText calculated $traitName as $traitText"
             return $traitText
@@ -337,33 +340,6 @@ $baseArray = @(
     [PSCustomObject]@{evalText="outstandingly better";low="71";high="1700"}
 	)
 
-# knownPet replicates the effect of Import-CSV against a normal csv
-# Comment this out and start pulling from a real database
-<#
-$knownPet = @(
-    [PSCustomObject]@{
-        Name="Heap ZeroDog";
-        Alertness=0;
-        Appetite=0;
-        Brutality=0;
-        Development=0;
-        Eluding=0;
-        Energy=0;
-        Evasion=0;
-        Ferocity=0;
-        Fortitude=0;
-        Insight=0;
-        Might=0;
-        Nimbleness=0;
-        Patience=0;
-        Procreation=0;
-        Sufficiency=0;
-        Targeting=0;
-        Toughness=0;
-        Total=0
-    }
-    )
-#>
 
 $traits = @(
     'Alertness','Appetite','Brutality','Development','Eluding','Energy',
