@@ -17,6 +17,7 @@ Check the relationship level?
 * not really relevant at this point
 * Futureproofing for some other need
 
+
 Update-LowPet and Update-HighPet seem to be working correctly now.
 * Add an evaluation of OVERALL
   * overAll for the low estimate is the floor, rarely this low
@@ -31,9 +32,11 @@ Update-LowPet and Update-HighPet seem to be working correctly now.
   * Complicated logic to use an overall SIMILAR to resolve unknowns
   * Take a stab and see how useful OVERALL is as you cycle
 
+
 Report-Status checks count of solutions and returns a boolean $solved
 * Loops through traits and compare low/high hashtables
 * Present the option to [C]ontinue [R]eport [E]xit
+
 
 Run-Comparisons function?
 ```
