@@ -21,8 +21,8 @@ Update-LowPet and Update-HighPet seem to be working correctly now.
 
 Compare the two hashtables somehow
 *	Ingest them into an array like our PetDB?
-`
-``
+
+```
 	foreach($trait in $traitnames){
 	if array.lowpet.traitname -eq array.highpet.traitname
 		Solved $traitname

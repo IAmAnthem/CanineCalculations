@@ -32,7 +32,7 @@ Function Read-Database {
         # Output object
         $_
         }
-
+    $petDB = $petDB | Sort-Object -Property Name
     return $petDB
     }
 
@@ -177,7 +177,7 @@ Function Get-EvalLowValue {
     $evalLowRange = Get-EvalLowRange $traitName $traitText
     Write-Host "Get-EvalLowValue should now know to modify knownPet by $evalLowRange"
     $knownValue = $knownPet.$traitName
-    Write-Host "Get-EvalLowValue should know knownpet $traitName is ($knownPet).$traitName"
+    Write-Host "Get-EvalLowValue should know knownpet $traitName is $knownValue"
     $evalLowValue = $knownValue + $evalLowRange
     return $evalLowValue
 
@@ -216,27 +216,31 @@ Function Update-LowPet {
     )
     Write-Host "Entering Update-LowPet"
     foreach ($traitName in $traits){
-        Write-Host "Looking for $traitName in traits array"
         $traitValueHashTable = Get-TraitValueRange $traitName
-        if($null -eq $lowPet.$traitName){
+        $currentValue = $lowPet.$traitName
+        $potentialValue = $traitValueHashTable['Low']
+        Write-Host "Update-LowPet Looking for $traitName in traits array"
+        Write-Host "Update-LowPet currentValue is $currentValue"
+        Write-Host "Update-LowPet potentialValue is $potentialValue"
+
+        if($null -eq $currentValue){
+            Write-Host "Update-Lowpet creating key for $traitName value $potentialValue" 
             $lowPet.$traitName += $traitValueHashTable.Low
+            $currentValue = $potentialValue
             }
-        elseif($lowpet.$traitName -lt $traitValueHashTable.Low){
+        elseif((0+ $currentValue) -lt $potentialValue){  # not necessary i think, but ($null -lt 0) = $true otherwise
             # The low range should continue to 'rise' as we refine
             # Since our lowPet low is less than calculated low, Update
-            $lowPet.$traitName = $traitValueHashTable.Low
+            Write-Host "Update-Lowpet $traitName curr $currentValue change to $potentialValue"
+            $lowPet.$traitName = $potentialValue
             }
-        elseif($lowPet.traitName -ge $traitValueHashTable.Low){
+        elseif($currentValue -ge $potentialValue){
             # his value is fine, don't change it
+            Write-Host "Update-Lowpet $traitName doesn't need change"
             }
-        else{
-            Write-Host "null, lt, ge cases accounted for, but still no match"
-            Write-Host "Welcome to New Math"
-            break
-            }
-            
     }
-
+    Write-Host "Exiting Update-LowPet"
+    return
 }
 
 Function Update-HighPet {
@@ -245,24 +249,28 @@ Function Update-HighPet {
     )
     foreach ($traitName in $traits){
         $traitValueHashTable = Get-TraitValueRange $traitName
-        if($null -eq $highPet.$traitName){
+        $currentValue = $highPet.$traitName
+        $potentialValue = $traitValueHashTable['High']
+        Write-Host "Update-HighPet Looking for $traitName in traits array"
+        Write-Host "Update-HighPet currentValue is $currentValue"
+        Write-Host "Update-HighPet potentialValue is $potentialValue"
+        if($null -eq $currentValue){
+            Write-Host "Update-HighPet creating key for $traitName value $potentialValue"
             $highPet.$traitName += $traitValueHashTable.High
+            $currentValue = $potentialValue
             }
-        elseif($highPet.$traitName -lt $traitValueHashTable.High){
+        elseif($currentValue -le $potentialValue){
+            Write-Host "Update-HighPet curr $traitName $currentValue is lower than $potentialValue - do nothing"
+#            $highPet.TraitName = $traitValueHashTable.High
+            }
+        elseif($currentValue -gt $potentialValue){
             # The high range should continue to 'sink' as we refine
-            $highPet.TraitName = $traitValueHashTable.High
+            Write-Host "Update-HighPet curr $traitName curr $currentValue change to $potentialValue"
+            $highPet.$traitName = $potentialValue
             }
-        elseif($lowPet.traitName -ge $traitValueHashTable.Low){
-            # This value is fine, don't change it
-            }
-        else{
-            Write-Host "null, lt, ge cases accounted for, but still no match"
-            Write-Host "Welcome to New Math"
-            break
-            }
-            
     }
-
+    Write-Host "Exiting Update-HighPet"            
+    return
 }
 
 function Read-MultiLineInputBoxDialog([string]$Message, [string]$WindowTitle, [string]$DefaultText)
@@ -280,7 +288,7 @@ function Read-MultiLineInputBoxDialog([string]$Message, [string]$WindowTitle, [s
         # Create the TextBox used to capture the user's text.
         $textBox = New-Object System.Windows.Forms.TextBox 
         $textBox.Location = New-Object System.Drawing.Size(10,40) 
-        $textBox.Size = New-Object System.Drawing.Size(575,200)
+        $textBox.Size = New-Object System.Drawing.Size(575,400)
         $textBox.AcceptsReturn = $true
         $textBox.AcceptsTab = $false
         $textBox.Multiline = $true
@@ -289,14 +297,14 @@ function Read-MultiLineInputBoxDialog([string]$Message, [string]$WindowTitle, [s
      
         # Create the OK button.
         $okButton = New-Object System.Windows.Forms.Button
-        $okButton.Location = New-Object System.Drawing.Size(415,250)
+        $okButton.Location = New-Object System.Drawing.Size(415,450)
         $okButton.Size = New-Object System.Drawing.Size(75,25)
         $okButton.Text = "OK"
         $okButton.Add_Click({ $form.Tag = $textBox.Text; $form.Close() })
      
         # Create the Cancel button.
         $cancelButton = New-Object System.Windows.Forms.Button
-        $cancelButton.Location = New-Object System.Drawing.Size(510,250)
+        $cancelButton.Location = New-Object System.Drawing.Size(510,450)
         $cancelButton.Size = New-Object System.Drawing.Size(75,25)
         $cancelButton.Text = "Cancel"
         $cancelButton.Add_Click({ $form.Tag = $null; $form.Close() })
@@ -304,7 +312,7 @@ function Read-MultiLineInputBoxDialog([string]$Message, [string]$WindowTitle, [s
         # Create the form.
         $form = New-Object System.Windows.Forms.Form 
         $form.Text = $WindowTitle
-        $form.Size = New-Object System.Drawing.Size(610,320)
+        $form.Size = New-Object System.Drawing.Size(610,520)
         $form.FormBorderStyle = 'FixedSingle'
         $form.StartPosition = "CenterScreen"
         $form.AutoSizeMode = 'GrowAndShrink'
@@ -327,6 +335,25 @@ function Read-MultiLineInputBoxDialog([string]$Message, [string]$WindowTitle, [s
         return $form.Tag
     }
 
+Function Report-Status {
+    Param(
+        $lowPet,
+        $highPet
+        )
+    $i = 0
+    foreach($trait in $traits){
+    if($lowPet.$trait -eq $highPet.$trait){
+        $i=$i+1
+        }
+    }
+    $total = $traits.Count
+    Write-Host "Solved $i of $total"
+    if($i -eq $total){$solved = $true}
+    else{$solved = $false}
+    return $solved
+}
+
+
 <# Placeholder - something like this?, need multiple pets to compare against
     Make a better CSV-replica
     Need to loop through compare-pet until low=high or user says stop
@@ -342,38 +369,32 @@ Function Compare-Pet(
 
 ########## END OF FUNCTIONS ##########
 ########## Setting up vars  #########
-# Playing with hashtables to see how this works
-# Eventually I guess I need to switch to horizontal, since my sourcedata is csv
-# Reminder - source data comes in as NoteProperty with a type of string
-#    Might have some issues with hashtable data being type of int
-#    Problem for later!
 
-# Setting up low pet hashtable, don't even need all traits here
+# Setting up low pet hashtable, don't need all keys, will add as calculated
 $lowPet = [ordered]@{    
-        Name        ="lowPet"
+        Name        ="dummy"
         }
-
 
 $highPet = [ordered]@{
-        Name        ="highPet"
+        Name        ="dummy"
         }
 
-# Aha, passing a hashtable with a number in quotes casts the value as a string
-# So don't do that!
+
+# Syntax: passing a hash value with a number in quotes casts as string, without is int
 $baseArray = @(
-    [PSCustomObject]@{evalText="totally inferior";low=-1700;high=-71}
-    [PSCustomObject]@{evalText="very inferior";low=-70;high=-21}
-    [PSCustomObject]@{evalText="inferior";low=-20;high=-10}
-    [PSCustomObject]@{evalText="slightly inferior";low=-9;high=-5}
-    [PSCustomObject]@{evalText="marginally inferior";low=-4;high=-2}
-    [PSCustomObject]@{evalText="barely inferior";low=-1;high=-1}
-    [PSCustomObject]@{evalText="similar";low=0;high=0}
-    [PSCustomObject]@{evalText="barely better";low=1;high=1}
-    [PSCustomObject]@{evalText="marginally better";low=2;high=4}
-    [PSCustomObject]@{evalText="slightly better";low=5;high=9}
-    [PSCustomObject]@{evalText="better";low=10;high=20}
-    [PSCustomObject]@{evalText="much better";low=21;high=70}
-    [PSCustomObject]@{evalText="outstandingly better";low=71;high=1700}
+    [PSCustomObject]@{evalText="totally inferior";     low=-1700; high=-71}
+    [PSCustomObject]@{evalText="very inferior";        low=-70;   high=-21}
+    [PSCustomObject]@{evalText="inferior";             low=-20;   high=-10}
+    [PSCustomObject]@{evalText="slightly inferior";    low=-9;    high=-5}
+    [PSCustomObject]@{evalText="marginally inferior";  low=-4;    high=-2}
+    [PSCustomObject]@{evalText="barely inferior";      low=-1;    high=-1}
+    [PSCustomObject]@{evalText="similar";              low=0;     high=0}
+    [PSCustomObject]@{evalText="barely better";        low=1;     high=1}
+    [PSCustomObject]@{evalText="marginally better";    low=2;     high=4}
+    [PSCustomObject]@{evalText="slightly better";      low=5;     high=9}
+    [PSCustomObject]@{evalText="better";               low=10;    high=20}
+    [PSCustomObject]@{evalText="much better";          low=21;    high=70}
+    [PSCustomObject]@{evalText="outstandingly better"; low=71;    high=1700}
     )
 
 
@@ -383,12 +404,16 @@ $traits = @(
     'Patience','Procreation','Sufficiency','Targeting','Toughness'
     )
 
-# Maybe I'll do a transform with lowpet hashtable to ghostArray csv format?
-$ghostArray = @()
 
 <#
         Build your program here
+  Run through sequence and validate against spreadsheet
+  Ballad - Cover - Mulapin - Crescendo - Exie = Angrynerd Solution
+
 #>
+
+
+
 
 $knownPet = Get-KnownPet
 $evalText = Get-EvalText
@@ -402,4 +427,27 @@ if($knowledge -ne "certain"){
     }
 
 
+Update-LowPet -evalText $evalText
+Update-HighPet -evalText $evalText
+
+Report-Status $lowPet $highPet
+
+<#
+
+$knownPet = Get-KnownPet
+$evalText = Get-EvalText
+$knowledge = Get-Knowledge $evalText
+
+if($knowledge -ne "certain"){
+    Write-Host "Comparison not certain, breaking run!";break
+    }
+    else{
+    Write-Host "Yup, good eval"
+    }
+
+
+Update-LowPet -evalText $evalText
+Update-HighPet -evalText $evalText
+
+#>
 
