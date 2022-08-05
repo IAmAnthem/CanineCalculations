@@ -101,8 +101,11 @@ function Get-TraitText {
             $traitText = $traitText.TrimEnd().TrimStart()
             # DEBUG: Write-Host "Get-TraitText calculated $traitName as $traitText"
             return $traitText
-        } else {
-        if ($traitName -eq "TOTAL"){
+        } 
+<#      else
+        {
+ NOT VALID - NEEDS SEPARATE HANDLING
+        if ($traitName -eq "Overall"){
             # DEBUG: Write-Host "Get-TraitText is going to look for Overall"
             $evalString = $evalText -match "Overall"
             $traitText = $evalString -replace '(^(?:\S+\s+\n?){1,5})',''
@@ -115,7 +118,89 @@ function Get-TraitText {
         }
     return $traitText
     }
+#>
 }
+
+Function Get-Overall {
+    Param(
+    $evalText
+    )
+    # This is hideous but Overall is a special case so, whatever
+    # In testing through this might make everything a lot cleaner to do traits this way
+    # Get the comparison text
+    $pattern = "Overall"         # Made it a var since I'll use it for key later
+    $overallText = foreach ($str in $evalText){
+        Select-String -InputObject $str -Pattern $pattern
+        }
+    $overallText = $overallText.ToString()
+    $overallText = $overallText -replace '(^(?:\S+\s+\n?){1,5})',''
+    $overallText = $overallText.Replace(".","")
+    # DEBUG:    Write-Host "Get-Overall found the Overall to be: $overallText"
+
+    # Turn comparison text into a number
+    foreach($row in $baseArray){
+        if($row.evalText -eq $overallText){
+            $overallLowRange  = $row.low
+            $overallHighRange = $row.high
+            }
+        }
+    # DEBUG:    Write-Host "Get-Overall found modifiers low: $overallLowRange - high: $overallHighRange"
+
+    # Do the math, known.total + modifiers
+    $knownValue = $knownPet.TOTAL
+    # DEBUG:    Write-Host "Get-Overall found knownpet TOTAL: $knownValue"
+    $potentialOverallLowValue = $knownValue + $overallLowRange
+    $potentialOverallHighValue = $knownValue + $overallHighRange
+
+    # Handling the Overall Low first
+    # DEBUG:    Write-Host "Get-Overall calculated Overall Low: $overallLowValue High: $overallHighValue"
+
+    # Get our current values for low and high
+    $currentLowOverall  = $lowPet.$pattern
+    $currentHighOverall = $highPet.$pattern
+    # DEBUG:    Write-Host "Get-Overall current Low Overall is $currentLowOverall"
+    # DEBUG:    Write-Host "Get-Overall current High Overall is $currentHighOverall"
+
+    # Do we need to add or change the value in key Overall?
+    if($lowpet.keys -notcontains $pattern){
+        # DEBUG:    Write-Host "Get-Overall creating key for lowPet $pattern value $potentialOverallLowValue" 
+        $lowPet.Add($pattern,$potentialOverallLowValue)
+    }
+    elseif($currentLowOverall -lt $potentialOverallLowValue){  
+        # The low range should continue to 'rise' as we refine
+        # Since our current overall low < than calculated low, update!
+        # DEBUG:    Write-Host "Get-Overall updating lowpet $pattern value from $currentLowOverall to $potentialOverallLowValue"
+        $lowpet.$pattern = $potentialOverallLowValue
+    }
+    elseif($currentLowOverall -ge $potentialLowOverall){
+        # current overall low  >= potential overall low, discard this (Don't do anything)
+        # DEBUG:    Write-Host "Get-Overall - no action: $currentLowOverall is greater or equal to $potentialOverallLowValue"
+    }
+
+
+    # Handle the Overall High
+    # DEBUG: 
+    # Get our current values for low and high
+    # DEBUG:    Write-Host "Get-Overall current High Overall is $currentHighOverall"
+
+    # Do we need to add or change the value in key Overall?
+    if($highpet.keys -notcontains $pattern){
+        # DEBUG:   Write-Host "Get-Overall creating key for highPet $pattern value $potentialOverallHighValue" 
+        $highPet.Add($pattern,$potentialOverallHighValue)
+    }
+    elseif($currentHighOverall -gt $potentialOverallHighValue){  
+        # The high range should continue to 'sink' as we refine
+        # Since our current overall high > calculated low, update!
+        # DEBUG:    Write-Host "Get-Overall updating highpet $pattern value from $currentHighOverall to $potentialOverallHighValue"
+        $highpet.$pattern = $potentialOverallHighValue
+    }
+    elseif($currentHighOverall -le $potentialHighOverall){
+        # current overall low  <= potential overall low, discard this (Don't do anything)
+    # DEBUG:    Write-Host "Get-Overall - no action: $currentHighOverall is less than or equal to $potentialOverallHighValue"
+    }
+
+}
+
 
 function Get-EvalLowRange {
     param(
@@ -346,11 +431,11 @@ Function Get-Status {
         }
     }
     $total = $traits.Count
-    $lowTOTAL  = ($lowPet.TOTAL  | Out-String).Replace("`n","") # force to string
-    $highTOTAL = ($highPet.TOTAL | Out-String).Replace("`n","") # remove newline in string
+    $lowOverall  = ($lowPet.Overall  | Out-String).Replace("`n","") # force to string
+    $highOverall = ($highPet.Overall | Out-String).Replace("`n","") # remove newline in string
     
     Write-Host "STATUS: Solved $i of $total"
-    Write-Output "Unknown Pet TOTAL is between $lowTOTAL and $highTOTAL"
+    Write-Output "Unknown Pet OVERALL is between $lowOverall and $highOverall"
     if($i -eq $total){$solved = $true}
     else{$solved = $false}
     return $solved
@@ -364,9 +449,30 @@ Function Get-Response {
         )
     # Do Stuff
     Write-Host "Build a menuing system here:"
+    Write-Host "[C]ontinue process (call Update-Unknown)"
+    Write-Host "[R]eport columnar data where x axis is low,high, y axis is properties [ordered]"
+    Write-Host "[E]xport prep, csv-style data where x axis is properties [complicated, unsolved must switch to str]"
+    Write-Host "[Q]uit this application"
+    Write-Host "STRETCH GOAL"
+    Write-Host "[I]nsert this pet into database (prompt for fields to fill in for real name/owner/whatnet) and updatecsv"
 }
 
+Function Update-Unknown {
+    Param()
+    $knownPet = Get-KnownPet
+    $evalText = Get-EvalText
+    $knowledge = Get-Knowledge $evalText
 
+    if($knowledge -ne "certain"){
+        Write-Host "Comparison not certain, breaking run!";break
+        }
+
+    Update-LowPet -evalText $evalText
+    Update-HighPet -evalText $evalText
+    Get-Overall -evalText $evalText
+    Get-Status $lowPet $highPet
+    Get-Response $solved $lowPet $highPet
+}
 
 ########## END OF FUNCTIONS ##########
 ########## Setting up vars  #########
@@ -402,8 +508,7 @@ $baseArray = @(
 $traits = @(
     'Alertness','Appetite','Brutality','Development','Eluding','Energy',
     'Evasion','Ferocity','Fortitude','Insight','Might','Nimbleness',
-    'Patience','Procreation','Sufficiency','Targeting','Toughness',
-    'TOTAL'
+    'Patience','Procreation','Sufficiency','Targeting','Toughness'
     )
 
 
@@ -427,6 +532,7 @@ if($knowledge -ne "certain"){
 
 Update-LowPet -evalText $evalText
 Update-HighPet -evalText $evalText
+Get-Overall -evalText $evalText
 Get-Status $lowPet $highPet
 Get-Response $solved $lowPet $highPet
 
