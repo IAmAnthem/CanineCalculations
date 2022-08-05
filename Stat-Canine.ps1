@@ -89,17 +89,17 @@ Function Get-Traits {
     foreach($trait in $traits){
         # DO STUFF
         $pattern = $trait
-        Write-Host "Get-Traits is looking for $trait"
+        # DEBUG: Write-Host "Get-Traits is looking for $trait"
 
         #Strip down to get the comparison text
         $diffDesc = foreach ($str in $evalText){               # Difference Description
             Select-String -InputObject $str -Pattern $pattern
             }
         $diffDesc = $diffDesc.ToString().TrimStart()           # Remove padding
-        Write-Host "Get-Traits working on this string: $diffDesc"
+        # DEBUG: Write-Host "Get-Traits working on this string: $diffDesc"
         $diffDesc = $diffDesc -replace '(^(?:\S+\s+\n?){1,2})',''  # Remove 1st 2 words
         $diffDesc = $diffDesc.Replace('.','')
-        Write-Host "Get-Traits string: $diffDesc is ready"
+        # DEBUG: Write-Host "Get-Traits string: $diffDesc is ready"
 
         # Translate difference description into two numbers
         foreach($row in $baseArray){
@@ -108,8 +108,8 @@ Function Get-Traits {
             $traitHighModifier = $row.high
             }
         }
-        Write-Host "Get-Traits found lowModifier: $traitLowModifier"
-        Write-Host "Get-Traits found highModifier: $traitHighModifier"
+        # DEBUG: Write-Host "Get-Traits found lowModifier: $traitLowModifier"
+        # DEBUG: Write-Host "Get-Traits found highModifier: $traitHighModifier"
 
         # Do math, known value + modifier
         $knownValue = $knownPet.$trait
@@ -123,34 +123,33 @@ Function Get-Traits {
         # Create / Modify value for this key
         # Does the key exist?
         if($lowPet.Keys -notcontains $trait){
-            Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
+            # DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
             $lowPet.Add($trait,$potentialLow)
             }
         elseif($currentLow -lt $potentialLow){
-            Write-Host "Get-Traits $currentLow < $potentialLow : UPDATING"
+            # DEBUG: Write-Host "Get-Traits $currentLow < $potentialLow : UPDATING"
             $lowPet.$trait = $potentialLow
             }
         elseif($currentLow -ge $potentialLow){
-            Write-Host "Get-Traits $currentLow >= $potentialLow : NO ACTION"
+            # DEBUG: Write-Host "Get-Traits $currentLow >= $potentialLow : NO ACTION"
             }
 
         # HIGH PET
         if($highPet.Keys -notcontains $trait){
-            Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
+            # DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
             $highPet.Add($trait,$potentialHigh)
             }
         elseif($currentHigh -gt $potentialHigh){
-            Write-Host "Get-Traits $currentHigh > $potentialHigh : UPDATING"
+            # DEBUG: Write-Host "Get-Traits $currentHigh > $potentialHigh : UPDATING"
             $highPet.$trait = $potentialHigh
             }
         elseif($currentHigh -le $potentialHigh){
-            Write-Host "Get-Traits $currentHigh <= $potentialHigh : NO ACTION"
+            # DEBUG: Write-Host "Get-Traits $currentHigh <= $potentialHigh : NO ACTION"
             }
 
     }
     return
 }
-
 
 Function Get-Overall {
     Param(
@@ -230,7 +229,6 @@ Function Get-Overall {
 
 }
 
-
 Function Get-KnownPet{
     param()     # No params, we're going to start by asking who you compared to
     # Develop picker-code
@@ -258,9 +256,13 @@ Function Get-KnownPet{
     return $knownPet
     }
 
-
-function Read-MultiLineInputBoxDialog([string]$Message, [string]$WindowTitle, [string]$DefaultText)
-    {
+Function Read-MultiLineInputBoxDialog {
+    Param(
+    [string]$Message, 
+    [string]$WindowTitle, 
+    [string]$DefaultText
+    )
+    
         Add-Type -AssemblyName System.Drawing
         Add-Type -AssemblyName System.Windows.Forms
      
@@ -306,6 +308,7 @@ function Read-MultiLineInputBoxDialog([string]$Message, [string]$WindowTitle, [s
         $form.AcceptButton = $okButton
         $form.CancelButton = $cancelButton
         $form.ShowInTaskbar = $true
+        #$Form.Add_KeyDown({if ($PSItem.KeyCode -eq "Enter"){$OKButton.PerformClick()}})
      
         # Add all of the controls to the form.
         $form.Controls.Add($label)
@@ -333,30 +336,67 @@ Function Get-Status {
         }
     }
     $total = $traits.Count
-    $lowOverall  = ($lowPet.Overall  | Out-String).Replace("`n","") # force to string
-    $highOverall = ($highPet.Overall | Out-String).Replace("`n","") # remove newline in string
-    
-    Write-Host "STATUS: Solved $i of $total"
-    Write-Output "Unknown Pet OVERALL is between $lowOverall and $highOverall"
-    if($i -eq $total){$solved = $true}
-    else{$solved = $false}
-    return $solved
+    Write-Host "--- --- STATUS: Solved $i of $total --- ---" -ForegroundColor Yellow
 }
 
-Function Get-Response {
+Function Better-Menu {
+do {
+  [int]$userMenuChoice = 0
+  while ( $userMenuChoice -lt 1 -or $userMenuChoice -gt 4) {
+    Write-Host "1. Compare a known canine to an unknown canine"
+    Write-Host "2. Report current result in vertical columns"
+    Write-Host "3. Report current status"
+    Write-Host "4. Quit and Exit"
+
+    [int]$userMenuChoice = Read-Host "Please choose an option"
+
+    switch ($userMenuChoice) {
+            1 { Update-Unknown }
+            2 { Format-Vertical -lowPet $lowPet -highPet $highPet}
+            3 { Get-Status -lowPet $lowPet -highPet $highPet}
+            4 { Exit-Script }
+    default {
+        Write-Host "Nothing selected"
+            }
+        }
+      }
+    } 
+    while ( $userMenuChoice -ne 4 )
+}
+
+Function New-Menu {
+    [CmdletBinding()]
     Param(
-        $solved,
-        $lowPet,
-        $highPet
-        )
-    # Do Stuff
-    Write-Host "Build a menuing system here:"
-    Write-Host "[C]ontinue process (call Update-Unknown)"
-    Write-Host "[R]eport columnar data where x axis is low,high, y axis is properties [ordered]"
-    Write-Host "[E]xport prep, csv-style data where x axis is properties [complicated, unsolved must switch to str]"
-    Write-Host "[Q]uit this application"
-    Write-Host "STRETCH GOAL"
-    Write-Host "[I]nsert this pet into database (prompt for fields to fill in for real name/owner/whatnet) and updatecsv"
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [string]$Title,
+
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [string]$Question,
+
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [object]$lowPet,
+
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [object]$highPet
+    )
+
+    $continue = New-Object System.Management.Automation.Host.ChoiceDescription '&Continue', 'Continue processing comparisons'
+    $runReport = New-Object System.Management.Automation.Host.ChoiceDescription '&Report', 'Report a column-based output of current status'
+    $quit = New-Object System.Management.Automation.Host.ChoiceDescription '&Quit', 'Quit this script'
+
+    $options = [System.Management.Automation.Host.ChoiceDescription[]]($continue, $runReport, $quit)
+    $result = $host.UI.PromptForChoice($Title, $Question, $options, 0)
+    Write-Host "New-Menu result is $result"
+
+    switch ($result){
+        0 { Update-Unknown }
+        1 { Format-Vertical -lowPet $lowPet -highPet $highPet}
+        2 { Exit-Script }
+    }
 }
 
 Function Update-Unknown {
@@ -368,9 +408,15 @@ Function Update-Unknown {
     Get-Traits -evalText $evalText
     Get-Overall -evalText $evalText
     Get-Status $lowPet $highPet
-    Get-Response $solved $lowPet $highPet
 }
 
+Function Exit-Script {
+    Param()
+    Write-Host "Here it is, your moment of Zen..."
+    Format-Vertical -lowPet $lowPet -highPet $highPet
+    Pause
+    Break
+}
 
 <#
 
@@ -402,13 +448,11 @@ Function Format-Vertical {
     $highOverall  = ($highPet.Overall).ToString()
     $rangeOverall = $lowOverall + " - " + $highOverall
     $reportPet.Add("Overall",$rangeOverall)
-    $report = $reportPet | Out-String
-    return $report
+    $reportPet
 }
 
-
-########## END OF FUNCTIONS ##########
-########## Setting up vars  #########
+<########## END OF FUNCTIONS ##########
+########## Setting up vars  #########>
 
 # Setting up hashtables for results, don't need all keys, will add as calculated
 $lowPet = [ordered]@{    
@@ -437,13 +481,11 @@ $baseArray = @(
     [PSCustomObject]@{evalText="outstandingly better"; low=71;    high=1700}
     )
 
-
 $traits = @(
     'Alertness','Appetite','Brutality','Development','Eluding','Energy',
     'Evasion','Ferocity','Fortitude','Insight','Might','Nimbleness',
     'Patience','Procreation','Sufficiency','Targeting','Toughness'
     )
-
 
 <#
         Build your program here
@@ -452,17 +494,19 @@ $traits = @(
 
 #>
 
-$knownPet = Get-KnownPet
-$evalText = Get-EvalText
-$knowledge = Get-Knowledge $evalText
+#$knownPet = Get-KnownPet
+#$evalText = Get-EvalText
+#$knowledge = Get-Knowledge $evalText
 
-if($knowledge -ne "certain"){
-    Write-Host "Comparison not certain, breaking run!";break
-    }
+#if($knowledge -ne "certain"){
+#    Write-Host "Comparison not certain, breaking run!";break
+#    }
 
-Get-Traits -evalText $evalText
-Get-Overall -evalText $evalText
-Get-Status $lowPet $highPet
-Get-Response $solved $lowPet $highPet
+#Get-Traits -evalText $evalText
+#Get-Overall -evalText $evalText
+#Get-Status $lowPet $highPet
+#New-Menu -Title "Comparison Complete" -Question "Completed a comparison, select the next thing to do" -lowPet $lowPet -highPet $highPet
+
+Better-Menu
 
 ## TESTING

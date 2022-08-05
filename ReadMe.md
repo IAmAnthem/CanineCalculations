@@ -37,6 +37,14 @@ Report-Status checks count of solutions and returns a boolean $solved
 * Loops through traits and compare low/high hashtables
 * Present the option to [C]ontinue [R]eport [E]xit
 
+Workup New-Menu
+*  MEH. Didn't like it
+
+Workup Better-Menu
+* Seems good!
+* ENHANCEMENT
+  * [I]nsert this pet into database (prompt for fields to fill in for real name/owner/whatnet) and updatecsv
+
 
 Run-Comparisons function?
 ```
