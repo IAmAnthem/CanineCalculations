@@ -474,6 +474,35 @@ Function Update-Unknown {
     Get-Response $solved $lowPet $highPet
 }
 
+
+<#
+
+Transform HashTable to Horizontal Array
+[PSCustomObject]$highPet | Export-Csv -NoTypeInformation -Path .\highPet.csv
+[PSCustomObject]$lowpet  | Export-Csv -NoTypeInformation -Path .\lowPet.csv
+
+#>
+
+Function Format-VerticalReport {
+    Param(
+        $lowPet,
+        $highPet
+    )
+    # build an output hashtable, if trait !=, [string]trait + [string]trait is newval
+    $reportPet = [ordered]@{Name="dummy"}
+    foreach($trait in $traits){
+        if($lowPet.$trait -eq $highPet.$trait){
+            # DEBUG: 
+            Write-Host "Format-VerticalReport creating key for $trait value $lowpet.$trait"
+            $reportPet.$trait += $lowPet.$trait
+            }
+        else{
+
+        }
+    return            
+}
+
+
 ########## END OF FUNCTIONS ##########
 ########## Setting up vars  #########
 
