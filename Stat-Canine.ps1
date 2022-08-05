@@ -446,9 +446,6 @@ $traits = @(
 
 #>
 
-
-
-
 $knownPet = Get-KnownPet
 $evalText = Get-EvalText
 $knowledge = Get-Knowledge $evalText
@@ -461,24 +458,5 @@ Get-Traits -evalText $evalText
 Get-Overall -evalText $evalText
 Get-Status $lowPet $highPet
 Get-Response $solved $lowPet $highPet
-
-<#
-
-$knownPet = Get-KnownPet
-$evalText = Get-EvalText
-$knowledge = Get-Knowledge $evalText
-
-if($knowledge -ne "certain"){
-    Write-Host "Comparison not certain, breaking run!";break
-    }
-    else{
-    Write-Host "Yup, good eval"
-    }
-
-
-Update-LowPet -evalText $evalText
-Update-HighPet -evalText $evalText
-
-#>
 
 ## TESTING
