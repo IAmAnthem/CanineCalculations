@@ -225,7 +225,7 @@ Function Get-Overall {
     }
     elseif($currentHighOverall -le $potentialHighOverall){
         # current overall low  <= potential overall low, discard this (Don't do anything)
-    # DEBUG:    Write-Host "Get-Overall - no action: $currentHighOverall is less than or equal to $potentialOverallHighValue"
+        # DEBUG:    Write-Host "Get-Overall - no action: $currentHighOverall is less than or equal to $potentialOverallHighValue"
     }
 
 }
@@ -380,7 +380,7 @@ Transform HashTable to Horizontal Array
 
 #>
 
-Function Format-VerticalReport {
+Function Format-Vertical {
     Param(
         $lowPet,
         $highPet
@@ -389,15 +389,21 @@ Function Format-VerticalReport {
     $reportPet = [ordered]@{Name="dummy"}
     foreach($trait in $traits){
         if($lowPet.$trait -eq $highPet.$trait){
-            # DEBUG: 
-            Write-Host "Format-VerticalReport creating key for $trait value $lowpet.$trait"
             $reportPet.$trait += $lowPet.$trait
             }
-        else{
-
-        }
-    return            
+        elseif($lowPet.$trait -ne $highPet.$trait){
+            $lowStr   = ($lowPet.$trait).ToString()
+            $highStr  = ($highPet.$trait).ToString()
+            $rangeStr = $lowStr + " - " + $highStr
+            $reportPet.Add($trait,$rangeStr)
+        }      
     }
+    $lowOverall   = ($lowPet.Overall).ToString()
+    $highOverall  = ($highPet.Overall).ToString()
+    $rangeOverall = $lowOverall + " - " + $highOverall
+    $reportPet.Add("Overall",$rangeOverall)
+    $report = $reportPet | Out-String
+    return $report
 }
 
 
