@@ -38,7 +38,6 @@ Function Read-Database {
 
 function Get-EvalText {
     param ()
-    # Ok prompt for some text, we need an input box
     $message = "Please enter a CERTAIN eval, KNOWN to UNKNOWN"
     $windowTitle = "Compare Known to Unknown"
     $defaultText = "Enter some text here..."
@@ -46,7 +45,6 @@ function Get-EvalText {
     if ($null -eq $evalText) { Write-Host "You clicked Cancel - ending script";break }
     else { 
         # Don't do anything
-        # Write-Host "You entered the following text: $multiLineText" 
         }
     $evalText = $evalText.Split([Environment]::NewLine, [System.StringSplitOptions]::RemoveEmptyEntries)
     return $evalText
@@ -54,6 +52,8 @@ function Get-EvalText {
 
 function Get-Knowledge {
     param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
     $evalText
     )
     $knowledgePattern = "think","feel","certain"
@@ -69,7 +69,11 @@ function Get-Knowledge {
 }
 
 function Get-Relationship {
-    $evalText = Get-EvalText
+    Param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $evalText
+    )
     $relationshipPattern = "They seem to be"
     if($evalText -match $relationshipPattern){
         $relationship = $evalText -match $relationshipPattern
@@ -83,7 +87,9 @@ function Get-Relationship {
 
 Function Get-Traits {
     Param(
-        $evalText
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $evalText
     )
     # Cycle through $traits and fill $lowPet $highPet as appropriate
     foreach($trait in $traits){
@@ -153,9 +159,10 @@ Function Get-Traits {
 
 Function Get-Overall {
     Param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
     $evalText
     )
-    # In testing through this might make everything a lot cleaner to do traits this way
     # Get the comparison text
     $pattern = "Overall"         # Made it a var since I'll use it for key later
     $overallText = foreach ($str in $evalText){
@@ -258,8 +265,16 @@ Function Get-KnownPet{
 
 Function Read-MultiLineInputBoxDialog {
     Param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
     [string]$Message, 
-    [string]$WindowTitle, 
+    
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    [string]$WindowTitle,
+
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
     [string]$DefaultText
     )
     
@@ -326,9 +341,19 @@ Function Read-MultiLineInputBoxDialog {
 
 Function Get-Status {
     Param(
-        $lowPet,
-        $highPet
-        )
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $lowPet,
+
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $highPet
+    )
+    if($lowPet.Keys.count -eq 1){
+        Write-Host "--- --- STATUS: No comparisons completed, return to menu --- ---" -ForegroundColor Yellow
+        pause
+        break
+        }
     $i = 0
     foreach($trait in $traits){
     if($lowPet.$trait -eq $highPet.$trait){
@@ -340,13 +365,19 @@ Function Get-Status {
 }
 
 Function Better-Menu {
-do {
-  [int]$userMenuChoice = 0
-  while ( $userMenuChoice -lt 1 -or $userMenuChoice -gt 4) {
-    Write-Host "1. Compare a known canine to an unknown canine"
-    Write-Host "2. Report current result in vertical columns"
-    Write-Host "3. Report current status"
-    Write-Host "4. Quit and Exit"
+    Param()
+    do {
+    [int]$userMenuChoice = 0
+    while ( $userMenuChoice -lt 1 -or $userMenuChoice -gt 4) {
+    Write-Host "+=================================================+"
+    Write-Host "|    Ancient Anguish Canine Trait Calculations    |"
+    Write-Host "+=================================================+"
+    Write-Host "| 1) Compare a known canine to an unknown canine  |"
+    Write-Host "| 2) Report current result in vertical columns    |"
+    Write-Host "| 3) Report current status                        |"
+    Write-Host "| 4) Quit and Exit                                |"
+    Write-Host "|                                                 |"
+    Write-Host "+-------------------------------------------------+"
 
     [int]$userMenuChoice = Read-Host "Please choose an option"
 
@@ -364,47 +395,15 @@ do {
     while ( $userMenuChoice -ne 4 )
 }
 
-Function New-Menu {
-    [CmdletBinding()]
-    Param(
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]$Title,
-
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]$Question,
-
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [object]$lowPet,
-
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [object]$highPet
-    )
-
-    $continue = New-Object System.Management.Automation.Host.ChoiceDescription '&Continue', 'Continue processing comparisons'
-    $runReport = New-Object System.Management.Automation.Host.ChoiceDescription '&Report', 'Report a column-based output of current status'
-    $quit = New-Object System.Management.Automation.Host.ChoiceDescription '&Quit', 'Quit this script'
-
-    $options = [System.Management.Automation.Host.ChoiceDescription[]]($continue, $runReport, $quit)
-    $result = $host.UI.PromptForChoice($Title, $Question, $options, 0)
-    Write-Host "New-Menu result is $result"
-
-    switch ($result){
-        0 { Update-Unknown }
-        1 { Format-Vertical -lowPet $lowPet -highPet $highPet}
-        2 { Exit-Script }
-    }
-}
-
 Function Update-Unknown {
     Param()
     $knownPet = Get-KnownPet
     $evalText = Get-EvalText
     $knowledge = Get-Knowledge $evalText
-    if($knowledge -ne "certain"){Write-Host "Comparison not certain, breaking run!";break}
+    if($knowledge -ne "certain"){
+        Write-Host "Comparison not certain, breaking run!" -ForegroundColor Yellow
+        break
+        }
     Get-Traits -evalText $evalText
     Get-Overall -evalText $evalText
     Get-Status $lowPet $highPet
@@ -428,9 +427,19 @@ Transform HashTable to Horizontal Array
 
 Function Format-Vertical {
     Param(
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
         $lowPet,
+
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
         $highPet
     )
+    
+    if($lowPet.Keys.count -eq 1){
+        Write-Host "--- --- REPORT: No comparisons completed --- ---" -ForegroundColor Yellow
+        return
+        }    
     # build an output hashtable, if trait !=, [string]trait + [string]trait is newval
     $reportPet = [ordered]@{Name="dummy"}
     foreach($trait in $traits){
@@ -494,19 +503,4 @@ $traits = @(
 
 #>
 
-#$knownPet = Get-KnownPet
-#$evalText = Get-EvalText
-#$knowledge = Get-Knowledge $evalText
-
-#if($knowledge -ne "certain"){
-#    Write-Host "Comparison not certain, breaking run!";break
-#    }
-
-#Get-Traits -evalText $evalText
-#Get-Overall -evalText $evalText
-#Get-Status $lowPet $highPet
-#New-Menu -Title "Comparison Complete" -Question "Completed a comparison, select the next thing to do" -lowPet $lowPet -highPet $highPet
-
 Better-Menu
-
-## TESTING
