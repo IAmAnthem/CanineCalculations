@@ -329,7 +329,45 @@ Function Read-MultiLineInputBoxDialog {
         $form.AcceptButton = $okButton
         $form.CancelButton = $cancelButton
         $form.ShowInTaskbar = $true
-        #$Form.Add_KeyDown({if ($PSItem.KeyCode -eq "Enter"){$OKButton.PerformClick()}})
+
+        # Check for ENTER and ESC presses
+        $Form.KeyPreview = $True
+        $Form.Add_KeyDown({if ($PSItem.KeyCode -eq "Enter") 
+            {
+                # if enter, perform click
+                $OKButton.PerformClick()
+                }
+            })
+        $Form.Add_KeyDown({if ($PSItem.KeyCode -eq "Escape") 
+        {
+            # if escape, exit
+            $Form1.Close()
+            }
+        })
+<#
+THROWS ERROR
+
+The property 'KeyPreview' cannot be found on this object. Verify that the property exists and can be set.
+At C:\Users\winnd\OneDrive\Documents\GitHub\CanineCalculations\Stat-Canine.ps1:308 char:9
++         $Form.KeyPreview = $True
++         ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyNotFound
+ 
+You cannot call a method on a null-valued expression.
+At C:\Users\winnd\OneDrive\Documents\GitHub\CanineCalculations\Stat-Canine.ps1:309 char:9
++         $Form.Add_KeyDown({if ($PSItem.KeyCode -eq "Enter")
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull
+ 
+You cannot call a method on a null-valued expression.
+At C:\Users\winnd\OneDrive\Documents\GitHub\CanineCalculations\Stat-Canine.ps1:315 char:9
++         $Form1.Add_KeyDown({if ($PSItem.KeyCode -eq "Escape")
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull
+#>        #$Form.Add_KeyDown({if ($PSItem.KeyCode -eq "Enter"){$OKButton.PerformClick()}})
      
         # Add all of the controls to the form.
         $form.Controls.Add($label)
