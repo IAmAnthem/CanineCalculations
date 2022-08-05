@@ -243,11 +243,17 @@ Function Get-KnownPet{
     $validChoices = 0..($petDB.Count -1)
     $choice = ''
     while ([string]::IsNullOrEmpty($choice)){
-        #thing
+    Write-Host "+=================================================+"
+    Write-Host "|      Select a known pet from the database       |"
+    Write-Host "+=================================================+"
         foreach ($line in $petDB){
             #another thing
-            Write-Host ('{0} - {1} - {2}' -f $petDB.IndexOf($line),$line.Person,$line.Name)
+            Write-Host ('{0} - {1} - {2}' -f $petDB.IndexOf($line),$line.Name,$line.Person)
             }
+        Write-Host "--- --- SELECTOR: Feedback request" -ForegroundColor Yellow
+        Write-Host "--- --- SELECTOR: Would you like to be able to refine this list by Person?" -ForegroundColor Yellow
+        Write-Host "--- --- SELECTOR: This would add a couple more keyclicks to your workflow, maybe not worth the effort" -ForegroundColor Yellow
+        Write-Host "--- --- SELECTOR: And you don't always know the human's name, so maybe that field is of limited use" -ForegroundColor Yellow
         $choice = Read-Host -Prompt 'Please chose one of the known pets by number'
         if($choice -in $validChoices){
             Write-Host (' --- Your choice of: [{0}] is valid.' -f $choice)
