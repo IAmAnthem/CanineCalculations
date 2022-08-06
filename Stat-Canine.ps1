@@ -389,7 +389,7 @@ Function Show-Menu {
     Param()
     do {
     [int]$userMenuChoice = 0
-    while ( $userMenuChoice -lt 1 -or $userMenuChoice -gt 4) {
+    while ( $userMenuChoice -lt 1 -or $userMenuChoice -gt 5) {
     Write-Host "+=================================================+"
     Write-Host "|    Ancient Anguish Canine Trait Calculations    |"
     Write-Host "+=================================================+"
@@ -404,21 +404,26 @@ Function Show-Menu {
     [int]$userMenuChoice = Read-Host "Please choose an option"
 
     switch ($userMenuChoice) {
-            1 { Update-UnknownToKnown }
-            2 { Format-Vertical -lowPet $lowPet -highPet $highPet}
-            3 { Get-Status -lowPet $lowPet -highPet $highPet}
-            4 { Exit-Script }
+            1 { Update-Unknown -direction "KnownToUnknown" }
+            2 { Update-Unknown -direction "KnownToUnknown"}
+            3 { Format-Vertical -lowPet $lowPet -highPet $highPet}
+            4 { Get-Status -lowPet $lowPet -highPet $highPet}
+            5 { Exit-Script }
     default {
         Write-Host "Nothing selected"
             }
         }
       }
     } 
-    while ( $userMenuChoice -ne 4 )
+    while ( $userMenuChoice -ne 5 )
 }
 
-Function Update-UnknownToKnown {
-    Param()
+Function Update-Unknown {
+    Param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $direction    
+    )
     $knownPet = Get-KnownPet
     $evalText = Get-EvalText
     $knowledge = Get-Knowledge $evalText
@@ -426,9 +431,12 @@ Function Update-UnknownToKnown {
         Write-Host "Comparison not certain, breaking run!" -ForegroundColor Yellow
         break
         }
-    Get-Traits -evalText $evalText
-    Get-Overall -evalText $evalText
-    Get-Status $lowPet $highPet
+    Write-Host "Update-Unknown is comparing against $knownPet.Name" -ForegroundColor Yellow
+    Get-Traits -evalText $evalText -direction $direction
+    Write-Host "Update-Unknown - have you fixed Get-Traits for direction?"
+    Get-Overall -evalText $evalText -direction $direction
+    Write-Host "Update-Unknown - have you fixed Get-Overall for direction?"
+    Get-Status -lowPet $lowPet -highPet $highPet
 }
 
 Function Exit-Script {
@@ -459,7 +467,7 @@ Function Format-Vertical
     if($lowPet.Keys.count -eq 1){
         Write-Host "--- --- REPORT: No comparisons completed --- ---" -ForegroundColor Yellow
         return
-        }    
+    }    
     # build an output hashtable, if trait !=, [string]trait + [string]trait is newval
     $reportPet = [ordered]@{Name="dummy"}
     foreach($trait in $traits){
@@ -477,19 +485,14 @@ Function Format-Vertical
     $highOverall  = ($highPet.Overall).ToString()
     $rangeOverall = $lowOverall + " - " + $highOverall
     $reportPet.Add("Overall",$rangeOverall)
-    $reportPet
+    $reportPet | Format-Table -HideTableHeaders
 }
 
 <# ######### END OF FUNCTIONS ########## Setting up vars  ########## #>
 
 # Setting up hashtables for results, don't need all keys, will add as calculated
-$lowPet = [ordered]@{    
-        Name        ="dummy"
-        }
-
-$highPet = [ordered]@{
-        Name        ="dummy"
-        }
+$lowPet = [ordered]@{Name="dummy"}
+$highPet = [ordered]@{Name="dummy"}
 
 
 # Syntax: passing a hash value with a number in quotes casts as string, without is int
@@ -514,9 +517,6 @@ $traits = @(
     'Evasion','Ferocity','Fortitude','Insight','Might','Nimbleness',
     'Patience','Procreation','Sufficiency','Targeting','Toughness'
     )
-
-# VSC Complains if a var is only called once, so define it in the vars section
-$knownPet = @()
 
 <#  Run through sequence and validate 
         Spreadsheet (uses Uknown to Known method)
