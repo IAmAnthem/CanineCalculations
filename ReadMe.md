@@ -1,6 +1,6 @@
 # Canine Calculations for Ancient Anguish
 
-Ancient Anguish is a MUD that's been around a long time.
+[Ancient Anguish](https://www.anguish.org) is a MUD that's been around a long time.
 
 A feature was introduced that allows players in the Ranger class to breed pets, and for those pets to raise their traits through breeding.
 
