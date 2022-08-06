@@ -38,15 +38,19 @@ The players can only see a description of the difference between canines, not th
 
 The script will turn those descriptions into values, if you have enough known pets to compare against.
 
-## What does the script do?
+## What does the script do (right now)?
 - Pick from a list of pets with known values
-- Paste in the comparison text (shortcut, hitting ENTER is equivalent to clicking OK - mudders ARE keyboard warriors)
+- Paste in the comparison text (shortcut, hit ENTER after paste - mudders ARE keyboard warriors)
+- Report the number of traits 'solved'
+- Continue adding comparisons to refine
+- Report the known values and ranges for unknown values
+
 ## Why isn't this an open webapp?
 - Poisoning: in an online world where people are anonymous, spiteful, and selfish an open website is invitation to destruction.
 - Privacy: The only data you see by example here has been OK'd by the data owner.  Some players may choose to not reveal their pet lineage or stats for whatever reason.
 - Skills: I'm a systems engineer by trade and at heart, I learn enough code to do what I need to do.  Currently that's PowerShell, not something sexy like the AWS stack.
 
-### Progress Notes
+### Progress Notes - what am I working on?
 
 - Check the knowledge level
 
