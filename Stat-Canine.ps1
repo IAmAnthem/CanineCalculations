@@ -344,30 +344,6 @@ Function Read-MultiLineInputBoxDialog {
             $Form1.Close()
             }
         })
-<#
-THROWS ERROR
-
-The property 'KeyPreview' cannot be found on this object. Verify that the property exists and can be set.
-At C:\Users\winnd\OneDrive\Documents\GitHub\CanineCalculations\Stat-Canine.ps1:308 char:9
-+         $Form.KeyPreview = $True
-+         ~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
-    + FullyQualifiedErrorId : PropertyNotFound
- 
-You cannot call a method on a null-valued expression.
-At C:\Users\winnd\OneDrive\Documents\GitHub\CanineCalculations\Stat-Canine.ps1:309 char:9
-+         $Form.Add_KeyDown({if ($PSItem.KeyCode -eq "Enter")
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
-    + FullyQualifiedErrorId : InvokeMethodOnNull
- 
-You cannot call a method on a null-valued expression.
-At C:\Users\winnd\OneDrive\Documents\GitHub\CanineCalculations\Stat-Canine.ps1:315 char:9
-+         $Form1.Add_KeyDown({if ($PSItem.KeyCode -eq "Escape")
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
-    + FullyQualifiedErrorId : InvokeMethodOnNull
-#>        #$Form.Add_KeyDown({if ($PSItem.KeyCode -eq "Enter"){$OKButton.PerformClick()}})
      
         # Add all of the controls to the form.
         $form.Controls.Add($label)
@@ -408,7 +384,7 @@ Function Get-Status {
     Write-Host "--- --- STATUS: Solved $i of $total --- ---" -ForegroundColor Yellow
 }
 
-Function Better-Menu {
+Function Show-Menu {
     Param()
     do {
     [int]$userMenuChoice = 0
@@ -426,7 +402,7 @@ Function Better-Menu {
     [int]$userMenuChoice = Read-Host "Please choose an option"
 
     switch ($userMenuChoice) {
-            1 { Update-Unknown }
+            1 { Update-UnknownToKnown }
             2 { Format-Vertical -lowPet $lowPet -highPet $highPet}
             3 { Get-Status -lowPet $lowPet -highPet $highPet}
             4 { Exit-Script }
@@ -439,7 +415,7 @@ Function Better-Menu {
     while ( $userMenuChoice -ne 4 )
 }
 
-Function Update-Unknown {
+Function Update-UnknownToKnown {
     Param()
     $knownPet = Get-KnownPet
     $evalText = Get-EvalText
@@ -461,15 +437,13 @@ Function Exit-Script {
     Break
 }
 
-<#
-
-Transform HashTable to Horizontal Array
+<# Transform HashTable to Horizontal Array - HowTo
 [PSCustomObject]$highPet | Export-Csv -NoTypeInformation -Path .\highPet.csv
 [PSCustomObject]$lowpet  | Export-Csv -NoTypeInformation -Path .\lowPet.csv
-
 #>
 
-Function Format-Vertical {
+Function Format-Vertical
+{
     Param(
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -504,8 +478,7 @@ Function Format-Vertical {
     $reportPet
 }
 
-<########## END OF FUNCTIONS ##########
-########## Setting up vars  #########>
+<# ######### END OF FUNCTIONS ########## Setting up vars  ########## #>
 
 # Setting up hashtables for results, don't need all keys, will add as calculated
 $lowPet = [ordered]@{    
@@ -540,11 +513,10 @@ $traits = @(
     'Patience','Procreation','Sufficiency','Targeting','Toughness'
     )
 
-<#
-        Build your program here
-  Run through sequence and validate against spreadsheet
-  Ballad - Cover - Mulapin - Crescendo - Exie = Angrynerd Solution
-
+<#  Run through sequence and validate 
+        Spreadsheet (uses Uknown to Known method)
+    Unknown To Known sequence: Ballad - Cover - Mulapin - Crescendo - Exie = Angrynerd Solution
+    Known to Unknown sequence: 
 #>
 
-Better-Menu
+Show-Menu
