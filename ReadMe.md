@@ -6,11 +6,14 @@ A feature was introduced that allows characters[^1] in the Ranger class to breed
 
 Everyone started at 0, and the traits were all unknown.  
 - How many of them are there? (17)
+- What is the trait value range? (-100 to 100, yes a trait can have a negative value)
 - What are they?
   - Alertness, Appetite, Brutality, Development, Eluding, Energy
   - Evasion, Ferocity, Fortitude, Insight, Might, Nimbleness
   - Patience, Procreation, Sufficiency, Targeting, Toughness
 - What do they do? Hah, who knows.  We can make some guesses by the descriptive word, but no clear definition exists.
+  - Guesses as to function are conjecture, and we really have very little way to know
+  - If your *baking* trait was 100, would that mean you bake cakes faster? Cakes are more delicious? Cakes are prettier?
 
 Days were spent just figuring out the basics of getting two pets to procreate reliably.
 Months were spent trying to get all traits to have a non-zero value.
@@ -20,6 +23,8 @@ Once the basics were discovered, some progress was being made, then another wren
 RELATIONSHIPS?!  Yes, breeding between related canines produces resulting puppies between suboptimal and completely awful.
 
 My initial efforts are to develop the logic for automating the cacluation of trait values and checking to ensure pets are unrelated for breeding.
+
+My estimate is something over 12,000 canines have been tamed.  The highest traited pets are a bit over halfway to the maximum value.  It took YEARS.
 ## Why do we need scripts?
 ### Trait Values
 Characters develop more certainty in their 'compare' ability the more puppies they have.
