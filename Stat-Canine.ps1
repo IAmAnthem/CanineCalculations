@@ -121,14 +121,23 @@ Function Get-Traits {
 
         # Do math, known value + modifier
         $knownValue = $knownPet.$trait
-        $potentialLow  = $knownValue + $traitLowModifier
-        $potentialHigh = $knownValue + $traitHighModifier
 
+        if($direction -eq "UnknownToKnown"){
+            $potentialLow  = $knownValue + $traitLowModifier
+            $potentialHigh = $knownValue + $traitHighModifier
+        }
+        elseif ($direction -eq "KnownToUnknown") {
+            $potentialLow  = $knownValue - $traitLowModifier
+            $potentialHigh = $knownValue - $traitHighModifier
+        }
+        elseif ($direction -notin "UnknownToKnown","KnownToUnknown"){
+            Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
+            break
+        }
         $currentLow  = $lowPet.$trait
         $currentHigh = $highPet.$trait
 
         # LOW PET
-        # Create / Modify value for this key
         # Does the key exist?
         if($lowPet.Keys -notcontains $trait){
             # DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
