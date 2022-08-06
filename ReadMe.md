@@ -1,5 +1,17 @@
-Ancient Anguish
+# Canine Calculations for Ancient Anguish 
+Ancient Anguish is a MUD that's been around a long time.
 
+
+## Why do we need a script?
+
+
+## What does the script do?
+
+
+## Why isn't this an open webapp?
+
+
+### Progress Notes
 - Check the knowledge level
 
   - `if $knowledge -ne certain, abort`
