@@ -2,7 +2,7 @@
 
 [Ancient Anguish](http://www.anguish.org) is a MUD that has been around a long time.
 
-A feature was introduced that allows players in the Ranger class to breed pets, and for those pets to raise their traits through breeding.
+A feature was introduced that allows characters[^1] in the Ranger class to breed pets, and for those pets to raise their traits through breeding.
 
 Everyone started at 0, and the traits were all unknown.  
 - How many of them are there? (17)
@@ -22,7 +22,7 @@ RELATIONSHIPS?!  Yes, breeding between related canines produces resulting puppie
 My initial efforts are to develop the logic for automating the cacluation of trait values and checking to ensure pets are unrelated for breeding.
 ## Why do we need scripts?
 ### Trait Values
-Players develop more certainty in their 'compare' ability the more puppies they have.
+Characters develop more certainty in their 'compare' ability the more puppies they have.
 Once the comparison is *certain* (instead of *think* or *feel*) you can definately use the Stat script.
 If you are still in *think* or *feel* your results are shifted by some unknown amount, which may vary per-reboot.
 More research is required.
@@ -100,3 +100,5 @@ Selecting Known Pet
 - FIXES
   - Can I switch the selection menu to start counting at 1 instead of 0?
     - Pretty sure there's an example somewhere that does this
+
+[^1]: Players are the human beings.  Characters are the in-game persona running around.  A player may have many characters.
