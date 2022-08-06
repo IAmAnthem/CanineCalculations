@@ -21,6 +21,12 @@ RELATIONSHIPS?!  Yes, breeding between related canines produces resulting puppie
 
 My initial efforts are to develop the logic for automating the cacluation of trait values and checking to ensure pets are unrelated for breeding.
 ## Why do we need scripts?
+### Trait Values
+Players develop more certainty in their 'compare' ability the more puppies they have.
+Once the comparison is *certain* (instead of *think* or *feel*) you can definately use the Stat script.
+If you are still in *think* or *feel* your results are shifted by some unknown amount, which may vary per-reboot.
+More research is required.
+
 The players can only see a description of the difference between canines, not the actual values.
 - "totally inferior"
 - "very inferior"
@@ -38,15 +44,29 @@ The players can only see a description of the difference between canines, not th
 
 The script will turn those descriptions into values, if you have enough known pets to compare against.
 
-## What does the script do (right now)?
-- Pick from a list of pets with known values
-- Paste in the comparison text (shortcut, hit ENTER after paste - mudders ARE keyboard warriors)
-- Report the number of traits 'solved'
-- Continue adding comparisons to refine
-- Report the known values and ranges for unknown values
+### Relationships
+Once a character has had MANY litters, the compare ability also reports the relationship level between two canines.
+Any player can get the lineage tree for their canine at the bottom of the character's [Player Info Page](http://anguish.org/tools/player_info.php_)
+
+## What do the scripts do (right now)?
+- Stat-Canine.ps1
+  - Pick from a list of pets with known values
+  - Paste in the comparison text (shortcut, hit ENTER after paste - mudders ARE keyboard warriors)
+  - Report the number of traits 'solved'
+  - Continue adding comparisons to refine
+  - Report the known values and ranges for unknown values
+- PetRelations.ps1
+  - Compare the lineage of two pets to see if they are related
+  - If unrelated, report the lineage of any output puppies
+
+## Limitations of Scripts
+I'm starting with some assumptions and haven't really tested the workflow in the wild with someone not heavily invested in canine breeding. 
+There are probably things I don't know.
+I don't do any data validation, you can probably break the script by injecting bad data into the CSV.
+Some 
 
 ## Why isn't this an open webapp?
-- Poisoning: in an online world where people are anonymous, spiteful, and selfish an open website is invitation to destruction.
+- Poisoning: in an online world where people are anonymous, spiteful, and selfish an open website is invitation to destruction.  You know who you are.
 - Privacy: The only data you see by example here has been OK'd by the data owner.  Some players may choose to not reveal their pet lineage or stats for whatever reason.
 - Skills: I'm a systems engineer by trade and at heart, I learn enough code to do what I need to do.  Currently that's PowerShell, not something sexy like the AWS stack.
 
@@ -62,8 +82,9 @@ The script will turn those descriptions into values, if you have enough known pe
 - Check the relationship level?
   - not really relevant at this point
   - Futureproofing for some other need
+  - Trying to decide between One Big Table and different tables for Traits / Relationships
 
-Workup Show-Menu
+Work on Menu functionality
 
 - Seems good!
   - Whoops, assumed that everyone does compares in the same direction
