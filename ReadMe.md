@@ -7,9 +7,9 @@ A feature was introduced that allows players in the Ranger class to breed pets, 
 Everyone started at 0, and the traits were all unknown.  
 - How many of them are there? (17)
 - What are they?
-  - 'Alertness','Appetite','Brutality','Development','Eluding','Energy',
-  - 'Evasion','Ferocity','Fortitude','Insight','Might','Nimbleness',
-  - 'Patience','Procreation','Sufficiency','Targeting','Toughness'
+  - Alertness, Appetite, Brutality, Development, Eluding, Energy
+  - Evasion, Ferocity, Fortitude, Insight, Might, Nimbleness
+  - Patience, Procreation, Sufficiency, Targeting, Toughness
 - What do they do? Hah, who knows.  We can make some guesses by the descriptive word, but no clear definition exists.
 
 Days were spent just figuring out the basics of getting two pets to procreate reliably.
