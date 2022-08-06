@@ -66,14 +66,16 @@ Any player can get the lineage tree for their canine at the bottom of the charac
 
 ## Limitations of Scripts
 I'm starting with some assumptions and haven't really tested the workflow in the wild with someone not heavily invested in canine breeding. 
+
 There are probably things I don't know.
+
 I don't do any data validation, you can probably break the script by injecting bad data into the CSV.
-Some 
+
 
 ## Why isn't this an open webapp?
 - Poisoning: in an online world where people are anonymous, spiteful, and selfish an open website is invitation to destruction.  You know who you are.
 - Privacy: The only data you see by example here has been OK'd by the data owner.  Some players may choose to not reveal their pet lineage or stats for whatever reason.
-- Skills: I'm a systems engineer by trade and at heart, I learn enough code to do what I need to do.  Currently that's PowerShell, not something sexy like the AWS stack.
+- Skills: I'm a systems engineer by trade and at heart, I learn enough code to do what I need to do.  Currently that's PowerShell, not something sexy like a [Serverless Web Application](https://aws.amazon.com/serverless/build-a-web-app/).  But maybe someday?
 
 ### Progress Notes - what am I working on?
 
@@ -96,7 +98,7 @@ Work on Menu functionality
 - FIXES
   - Relabel existing funcs to explicitly state direction
     - Update Menu
-  - Add new funcs to reverse direction
+  - Add new funcs to reverse direction, pass $direction KtoU or UtoK, flip math depending on direction
 - ENHANCEMENT
   - Insert this pet into database (prompt for fields to fill in for real name/owner/whatnet) and updatecsv
 
