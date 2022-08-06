@@ -97,17 +97,17 @@ Function Get-Traits {
     foreach($trait in $traits){
         # DO STUFF
         $pattern = $trait
-        # DEBUG: Write-Host "Get-Traits is looking for $trait"
+        Write-Host "Get-Traits is looking for $trait"
 
         #Strip down to get the comparison text
         $diffDesc = foreach ($str in $evalText){               # Difference Description
             Select-String -InputObject $str -Pattern $pattern
             }
         $diffDesc = $diffDesc.ToString().TrimStart()           # Remove padding
-        # DEBUG: Write-Host "Get-Traits working on this string: $diffDesc"
+        Write-Host "Get-Traits working on this string: $diffDesc"
         $diffDesc = $diffDesc -replace '(^(?:\S+\s+\n?){1,2})',''  # Remove 1st 2 words
         $diffDesc = $diffDesc.Replace('.','')
-        # DEBUG: Write-Host "Get-Traits string: $diffDesc is ready"
+        Write-Host "Get-Traits string: $diffDesc is ready"
 
         # Translate difference description into two numbers
         foreach($row in $baseArray){
@@ -116,8 +116,8 @@ Function Get-Traits {
             $traitHighModifier = $row.high
             }
         }
-        # DEBUG: Write-Host "Get-Traits found lowModifier: $traitLowModifier"
-        # DEBUG: Write-Host "Get-Traits found highModifier: $traitHighModifier"
+        Write-Host "Get-Traits found lowModifier: $traitLowModifier"
+        Write-Host "Get-Traits found highModifier: $traitHighModifier"
 
         # Do math, known value + modifier
         $knownValue = $knownPet.$trait
@@ -125,10 +125,13 @@ Function Get-Traits {
         if($direction -eq "UnknownToKnown"){
             $potentialLow  = $knownValue + $traitLowModifier
             $potentialHigh = $knownValue + $traitHighModifier
+            Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -eq "KnownToUnknown") {
-            $potentialLow  = $knownValue - $traitLowModifier
-            $potentialHigh = $knownValue - $traitHighModifier
+Write-Host "Get-Traits is in KnownToUnknown mode, flipping position of modifiers"
+            $potentialLow  = $knownValue - $traitHighModifier
+            $potentialHigh = $knownValue - $traitLowModifier
+             Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -notin "UnknownToKnown","KnownToUnknown"){
             Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
@@ -186,7 +189,7 @@ Function Get-Overall {
     $overallText = $overallText.ToString()
     $overallText = $overallText -replace '(^(?:\S+\s+\n?){1,5})','' # Remove 1st 5 words
     $overallText = $overallText.Replace(".","")
-    # DEBUG:    Write-Host "Get-Overall found the Overall to be: $overallText"
+    Write-Host "Get-Overall found the Overall to be: $overallText"
 
     # Turn comparison text into a number
     foreach($row in $baseArray){
@@ -195,59 +198,65 @@ Function Get-Overall {
             $overallHighRange = $row.high
             }
         }
-    # DEBUG:    Write-Host "Get-Overall found modifiers low: $overallLowRange - high: $overallHighRange"
+    Write-Host "Get-Overall found modifiers low: $overallLowRange - high: $overallHighRange"
 
     # Do the math, known.total + modifiers
     $knownValue = $knownPet.TOTAL
-    # DEBUG:    Write-Host "Get-Overall found knownpet TOTAL: $knownValue"
-    $potentialOverallLowValue = $knownValue + $overallLowRange
-    $potentialOverallHighValue = $knownValue + $overallHighRange
+    Write-Host "Get-Overall found knownpet TOTAL: $knownValue"
+    if($direction -eq "UnknownToKnown"){
+        $potentialOverallLowValue = $knownValue + $overallLowRange
+        $potentialOverallHighValue = $knownValue + $overallHighRange
+    }
+    elseif($direction -eq "KnownToUnknown"){
+        # Comparisons are reversed, so flip the positions
+Write-Host "Get-Overall in KnownToUnknown, flipping position of lookup table values"
+        $potentialOverallLowValue = $knownValue - $overallHighRange
+        $potentialOverallHighValue = $knownValue - $overallLowRange
+    }
+    elseif($direction -notin "UnknownToKnown","KnownToUnknown"){
+        Write-Host "Get-Overall: Something wring in direction $direction - breaking"
+        break
+        }
 
     # Handling the Overall Low first
-    # DEBUG:    Write-Host "Get-Overall calculated Overall Low: $overallLowValue High: $overallHighValue"
+    Write-Host "Get-Overall calculated Overall Low: $overallLowValue High: $overallHighValue"
 
     # Get our current values for low and high
     $currentLowOverall  = $lowPet.$pattern
     $currentHighOverall = $highPet.$pattern
-    # DEBUG:    Write-Host "Get-Overall current Low Overall is $currentLowOverall"
-    # DEBUG:    Write-Host "Get-Overall current High Overall is $currentHighOverall"
+    Write-Host "Get-Overall current Low Overall is $currentLowOverall"
+    Write-Host "Get-Overall current High Overall is $currentHighOverall"
 
     # Do we need to add or change the value in key Overall?
     if($lowpet.keys -notcontains $pattern){
-        # DEBUG:    Write-Host "Get-Overall creating key for lowPet $pattern value $potentialOverallLowValue" 
-        $lowPet.Add($pattern,$potentialOverallLowValue)
-    }
+Write-Host "Get-Overall creating key for lowPet $pattern value $potentialOverallLowValue" 
+            $lowPet.Add($pattern,$potentialOverallLowValue)
+        }
     elseif($currentLowOverall -lt $potentialOverallLowValue){  
-        # The low range should continue to 'rise' as we refine
-        # Since our current overall low < than calculated low, update!
-        # DEBUG:    Write-Host "Get-Overall updating lowpet $pattern value from $currentLowOverall to $potentialOverallLowValue"
-        $lowpet.$pattern = $potentialOverallLowValue
-    }
+            # The low range should continue to 'rise' as we refine
+            # Since our current overall low < than calculated low, update!
+Write-Host "Get-Overall updating lowpet $pattern value from $currentLowOverall to $potentialOverallLowValue"
+            $lowpet.$pattern = $potentialOverallLowValue
+        }
     elseif($currentLowOverall -ge $potentialLowOverall){
-        # current overall low  >= potential overall low, discard this (Don't do anything)
-        # DEBUG:    Write-Host "Get-Overall - no action: $currentLowOverall is greater or equal to $potentialOverallLowValue"
-    }
+            # current overall low  >= potential overall low, discard this (Don't do anything)
+Write-Host "Get-Overall - no action: $currentLowOverall is greater or equal to $potentialOverallLowValue"
+        }
 
-    # Handle the Overall High
-    # Get our current values for low and high
-    # DEBUG:    Write-Host "Get-Overall current High Overall is $currentHighOverall"
-
-    # Do we need to add or change the value in key Overall?
     if($highpet.keys -notcontains $pattern){
-        # DEBUG:   Write-Host "Get-Overall creating key for highPet $pattern value $potentialOverallHighValue" 
-        $highPet.Add($pattern,$potentialOverallHighValue)
-    }
+Write-Host "Get-Overall creating key for highPet $pattern value $potentialOverallHighValue" 
+            $highPet.Add($pattern,$potentialOverallHighValue)
+        }
     elseif($currentHighOverall -gt $potentialOverallHighValue){  
         # The high range should continue to 'sink' as we refine
         # Since our current overall high > calculated low, update!
-        # DEBUG:    Write-Host "Get-Overall updating highpet $pattern value from $currentHighOverall to $potentialOverallHighValue"
+Write-Host "Get-Overall updating highpet $pattern value from $currentHighOverall to $potentialOverallHighValue"
         $highpet.$pattern = $potentialOverallHighValue
     }
     elseif($currentHighOverall -le $potentialHighOverall){
         # current overall low  <= potential overall low, discard this (Don't do anything)
-        # DEBUG:    Write-Host "Get-Overall - no action: $currentHighOverall is less than or equal to $potentialOverallHighValue"
+Write-Host "Get-Overall - no action: $currentHighOverall is less than or equal to $potentialOverallHighValue"
     }
-
 }
 
 Function Get-KnownPet{
@@ -402,8 +411,8 @@ Function Show-Menu {
     Write-Host "+=================================================+"
     Write-Host "|    Ancient Anguish Canine Trait Calculations    |"
     Write-Host "+=================================================+"
-    Write-Host "| 1) Compare a known canine to an unknown canine  |"
-    Write-Host "| 2) Compare an unknown canine to a known canine  |"
+    Write-Host "| 1) Compare an unknown canine to a known canine  |"
+    Write-Host "| 2) Compare a known canine to an unknown canine  |"
     Write-Host "| 3) Report current result in vertical columns    |"
     Write-Host "| 4) Report current status                        |"
     Write-Host "| 5) Quit and Exit                                |"
@@ -442,9 +451,7 @@ Function Update-Unknown {
         }
     Write-Host "Update-Unknown is comparing against $knownPet.Name" -ForegroundColor Yellow
     Get-Traits -evalText $evalText -direction $direction
-    Write-Host "Update-Unknown - have you fixed Get-Traits for direction?"
     Get-Overall -evalText $evalText -direction $direction
-    Write-Host "Update-Unknown - have you fixed Get-Overall for direction?"
     Get-Status -lowPet $lowPet -highPet $highPet
 }
 

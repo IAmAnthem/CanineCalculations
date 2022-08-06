@@ -106,6 +106,11 @@ Work on Menu functionality
   - Insert this pet into database (prompt for fields to fill in for real name/owner/whatnet) and updatecsv
 
 
+Working on Update-Unknown (Get-Traits and Get-Overall)
+- Directional indicator implementation
+- Simple regex to extract comparison strings fails on "Character says: Brutality seems inferior."
+  - Detect string contains "says", apply different regex replacement.
+
 Selecting Known Pet
 - FIXES
   - Can I switch the selection menu to start counting at 1 instead of 0?
