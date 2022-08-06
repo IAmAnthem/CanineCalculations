@@ -417,7 +417,7 @@ Function Show-Menu {
 
 Function Update-UnknownToKnown {
     Param()
-    $knownPet = Get-KnownPet
+    Get-KnownPet
     $evalText = Get-EvalText
     $knowledge = Get-Knowledge $evalText
     if($knowledge -ne "certain"){

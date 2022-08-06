@@ -1,10 +1,14 @@
 # Canine Calculations for Ancient Anguish
 
-[Ancient Anguish](https://www.anguish.org) is a MUD that's been around a long time.
+[Ancient Anguish](http://www.anguish.org) is a MUD that has been around a long time.
 
 A feature was introduced that allows players in the Ranger class to breed pets, and for those pets to raise their traits through breeding.
 
-Everyone started at 0, and the traits were all unknown.  What are they?  How many of them are there? What do they do?
+Everyone started at 0, and the traits were all unknown.  
+- What are they?  
+- How many of them are there? 
+- What do they do?
+
 Well, we discovered there are 17 traits.
 Days were spent just figuring out the basics of getting two pets to procreate reliably.
 Months were spent trying to get all traits to have a non-zero value.
