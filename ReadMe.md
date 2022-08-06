@@ -73,7 +73,8 @@ I don't do any data validation, you can probably break the script by injecting b
 
 
 ## Why isn't this an open webapp?
-- Poisoning: in an online world where people are anonymous, spiteful, and selfish an open website is invitation to destruction.  You know who you are.
+- Poisoning: in an online world where people are anonymous, spiteful, and selfish an open website is invitation to destruction.
+You know who you are.
 - Privacy: The only data you see by example here has been OK'd by the data owner.  
 Some players may choose to not reveal their pet lineage or stats for whatever reason.
 - Skills: I'm a systems engineer by trade and at heart, I learn enough code to do what I need to do.  
