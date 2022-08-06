@@ -42,10 +42,8 @@ function Get-EvalText {
     $windowTitle = "Compare Known to Unknown"
     $defaultText = "Enter some text here..."
     $evalText = Read-MultiLineInputBoxDialog -Message $message -WindowTitle $windowTitle -DefaultText $defaultText
-    if ($null -eq $evalText) { Write-Host "You clicked Cancel - ending script";break }
-    else { 
-        # Don't do anything
-        }
+    if ($null -eq $evalText) { Write-Host "You clicked Cancel - ending selector function";break }
+    else {}
     $evalText = $evalText.Split([Environment]::NewLine, [System.StringSplitOptions]::RemoveEmptyEntries)
     return $evalText
 }
@@ -89,7 +87,11 @@ Function Get-Traits {
     Param(
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()]
-    $evalText
+    $evalText,
+
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $direction
     )
     # Cycle through $traits and fill $lowPet $highPet as appropriate
     foreach($trait in $traits){
@@ -161,7 +163,11 @@ Function Get-Overall {
     Param(
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()]
-    $evalText
+    $evalText,
+
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $direction
     )
     # Get the comparison text
     $pattern = "Overall"         # Made it a var since I'll use it for key later
@@ -214,7 +220,6 @@ Function Get-Overall {
     }
 
     # Handle the Overall High
-    # DEBUG: 
     # Get our current values for low and high
     # DEBUG:    Write-Host "Get-Overall current High Overall is $currentHighOverall"
 
@@ -237,7 +242,7 @@ Function Get-Overall {
 }
 
 Function Get-KnownPet{
-    param()     # No params, we're going to start by asking who you compared to
+    param()     # No params, we're going to start by asking who you compared against
     # Develop picker-code
     $petDB = Read-Database
     $validChoices = 0..($petDB.Count -1)
@@ -250,10 +255,6 @@ Function Get-KnownPet{
             #another thing
             Write-Host ('{0} - {1} - {2}' -f $petDB.IndexOf($line),$line.Name,$line.Person)
             }
-        Write-Host "--- --- SELECTOR: Feedback request" -ForegroundColor Yellow
-        Write-Host "--- --- SELECTOR: Would you like to be able to refine this list by Person?" -ForegroundColor Yellow
-        Write-Host "--- --- SELECTOR: This would add a couple more keyclicks to your workflow, maybe not worth the effort" -ForegroundColor Yellow
-        Write-Host "--- --- SELECTOR: And you don't always know the human's name, so maybe that field is of limited use" -ForegroundColor Yellow
         $choice = Read-Host -Prompt 'Please chose one of the known pets by number'
         if($choice -in $validChoices){
             Write-Host (' --- Your choice of: [{0}] is valid.' -f $choice)
@@ -393,9 +394,10 @@ Function Show-Menu {
     Write-Host "|    Ancient Anguish Canine Trait Calculations    |"
     Write-Host "+=================================================+"
     Write-Host "| 1) Compare a known canine to an unknown canine  |"
-    Write-Host "| 2) Report current result in vertical columns    |"
-    Write-Host "| 3) Report current status                        |"
-    Write-Host "| 4) Quit and Exit                                |"
+    Write-Host "| 2) Compare an unknown canine to a known canine  |"
+    Write-Host "| 3) Report current result in vertical columns    |"
+    Write-Host "| 4) Report current status                        |"
+    Write-Host "| 5) Quit and Exit                                |"
     Write-Host "|                                                 |"
     Write-Host "+-------------------------------------------------+"
 
@@ -512,6 +514,9 @@ $traits = @(
     'Evasion','Ferocity','Fortitude','Insight','Might','Nimbleness',
     'Patience','Procreation','Sufficiency','Targeting','Toughness'
     )
+
+# VSC Complains if a var is only called once, so define it in the vars section
+$knownPet = @()
 
 <#  Run through sequence and validate 
         Spreadsheet (uses Uknown to Known method)
