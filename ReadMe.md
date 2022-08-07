@@ -82,36 +82,45 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 ### Progress Notes - what am I working on?
 
-- Check the knowledge level
+#### Check the knowledge level
 
   - `if $knowledge -ne certain, abort` Well we can't do that because "listeners" can't see relationships, pinged Paldin
   - Future development: Determine the variations in think/feel
     - Is this predictable?
     - redshift/blueshift the results based on (whatever)
 
-- Check the relationship level?
+#### Check the relationship level
   - not really relevant at this point
   - Futureproofing for some other need
   - Trying to decide between One Big Table and different tables for Traits / Relationships
 
-Work on Menu functionality
+#### Work on Menu functionality
 
+- USABILITY
+  - Should we select a mode (KtoU or UtoK) THEN cycle?
 - FIXES
   - Relabel existing funcs to explicitly state direction
     - Update Menu
-- ENHANCEMENT
-  - Insert this pet into database (prompt for fields to fill in for real name/owner/whatnet) and updatecsv
+- WISHLIST
+  - Insert this pet into database (prompt for fields to fill in for real name/owner/whatnot?) and updatecsv
+  - This is a long way off and I don't relish the idea
+    - Would mean users also need the ability to mark existing records inactive
 
-
-Working on Update-Unknown (Get-Traits and Get-Overall)
+#### Working on Update-Unknown (Get-Traits and Get-Overall)
 - Directional indicator implementation
 - Simple regex to extract comparison strings fails on "Character says: Brutality seems inferior."
   - Detect string contains "says", apply different regex replacement.
+- Add another array for $newReportPet and see what it looks like
+  - Why not look at the approach I used in the spreadsheet? Something like
+  - foreach ($row in $newReport){$traitValues += ($value = $row.$trait);Some-Get-Minimum-Function;Some-Get-Maximum-Function}
 
-Selecting Known Pet
-- FIXES
-  - Can I switch the selection menu to start counting at 1 instead of 0?
-    - Resolved by adding a zeropet to db, occasionally useful to be there anyway!
+#### Source Data (Import-CSV)
+- Added a column for active/inactive
+- Starting to get a little clunky with > 20 pets in PRIVATE-KNOWNS.csv
+- I really hate dealing with GUI elements in powershell, just get the logic all sorted then consider a web-enabled approach
+- WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, provide a filtered / pivoted data view
+
+#### Selecting Known Pet
 - CHANGES
   - Source data now includes a STATUS field, and I filter on import, selecting only **Active** canines
   - Allows CSV to contain historical data
