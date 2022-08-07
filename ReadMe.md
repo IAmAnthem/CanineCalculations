@@ -112,12 +112,12 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
     - Why not look at the approach I used in the spreadsheet? Something like
     - foreach ($row in $newReport){$traitValues += ($value = $row.$trait);Some-Get-Minimum-Function;Some-Get-Maximum-Function}
 
-| Iteration   | Low     | High    | Result |
-| ----------- | ------- | ------- | ------ |
-| Comparison1 | Integer | Integer | `if($row.Low -eq $row.High){$row.low};`
-| Comparison2 | Integer | Integer | `else{$myString= $($row.Low).ToString() + " - " + $($row.High).ToString()}`
+`$tableLow` maybe looks like this
+| Field       | Comparison 1 | Comparison N | Result |
+| ----------- | ------------ | ------------ | ------ |
+| Alertness   | Integer      | Integer      | `Function Max-Value $tableLow.Alertness`
+| Comparison2 | Integer      | Integer      | `Function Max-Value $tableLow.Alertness`
 
-Damnit Beavis, this table design is crap, go make it better.
 
 #### Source Data (Import-CSV)
 - Added a column for active/inactive
