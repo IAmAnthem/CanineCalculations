@@ -179,6 +179,16 @@ Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHi
             }
             pause
     }
+    # Having completed updating lowPet and highPet, we need subtotals, calculate fresh each compare
+    $subtotalLow = 0
+    $subtotalHigh = 0
+    foreach($trait in $traits){
+        $subtotalLow = $subtotalLow + $lowPet.$trait 
+    }
+    # if $lowpet.keys -notcontains Subtotal add key/value
+    # else $lowPet.Subtotal = $subtotalLow
+    # if $highpet.keys -notcontains Subtotal add key/value
+    # else $highPet.Subtotal = $subtotalHigh
     return
 }
 
