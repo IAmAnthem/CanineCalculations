@@ -117,25 +117,25 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 `$tableLow` maybe looks like this
 | Field        | Comparison 1 | Comparison N | Result |
 | ------------ | ------------ | ------------ | ------ |
-| Alertness    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Appetite     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Brutality    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Development  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Eluding      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Energy       | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Evasion      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Ferocity     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Fortitude    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Insight      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Might        | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Nimbleness   | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Patience     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Procreation  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Sufficiency  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Targeting    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Toughness    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| ==Subtotal== | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
-| Overall      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Alertness    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Appetite     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Brutality    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Development  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Eluding      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Energy       | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Evasion      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Ferocity     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Fortitude    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Insight      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Might        | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Nimbleness   | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Patience     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Procreation  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Sufficiency  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Targeting    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Toughness    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| ==Subtotal== | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
+| Overall      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
 
 
 
