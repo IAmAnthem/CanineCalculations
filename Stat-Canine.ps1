@@ -146,7 +146,8 @@ Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high
         # Get the current low and high estimates
         $currentLow = $lowPet.$trait
         $currentHigh = $highPet.$trait
-
+Write-Host "Get-Traits current estimate of LOW is $currentLow"
+Write-Host "Get-Traits current estimate of HIGH is $currentHigh"
         # LOW PET
         # Does the key exist?
         if($lowPet.Keys -notcontains $trait){
@@ -170,11 +171,11 @@ Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
             }
         # Again, lets keep it simple. spreadsheet does this: for an array of high ranges (23, 24, 25, 26) pick the lowest
         elseif($potentialHigh -lt $currentHigh){
-Write-Host "Get-Traits potential value $potentialHigh lower than current : UPDATING"
+Write-Host "Get-Traits potential HIGH value $potentialHigh lower than current $currentHigh : UPDATING"
             $highPet.$trait = $potentialHigh
             }
         elseif($potentialHigh -ge $currentHigh){
-Write-Host "Get-Traits potential value $potentialHigh >= current : NO ACTION"
+Write-Host "Get-Traits potential value $potentialHigh >= current $currentHigh : NO ACTION"
             }
             pause
     }
