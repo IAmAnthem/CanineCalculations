@@ -108,35 +108,8 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 #### Working on Update-Unknown (Get-Traits and Get-Overall)
 - Directional indicator implementation (still not confident this is "what I want")
-  - Add another array for $newReportPet and see what it looks like
-    - Why not look at the approach I used in the spreadsheet?
-    - I could debug / validate data a lot easier with this table
-    - Still not sure Overall is being useful
-    - Need to add a Subtotal column
-
-`$tableLow` maybe looks like this
-| Field        | Comparison 1 | Comparison N | Result |
-| ------------ | ------------ | ------------ | ------ |
-| Alertness    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Appetite     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Brutality    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Development  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Eluding      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Energy       | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Evasion      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Ferocity     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Fortitude    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Insight      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Might        | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Nimbleness   | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Patience     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Procreation  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Sufficiency  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Targeting    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Toughness    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| ==Subtotal== | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-| Overall      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$field` |
-
+  - Need to add a Subtotal column
+`$lowPet $highPet` hashtables still look to be the best option.
 
 
 #### Source Data (Import-CSV)
@@ -144,7 +117,9 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 - Starting to get a little clunky with > 20 pets in PRIVATE-KNOWNS.csv
 - I really hate dealing with GUI elements in powershell, just get the logic all sorted then consider a web-enabled approach
 - WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, WebApp would need to provide a filtered / pivoted data view
-  - Cheat: Borrow users source-data and write the view code in Google Sheets?  Inelegant and not portable.  Why am I considering this?
+  - Cheat: Borrow users source-data and write the view code in Google Sheets?  
+  Inelegant and not portable.  
+  ==Why am I considering this?==
 
 #### Selecting Known Pet
 - CHANGES

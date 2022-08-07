@@ -101,7 +101,7 @@ Function Get-Traits {
     foreach($trait in $traits){
         # DO STUFF
         $pattern = $trait
-        Write-Host "Get-Traits is looking for $trait"
+# DEBUG: Write-Host "Get-Traits is looking for $trait"
 
         #Strip down to get the comparison text
         $diffDesc = foreach ($str in $evalText){
@@ -111,10 +111,10 @@ Function Get-Traits {
         $diffDesc = $diffDesc -replace '\w+ says: ',''
 
         $diffDesc = $diffDesc.ToString().TrimStart()           # Remove padding
-        Write-Host "Get-Traits working on this string: $diffDesc"
+# DEBUG: Write-Host "Get-Traits working on this string: $diffDesc"
         $diffDesc = $diffDesc -replace '(^(?:\S+\s+\n?){1,2})',''  # Remove 1st 2 words
         $diffDesc = $diffDesc.Replace('.','')
-        Write-Host "Get-Traits string: $diffDesc is ready"
+# DEBUG: Write-Host "Get-Traits string: $diffDesc is ready"
 
         # Translate difference description into two numbers
         foreach($row in $baseArray){
@@ -123,8 +123,8 @@ Function Get-Traits {
             $traitHighModifier = $row.high
             }
         }
-Write-Host "Get-Traits found lowModifier: $traitLowModifier"
-Write-Host "Get-Traits found highModifier: $traitHighModifier"
+# DEBUG: Write-Host "Get-Traits found lowModifier: $traitLowModifier"
+# DEBUG: Write-Host "Get-Traits found highModifier: $traitHighModifier"
 
         # Do math, known value + modifier
         $knownValue = $knownPet.$trait
@@ -132,63 +132,81 @@ Write-Host "Get-Traits found highModifier: $traitHighModifier"
         if($direction -eq "UnknownToKnown"){
             $potentialLow  = $knownValue + $traitLowModifier
             $potentialHigh = $knownValue + $traitHighModifier
-Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
+# DEBUG: Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -eq "KnownToUnknown") {
             $potentialLow  = $knownValue - $traitHighModifier
             $potentialHigh = $knownValue - $traitLowModifier
-Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
+# DEBUG: Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -notin "UnknownToKnown","KnownToUnknown"){
-            Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
+# DEBUG: Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
             break
         }
         # Get the current low and high estimates
         $currentLow = $lowPet.$trait
         $currentHigh = $highPet.$trait
-Write-Host "Get-Traits current estimate of LOW is $currentLow"
-Write-Host "Get-Traits current estimate of HIGH is $currentHigh"
+# DEBUG: Write-Host "Get-Traits current estimate of LOW is $currentLow"
+# DEBUG: Write-Host "Get-Traits current estimate of HIGH is $currentHigh"
         # LOW PET
         # Does the key exist?
         if($lowPet.Keys -notcontains $trait){
-Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
+# DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
             $lowPet.Add($trait,$potentialLow)
             }
         # Simplify the logic, spreadsheet does this: for an array of low ranges (20, 21, 22, 23) select the highest
         # so if $potentialLow > $currentLow, replace value
         elseif($potentialLow -gt $currentLow){
-Write-Host "Get-Traits potential LOW value $potentialLow higher than current : UPDATING"
+# DEBUG: Write-Host "Get-Traits potential LOW value $potentialLow higher than current : UPDATING"
             $lowPet.$trait = $potentialLow
             }
         elseif($potentialLow -le $currentLow){
-Write-Host "Get-Traits potential LOW value $potentialLow <= $currentLow : NO ACTION"
+# DEBUG: Write-Host "Get-Traits potential LOW value $potentialLow <= $currentLow : NO ACTION"
             }
 
         # HIGH PET
         if($highPet.Keys -notcontains $trait){
-Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
+# DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
             $highPet.Add($trait,$potentialHigh)
             }
         # Again, lets keep it simple. spreadsheet does this: for an array of high ranges (23, 24, 25, 26) pick the lowest
         elseif($potentialHigh -lt $currentHigh){
-Write-Host "Get-Traits potential HIGH value $potentialHigh lower than current $currentHigh : UPDATING"
+# DEBUG: Write-Host "Get-Traits potential HIGH value $potentialHigh lower than current $currentHigh : UPDATING"
             $highPet.$trait = $potentialHigh
             }
         elseif($potentialHigh -ge $currentHigh){
-Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHigh : NO ACTION"
+# DEBUG: Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHigh : NO ACTION"
             }
-            pause
+# DEBUG: pause
     }
     # Having completed updating lowPet and highPet, we need subtotals, calculate fresh each compare
     $subtotalLow = 0
     $subtotalHigh = 0
     foreach($trait in $traits){
-        $subtotalLow = $subtotalLow + $lowPet.$trait 
+        $subtotalLow = $subtotalLow + $lowPet.$trait
+        $subtotalHigh = $subtotalHigh + $highPet.$trait
     }
     # if $lowpet.keys -notcontains Subtotal add key/value
+     if($lowPet.Keys -notcontains "Subtotal"){
+# DEBUG: Write-Host "Get-Traits SUBTOTAL LOW creating key/value Subtotal of $subtotalLow in lowPet"
+        $lowPet.Add("Subtotal",$subtotalLow)
+        }
     # else $lowPet.Subtotal = $subtotalLow
+    else{
+# DEBUG: Write-Host "Get-Traits SUBTOTAL LOW updating key/value Subtotal to $subtotalLow in lowPet"
+        $lowPet.Subtotal = $subtotalLow
+        }
+
     # if $highpet.keys -notcontains Subtotal add key/value
+    if($highPet.Keys -notcontains "Subtotal"){
+# DEBUG: Write-Host "Get-Traits SUBTOTAL HIGH creating key/value Subtotal of $subtotalHigh in highPet"
+        $highPet.Add("Subtotal",$subtotalHigh)
+    }
     # else $highPet.Subtotal = $subtotalHigh
+    else{
+# DEBUG: Write-Host "Get-Traits SUBTOTAL HIGH updating key/value Subtotal to $subtotalHigh in highPet"
+        $highPet.Subtotal = $subtotalHigh
+    }
     return
 }
 
@@ -521,6 +539,12 @@ Function Format-Vertical
             $reportPet.Add($trait,$rangeStr)
         }      
     }
+
+    $subtotalLow  = ($lowPet.Subtotal).ToString()
+    $subtotalHigh = ($highPet.Subtotal).ToString()
+    $rangeSubtotal = $subtotalLow + " - " + $subtotalHigh
+    $reportPet.Add("Subtotal",$rangeSubtotal)
+
     $lowOverall   = ($lowPet.Overall).ToString()
     $highOverall  = ($highPet.Overall).ToString()
     $rangeOverall = $lowOverall + " - " + $highOverall
