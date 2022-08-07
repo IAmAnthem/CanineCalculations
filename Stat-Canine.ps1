@@ -160,7 +160,7 @@ Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
 Write-Host "Get-Traits potential LOW value $potentialLow higher than current : UPDATING"
             $lowPet.$trait = $potentialLow
             }
-        elseif($currentLow -le $potentialLow){
+        elseif($potentialLow -le $currentLow){
 Write-Host "Get-Traits potential LOW value $potentialLow <= $currentLow : NO ACTION"
             }
 
