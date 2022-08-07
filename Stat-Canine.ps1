@@ -135,7 +135,6 @@ Function Get-Traits {
 Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -eq "KnownToUnknown") {
-Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh - FLIPPED"
             $potentialLow  = $knownValue - $traitHighModifier
             $potentialHigh = $knownValue - $traitLowModifier
 Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
@@ -154,7 +153,7 @@ Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
         # Simplify the logic, spreadsheet does this: for an array of low ranges (20, 21, 22, 23) select the highest
         # so if $potentialLow > $currentLow, replace value
         elseif($potentialLow -gt $currentLow){
-Write-Host "Get-Traits potential value $potentialLow higher than current : UPDATING"
+Write-Host "Get-Traits potential LOW value $potentialLow higher than current : UPDATING"
             $lowPet.$trait = $potentialLow
             }
         elseif($currentLow -le $potentialLow){
