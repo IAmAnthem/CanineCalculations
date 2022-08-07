@@ -107,12 +107,10 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
     - Would mean users also need the ability to mark existing records inactive
 
 #### Working on Update-Unknown (Get-Traits and Get-Overall)
-- Directional indicator implementation
-- Simple regex to extract comparison strings fails on "Character says: Brutality seems inferior."
-  - Detect string contains "says", apply different regex replacement.
-- Add another array for $newReportPet and see what it looks like
-  - Why not look at the approach I used in the spreadsheet? Something like
-  - foreach ($row in $newReport){$traitValues += ($value = $row.$trait);Some-Get-Minimum-Function;Some-Get-Maximum-Function}
+- Directional indicator implementation (still not confident this is "what I want")
+  - Add another array for $newReportPet and see what it looks like
+    - Why not look at the approach I used in the spreadsheet? Something like
+    - foreach ($row in $newReport){$traitValues += ($value = $row.$trait);Some-Get-Minimum-Function;Some-Get-Maximum-Function}
 
 #### Source Data (Import-CSV)
 - Added a column for active/inactive
