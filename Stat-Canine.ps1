@@ -161,7 +161,7 @@ Write-Host "Get-Traits potential LOW value $potentialLow higher than current : U
             $lowPet.$trait = $potentialLow
             }
         elseif($currentLow -le $potentialLow){
-Write-Host "Get-Traits potential value $potentialLow <= $currentLow : NO ACTION"
+Write-Host "Get-Traits potential LOW value $potentialLow <= $currentLow : NO ACTION"
             }
 
         # HIGH PET
@@ -175,7 +175,7 @@ Write-Host "Get-Traits potential HIGH value $potentialHigh lower than current $c
             $highPet.$trait = $potentialHigh
             }
         elseif($potentialHigh -ge $currentHigh){
-Write-Host "Get-Traits potential value $potentialHigh >= current $currentHigh : NO ACTION"
+Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHigh : NO ACTION"
             }
             pause
     }
