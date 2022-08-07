@@ -109,14 +109,34 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 #### Working on Update-Unknown (Get-Traits and Get-Overall)
 - Directional indicator implementation (still not confident this is "what I want")
   - Add another array for $newReportPet and see what it looks like
-    - Why not look at the approach I used in the spreadsheet? Something like
-    - foreach ($row in $newReport){$traitValues += ($value = $row.$trait);Some-Get-Minimum-Function;Some-Get-Maximum-Function}
+    - Why not look at the approach I used in the spreadsheet?
+    - I could debug / validate data a lot easier with this table
+    - Still not sure Overall is being useful
+    - Need to add a Subtotal column
 
 `$tableLow` maybe looks like this
-| Field       | Comparison 1 | Comparison N | Result |
-| ----------- | ------------ | ------------ | ------ |
-| Alertness   | Integer      | Integer      | `Function Max-Value $tableLow.Alertness`
-| Comparison2 | Integer      | Integer      | `Function Max-Value $tableLow.Alertness`
+| Field        | Comparison 1 | Comparison N | Result |
+| ------------ | ------------ | ------------ | ------ |
+| Alertness    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Appetite     | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Brutality    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Development  | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Eluding      | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Energy       | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Evasion      | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Ferocity     | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Fortitude    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Insight      | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Might        | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Nimbleness   | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Patience     | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Procreation  | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Sufficiency  | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Targeting    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Toughness    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| ==Subtotal== | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Overall      | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+
 
 
 #### Source Data (Import-CSV)
