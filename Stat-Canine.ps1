@@ -100,9 +100,12 @@ Function Get-Traits {
         Write-Host "Get-Traits is looking for $trait"
 
         #Strip down to get the comparison text
-        $diffDesc = foreach ($str in $evalText){               # Difference Description
+        $diffDesc = foreach ($str in $evalText){
             Select-String -InputObject $str -Pattern $pattern
             }
+        # If text is from the listener's perspective, strip CharacterName says:
+        $diffDesc = $diffDesc -replace '\w+ says: ',''
+
         $diffDesc = $diffDesc.ToString().TrimStart()           # Remove padding
         Write-Host "Get-Traits working on this string: $diffDesc"
         $diffDesc = $diffDesc -replace '(^(?:\S+\s+\n?){1,2})',''  # Remove 1st 2 words
@@ -187,6 +190,9 @@ Function Get-Overall {
         Select-String -InputObject $str -Pattern $pattern
         }
     $overallText = $overallText.ToString()
+    # If text is from the listener's perspective, strip CharacterName says:
+    $overallText = $overallText -replace '\w+ says: ',''
+
     $overallText = $overallText -replace '(^(?:\S+\s+\n?){1,5})','' # Remove 1st 5 words
     $overallText = $overallText.Replace(".","")
     Write-Host "Get-Overall found the Overall to be: $overallText"
@@ -446,8 +452,7 @@ Function Update-Unknown {
     $evalText = Get-EvalText
     $knowledge = Get-Knowledge $evalText
     if($knowledge -ne "certain"){
-        Write-Host "Comparison not certain, breaking run!" -ForegroundColor Yellow
-        break
+        Write-Host "Update-Unknown - WARNING - Comparison may not be certain!" -ForegroundColor Yellow
         }
     Write-Host "Update-Unknown is comparing against $knownPet.Name" -ForegroundColor Yellow
     Get-Traits -evalText $evalText -direction $direction
