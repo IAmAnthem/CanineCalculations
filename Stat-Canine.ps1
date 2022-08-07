@@ -7,7 +7,10 @@ Function Read-Database {
     Param()
     # The default behaviour of Import-CSV to import everything as strings
     # Cast the integers!
-    $petDB = Import-CSV -Path .\KNOWNS.csv
+    # Your pet database should be something like KNOWNS.csv
+    # A sample file is included in this repository
+    # I develop/test against PRIVATE-KNOWNS.csv which has data from other players
+    $petDB = Import-CSV -Path .\PRIVATE-KNOWNS.csv
     $petDB = $petDB | ForEach-Object {
         #Cast things to integer explicitly
         $_.Alertness   = [int]$_.Alertness
