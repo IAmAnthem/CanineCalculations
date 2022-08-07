@@ -84,7 +84,7 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 - Check the knowledge level
 
-  - `if $knowledge -ne certain, abort`
+  - `if $knowledge -ne certain, abort` Well we can't do that because "listeners" can't see relationships, pinged Paldin
   - Future development: Determine the variations in think/feel
     - Is this predictable?
     - redshift/blueshift the results based on (whatever)
@@ -96,12 +96,9 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 Work on Menu functionality
 
-- Seems good!
-  - Whoops, assumed that everyone does compares in the same direction
 - FIXES
   - Relabel existing funcs to explicitly state direction
     - Update Menu
-  - Add new funcs to reverse direction, pass $direction KtoU or UtoK, flip math depending on direction
 - ENHANCEMENT
   - Insert this pet into database (prompt for fields to fill in for real name/owner/whatnet) and updatecsv
 
@@ -114,6 +111,10 @@ Working on Update-Unknown (Get-Traits and Get-Overall)
 Selecting Known Pet
 - FIXES
   - Can I switch the selection menu to start counting at 1 instead of 0?
-    - Pretty sure there's an example somewhere that does this
+    - Resolved by adding a zeropet to db, occasionally useful to be there anyway!
+- CHANGES
+  - Source data now includes a STATUS field, and I filter on import, selecting only **Active** canines
+  - Allows CSV to contain historical data
+    - You're going to need a lot of historical data if you want to make educated guesses at the breeding calculation formulas
 
 [^1]: Players are the human beings.  Characters are the in-game persona running around.  A player may have many characters.

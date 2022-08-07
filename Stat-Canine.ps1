@@ -11,6 +11,7 @@ Function Read-Database {
     # A sample file is included in this repository
     # I develop/test against PRIVATE-KNOWNS.csv which has data from other players
     $petDB = Import-CSV -Path .\PRIVATE-KNOWNS.csv
+    $petDB = $petDB | Where-Object Status -EQ "Active"
     $petDB = $petDB | ForEach-Object {
         #Cast things to integer explicitly
         $_.Alertness   = [int]$_.Alertness
