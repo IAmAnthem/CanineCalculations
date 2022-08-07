@@ -112,6 +112,13 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
     - Why not look at the approach I used in the spreadsheet? Something like
     - foreach ($row in $newReport){$traitValues += ($value = $row.$trait);Some-Get-Minimum-Function;Some-Get-Maximum-Function}
 
+| Iteration | Low | High |
+| --------- | --- | ---- |
+| Comparison1 | Integer | Integer |
+| Comparison2 | Integer | Integer |
+
+
+
 #### Source Data (Import-CSV)
 - Added a column for active/inactive
 - Starting to get a little clunky with > 20 pets in PRIVATE-KNOWNS.csv
