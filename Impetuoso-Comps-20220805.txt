@@ -218,7 +218,7 @@ They seem to be unrelated.
 
 
 
-Arynia: KNOWN to UNKNOWN
+Arynia: UNKNOWN to KNOWN
 compare fox to petname out loud
 You look hard at a very large merle grey trained fox comparing to an enormous
 almond trained fox ...
@@ -245,7 +245,7 @@ They seem to be unrelated.
 
 
 
-Jackal: KNOWN to UNKNOWN
+Jackal: UNKNOWN to KNOWN
 Jackal enters the booth.
 A very large smoky charcoal trained fox arrives.
 compare fox to petname out loud
@@ -277,7 +277,7 @@ They seem to be partially related.
 
 
 
-Storm: KNOWN to UNKNOWN
+Storm: UNKNOWN to KNOWN
 Storm enters the booth.
 compare fox to petname out loud
 You look hard at a very large silver trained fox comparing to an enormous
