@@ -118,7 +118,8 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 - Added a column for active/inactive
 - Starting to get a little clunky with > 20 pets in PRIVATE-KNOWNS.csv
 - I really hate dealing with GUI elements in powershell, just get the logic all sorted then consider a web-enabled approach
-- WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, provide a filtered / pivoted data view
+- WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, WebApp would need to provide a filtered / pivoted data view
+  - Cheat: Borrow users source-data and write the view code in Google Sheets?  Inelegant and not portable.  Why am I considering this?
 
 #### Selecting Known Pet
 - CHANGES
