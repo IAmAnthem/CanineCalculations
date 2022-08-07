@@ -123,8 +123,8 @@ Function Get-Traits {
             $traitHighModifier = $row.high
             }
         }
-        Write-Host "Get-Traits found lowModifier: $traitLowModifier"
-        Write-Host "Get-Traits found highModifier: $traitHighModifier"
+Write-Host "Get-Traits found lowModifier: $traitLowModifier"
+Write-Host "Get-Traits found highModifier: $traitHighModifier"
 
         # Do math, known value + modifier
         $knownValue = $knownPet.$trait
@@ -143,6 +143,9 @@ Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high
             Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
             break
         }
+        # Get the current low and high estimates
+        $currentLow = $lowPet.$trait
+        $currentHigh = $highPet.$trait
 
         # LOW PET
         # Does the key exist?
