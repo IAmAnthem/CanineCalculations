@@ -117,25 +117,25 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 `$tableLow` maybe looks like this
 | Field        | Comparison 1 | Comparison N | Result |
 | ------------ | ------------ | ------------ | ------ |
-| Alertness    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Appetite     | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Brutality    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Development  | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Eluding      | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Energy       | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Evasion      | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Ferocity     | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Fortitude    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Insight      | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Might        | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Nimbleness   | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Patience     | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Procreation  | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Sufficiency  | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Targeting    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Toughness    | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| ==Subtotal== | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
-| Overall      | Integer      | Integer      | `Function Max-Value $tableLow.Alertness` |
+| Alertness    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Appetite     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Brutality    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Development  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Eluding      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Energy       | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Evasion      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Ferocity     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Fortitude    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Insight      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Might        | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Nimbleness   | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Patience     | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Procreation  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Sufficiency  | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Targeting    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Toughness    | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| ==Subtotal== | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
+| Overall      | Integer      | Integer      | `Function Max-Value -InputObj $tableLow.$traitName` |
 
 
 
