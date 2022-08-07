@@ -132,48 +132,49 @@ Function Get-Traits {
         if($direction -eq "UnknownToKnown"){
             $potentialLow  = $knownValue + $traitLowModifier
             $potentialHigh = $knownValue + $traitHighModifier
-            Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
+Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -eq "KnownToUnknown") {
-Write-Host "Get-Traits is in KnownToUnknown mode, flipping position of modifiers"
+Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh - FLIPPED"
             $potentialLow  = $knownValue - $traitHighModifier
             $potentialHigh = $knownValue - $traitLowModifier
-             Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
+Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -notin "UnknownToKnown","KnownToUnknown"){
             Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
             break
         }
-        $currentLow  = $lowPet.$trait
-        $currentHigh = $highPet.$trait
 
         # LOW PET
         # Does the key exist?
         if($lowPet.Keys -notcontains $trait){
-            # DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
+Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
             $lowPet.Add($trait,$potentialLow)
             }
-        elseif($currentLow -lt $potentialLow){
-            # DEBUG: Write-Host "Get-Traits $currentLow < $potentialLow : UPDATING"
+        # Simplify the logic, spreadsheet does this: for an array of low ranges (20, 21, 22, 23) select the highest
+        # so if $potentialLow > $currentLow, replace value
+        elseif($potentialLow -gt $currentLow){
+Write-Host "Get-Traits potential value $potentialLow higher than current : UPDATING"
             $lowPet.$trait = $potentialLow
             }
-        elseif($currentLow -ge $potentialLow){
-            # DEBUG: Write-Host "Get-Traits $currentLow >= $potentialLow : NO ACTION"
+        elseif($currentLow -le $potentialLow){
+Write-Host "Get-Traits potential value $potentialLow <= $currentLow : NO ACTION"
             }
 
         # HIGH PET
         if($highPet.Keys -notcontains $trait){
-            # DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
+Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
             $highPet.Add($trait,$potentialHigh)
             }
-        elseif($currentHigh -gt $potentialHigh){
-            # DEBUG: Write-Host "Get-Traits $currentHigh > $potentialHigh : UPDATING"
+        # Again, lets keep it simple. spreadsheet does this: for an array of high ranges (23, 24, 25, 26) pick the lowest
+        elseif($potentialHigh -lt $currentHigh){
+Write-Host "Get-Traits potential value $potentialHigh lower than current : UPDATING"
             $highPet.$trait = $potentialHigh
             }
-        elseif($currentHigh -le $potentialHigh){
-            # DEBUG: Write-Host "Get-Traits $currentHigh <= $potentialHigh : NO ACTION"
+        elseif($potentialHigh -ge $currentHigh){
+Write-Host "Get-Traits potential value $potentialHigh >= current : NO ACTION"
             }
-
+            pause
     }
     return
 }
@@ -209,7 +210,7 @@ Function Get-Overall {
             }
         }
     Write-Host "Get-Overall found modifiers low: $overallLowRange - high: $overallHighRange"
-
+    Write-Host "Get-Overall - pay attention, this is probably broken"
     # Do the math, known.total + modifiers
     $knownValue = $knownPet.TOTAL
     Write-Host "Get-Overall found knownpet TOTAL: $knownValue"
@@ -458,7 +459,8 @@ Function Update-Unknown {
     if($knowledge -ne "certain"){
         Write-Host "Update-Unknown - WARNING - Comparison may not be certain!" -ForegroundColor Yellow
         }
-    Write-Host "Update-Unknown is comparing against $knownPet.Name" -ForegroundColor Yellow
+    $textName = ($knownPet | Select-Object -Property Name).Name
+    Write-Host "Update-Unknown: Using $textName as Known Pet" -ForegroundColor Yellow
     Get-Traits -evalText $evalText -direction $direction
     Get-Overall -evalText $evalText -direction $direction
     Get-Status -lowPet $lowPet -highPet $highPet
