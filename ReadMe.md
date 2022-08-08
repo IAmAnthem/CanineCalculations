@@ -24,7 +24,7 @@ RELATIONSHIPS?!  Yes, breeding between related canines produces resulting puppie
 
 My initial efforts are to develop the logic for automating the cacluation of trait values and checking to ensure pets are unrelated for breeding.
 
-My estimate is something over 12,000 canines have been tamed.  The highest traited pets are a bit over halfway to the maximum value.  It took YEARS.
+My estimate is something over 12,000 canines have been tamed.  The highest traited pets are a bit under halfway to the maximum value.  It took YEARS.
 ## Why do we need scripts?
 ### Trait Values
 Characters develop more certainty in their 'compare' ability the more puppies they have.
@@ -118,8 +118,7 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 - I really hate dealing with GUI elements in powershell, just get the logic all sorted then consider a web-enabled approach
 - WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, WebApp would need to provide a filtered / pivoted data view
   - Cheat: Borrow users source-data and write the view code in Google Sheets?  
-  Inelegant and not portable.  
-  ==Why am I considering this?==
+  Inelegant and not portable.  ==Why am I considering this?==
 
 #### Selecting Known Pet
 - CHANGES
