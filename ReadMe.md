@@ -110,6 +110,8 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 - Directional indicator implementation (still not confident this is "what I want")
   - Need to add a Subtotal column
 `$lowPet $highPet` hashtables still look to be the best option.
+- Validation: larger data set, Unknown to Known looks good
+- Validation: larger data set, Known to Unknown (NEEDS TESTING)
 
 
 #### Source Data (Import-CSV)
