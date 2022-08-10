@@ -1,3 +1,8 @@
+# Release History
+- v0.78 - cleaning up extraneous files from development, I really should use .gitignore better
+- v0.79 - Mute all debugging messages, try/catch for KNOWNS.csv
+
+
 # Canine Calculations for Ancient Anguish
 
 [Ancient Anguish](http://www.anguish.org) is a MUD that has been around a long time.
@@ -25,6 +30,8 @@ RELATIONSHIPS?!  Yes, breeding between related canines produces resulting puppie
 My initial efforts are to develop the logic for automating the cacluation of trait values and checking to ensure pets are unrelated for breeding.
 
 My estimate is something over 12,000 canines have been tamed.  The highest traited pets are a bit under halfway to the maximum value.  It took YEARS.
+
+
 ## Why do we need scripts?
 ### Trait Values
 Characters develop more certainty in their 'compare' ability the more puppies they have.
@@ -95,32 +102,26 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - Trying to decide between One Big Table and different tables for Traits / Relationships
 
 #### Work on Menu functionality
-
-- USABILITY
-  - Should we select a mode (KtoU or UtoK) THEN cycle?
-- FIXES
-  - Relabel existing funcs to explicitly state direction
-    - Update Menu
 - WISHLIST
   - Insert this pet into database (prompt for fields to fill in for real name/owner/whatnot?) and updatecsv
   - This is a long way off and I don't relish the idea
     - Would mean users also need the ability to mark existing records inactive
 
 #### Working on Update-Unknown (Get-Traits and Get-Overall)
-- Directional indicator implementation (still not confident this is "what I want")
-  - Need to add a Subtotal column
-`$lowPet $highPet` hashtables still look to be the best option.
 - Validation: larger data set, Unknown to Known looks good
-- Validation: larger data set, Known to Unknown (NEEDS TESTING)
+- Validation: larger data set, Known to Unknown looks good
+- Validation: mixed mode comparisons (KtoU, then UtoK, etc etc - seems OK from limited test)
 
 
 #### Source Data (Import-CSV)
 - Added a column for active/inactive
 - Starting to get a little clunky with > 20 pets in PRIVATE-KNOWNS.csv
 - I really hate dealing with GUI elements in powershell, just get the logic all sorted then consider a web-enabled approach
+- Would you prefer a GUI pick-list?
+  - Click to select a known pet, click OK to proceed with inputting the comparison
 - WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, WebApp would need to provide a filtered / pivoted data view
   - Cheat: Borrow users source-data and write the view code in Google Sheets?  
-  Inelegant and not portable.  ==Why am I considering this?==
+  Inelegant and not portable.  *Why am I considering this?*
 
 #### Selecting Known Pet
 - CHANGES
@@ -128,4 +129,4 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - Allows CSV to contain historical data
     - You're going to need a lot of historical data if you want to make educated guesses at the breeding calculation formulas
 
-[^1]: Players are the human beings.  Characters are the in-game persona running around.  A player may have many characters.
+[^1]: Players are the human beings.  Characters are the in-game persona running around.  A player may have many characters.  If you get into breeding, plan on at least 4 characters.

@@ -6,32 +6,36 @@ Develops a set of functions useful in evaluating a canine
 Function Read-Database {
     Param()
     # The default behaviour of Import-CSV to import everything as strings
-    # Cast the integers!
     # Your pet database should be something like KNOWNS.csv
     # A sample file is included in this repository
     # I develop/test against PRIVATE-KNOWNS.csv which has data from other players
-    $petDB = Import-CSV -Path .\PRIVATE-KNOWNS.csv
+    try {
+        $petDB = Import-CSV -Path $sourceDBFile
+    }
+    catch {
+        $_.Exception.Message
+    }
     $petDB = $petDB | Where-Object Status -EQ "Active"
     $petDB = $petDB | ForEach-Object {
         #Cast things to integer explicitly
-        $_.Alertness   = [int]$_.Alertness
-        $_.Appetite	   = [int]$_.Appetite
-        $_.Brutality   = [int]$_.Brutality
-        $_.Development = [int]$_.Development
-        $_.Eluding     = [int]$_.Eluding
-        $_.Energy      = [int]$_.Energy
-        $_.Evasion     = [int]$_.Evasion
-        $_.Ferocity    = [int]$_.Ferocity
-        $_.Fortitude   = [int]$_.Fortitude
-        $_.Insight     = [int]$_.Insight
-        $_.Might       = [int]$_.Might
-        $_.Nimbleness  = [int]$_.Nimbleness
-        $_.Patience    = [int]$_.Patience
-        $_.Procreation = [int]$_.Procreation
-        $_.Sufficiency = [int]$_.Sufficiency
-        $_.Targeting   = [int]$_.Targeting
-        $_.Toughness   = [int]$_.Toughness
-        $_.TOTAL       = [int]$_.TOTAL
+        $_.Alertness    = [int]$_.Alertness
+        $_.Appetite     = [int]$_.Appetite
+        $_.Brutality    = [int]$_.Brutality
+        $_.Development  = [int]$_.Development
+        $_.Eluding      = [int]$_.Eluding
+        $_.Energy       = [int]$_.Energy
+        $_.Evasion      = [int]$_.Evasion
+        $_.Ferocity     = [int]$_.Ferocity
+        $_.Fortitude    = [int]$_.Fortitude
+        $_.Insight      = [int]$_.Insight
+        $_.Might        = [int]$_.Might
+        $_.Nimbleness   = [int]$_.Nimbleness
+        $_.Patience     = [int]$_.Patience
+        $_.Procreation  = [int]$_.Procreation
+        $_.Sufficiency  = [int]$_.Sufficiency
+        $_.Targeting    = [int]$_.Targeting
+        $_.Toughness    = [int]$_.Toughness
+        $_.TOTAL        = [int]$_.TOTAL
 
         # Output object
         $_
@@ -101,8 +105,7 @@ Function Get-Traits {
     foreach($trait in $traits){
         # DO STUFF
         $pattern = $trait
-# DEBUG: 
-Write-Host "Get-Traits is looking for $trait"
+# DEBUG: Write-Host "Get-Traits is looking for $trait"
 
         #Strip down to get the comparison text
         $diffDesc = foreach ($str in $evalText){
@@ -112,12 +115,10 @@ Write-Host "Get-Traits is looking for $trait"
         $diffDesc = $diffDesc -replace '\w+ says: ',''
 
         $diffDesc = $diffDesc.ToString().TrimStart()           # Remove padding
-# DEBUG: 
-Write-Host "Get-Traits working on this string: $diffDesc"
+# DEBUG: Write-Host "Get-Traits working on this string: $diffDesc"
         $diffDesc = $diffDesc -replace '(^(?:\S+\s+\n?){1,2})',''  # Remove 1st 2 words
         $diffDesc = $diffDesc.Replace('.','')
-# DEBUG: 
-Write-Host "Get-Traits string: $diffDesc is ready"
+# DEBUG: Write-Host "Get-Traits string: $diffDesc is ready"
 
         # Translate difference description into two numbers
         foreach($row in $baseArray){
@@ -126,75 +127,62 @@ Write-Host "Get-Traits string: $diffDesc is ready"
             $traitHighModifier = $row.high
             }
         }
-# DEBUG: 
-Write-Host "Get-Traits found lowModifier: $traitLowModifier"
-# DEBUG: 
-Write-Host "Get-Traits found highModifier: $traitHighModifier"
+# DEBUG: Write-Host "Get-Traits found lowModifier: $traitLowModifier"
+# DEBUG: Write-Host "Get-Traits found highModifier: $traitHighModifier"
 
         # Do math, known value + modifier
         $knownValue = $knownPet.$trait
-Write-Host "Get-Traits: $knownValue is the known value I am comparing to"
-Write-Host "Get-Traits: $direction is the DIRECTION"
+# DEBUG: Write-Host "Get-Traits: $knownValue is the known value I am comparing to"
+# DEBUG: Write-Host "Get-Traits: $direction is the DIRECTION"
         if($direction -eq "UnknownToKnown"){
             $potentialLow  = $knownValue + $traitLowModifier
             $potentialHigh = $knownValue + $traitHighModifier
-# DEBUG: 
-Write-Host "Get-Traits: case is UnknownToKnown - sum KnownValue and Modifier resulting in $trait low $potentialLow high $potentialHigh"
+# DEBUG: Write-Host "Get-Traits: case is UnknownToKnown - sum KnownValue and Modifier resulting in $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -eq "KnownToUnknown") {
             $potentialLow  = $knownValue - $traitHighModifier
             $potentialHigh = $knownValue - $traitLowModifier
-# DEBUG: 
-Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
+# DEBUG: Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
         }
         elseif ($direction -notin "UnknownToKnown","KnownToUnknown"){
-# DEBUG: 
-Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
+# DEBUG: Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
             break
         }
         # Get the current low and high estimates
         $currentLow = $lowPet.$trait
         $currentHigh = $highPet.$trait
-# DEBUG: 
-Write-Host "Get-Traits current estimate of LOW is $currentLow"
-# DEBUG: 
-Write-Host "Get-Traits current estimate of HIGH is $currentHigh"
+# DEBUG: Write-Host "Get-Traits current estimate of LOW is $currentLow"
+# DEBUG: Write-Host "Get-Traits current estimate of HIGH is $currentHigh"
         # LOW PET
         # Does the key exist?
         if($lowPet.Keys -notcontains $trait){
-# DEBUG: 
-Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
+# DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
             $lowPet.Add($trait,$potentialLow)
             }
         # Simplify the logic, spreadsheet does this: for an array of low ranges (20, 21, 22, 23) select the highest
         # so if $potentialLow > $currentLow, replace value
         elseif($potentialLow -gt $currentLow){
-# DEBUG: 
-Write-Host "Get-Traits potential LOW value $potentialLow higher than current : UPDATING"
+# DEBUG: Write-Host "Get-Traits potential LOW value $potentialLow higher than current : UPDATING"
             $lowPet.$trait = $potentialLow
             }
         elseif($potentialLow -le $currentLow){
-# DEBUG: 
-Write-Host "Get-Traits potential LOW value $potentialLow <= $currentLow : NO ACTION"
+# DEBUG: Write-Host "Get-Traits potential LOW value $potentialLow <= $currentLow : NO ACTION"
             }
 
         # HIGH PET
         if($highPet.Keys -notcontains $trait){
-# DEBUG: 
-Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
+# DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
             $highPet.Add($trait,$potentialHigh)
             }
         # Again, lets keep it simple. spreadsheet does this: for an array of high ranges (23, 24, 25, 26) pick the lowest
         elseif($potentialHigh -lt $currentHigh){
-# DEBUG: 
-Write-Host "Get-Traits potential HIGH value $potentialHigh lower than current $currentHigh : UPDATING"
+# DEBUG: Write-Host "Get-Traits potential HIGH value $potentialHigh lower than current $currentHigh : UPDATING"
             $highPet.$trait = $potentialHigh
             }
         elseif($potentialHigh -ge $currentHigh){
-# DEBUG: 
-Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHigh : NO ACTION"
+# DEBUG: Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHigh : NO ACTION"
             }
-Write-Host "Get-Traits: Finished with $trait"
+# DEBUG: Write-Host "Get-Traits: Finished with $trait"
 # DEBUG: pause
     }
     # Having completed updating lowPet and highPet, we need subtotals, calculate fresh each compare
@@ -249,7 +237,7 @@ Function Get-Overall {
 
     $overallText = $overallText -replace '(^(?:\S+\s+\n?){1,5})','' # Remove 1st 5 words
     $overallText = $overallText.Replace(".","")
-    Write-Host "Get-Overall found the Overall to be: $overallText"
+# DEBUG: Write-Host "Get-Overall found the Overall to be: $overallText"
 
     # Turn comparison text into a number
     foreach($row in $baseArray){
@@ -258,61 +246,60 @@ Function Get-Overall {
             $overallHighRange = $row.high
             }
         }
-    Write-Host "Get-Overall found modifiers low: $overallLowRange - high: $overallHighRange"
-    Write-Host "Get-Overall - pay attention, this is probably broken"
+# DEBUG: Write-Host "Get-Overall found modifiers low: $overallLowRange - high: $overallHighRange"
     # Do the math, known.total + modifiers
     $knownValue = $knownPet.TOTAL
-    Write-Host "Get-Overall found knownpet TOTAL: $knownValue"
+# DEBUG: Write-Host "Get-Overall found knownpet TOTAL: $knownValue"
     if($direction -eq "UnknownToKnown"){
         $potentialOverallLowValue = $knownValue + $overallLowRange
         $potentialOverallHighValue = $knownValue + $overallHighRange
     }
     elseif($direction -eq "KnownToUnknown"){
         # Comparisons are reversed, so flip the positions
-Write-Host "Get-Overall in KnownToUnknown, flipping position of lookup table values"
+# DEBUG: Write-Host "Get-Overall in KnownToUnknown, flipping position of lookup table values"
         $potentialOverallLowValue = $knownValue - $overallHighRange
         $potentialOverallHighValue = $knownValue - $overallLowRange
     }
     elseif($direction -notin "UnknownToKnown","KnownToUnknown"){
-        Write-Host "Get-Overall: Something wrong in direction $direction - breaking"
+# DEBUG: Write-Host "Get-Overall: Something wrong in direction $direction - breaking"
         break
         }
 
     # Handling the Overall Low first
-    Write-Host "Get-Overall calculated Overall Low: $overallLowValue High: $overallHighValue"
+# DEBUG: Write-Host "Get-Overall calculated Overall Low: $overallLowValue High: $overallHighValue"
 
     # Get our current values for low and high
     $currentLowOverall  = $lowPet.$pattern
     $currentHighOverall = $highPet.$pattern
-    Write-Host "Get-Overall current Low Overall is $currentLowOverall"
-    Write-Host "Get-Overall current High Overall is $currentHighOverall"
+# DEBUG: Write-Host "Get-Overall current Low Overall is $currentLowOverall"
+# DEBUG: Write-Host "Get-Overall current High Overall is $currentHighOverall"
 
     # Do we need to add or change the value in key Overall?
     if($lowpet.keys -notcontains $pattern){
-Write-Host "Get-Overall creating key for lowPet $pattern value $potentialOverallLowValue" 
+# DEBUG: Write-Host "Get-Overall creating key for lowPet $pattern value $potentialOverallLowValue" 
             $lowPet.Add($pattern,$potentialOverallLowValue)
         }
         # Reworking logic so it looks like Get-Traits.  For low range, select highest value
         elseif($potentialOverallLowValue -gt $currentLowOverall){
-Write-Host "Get-Overall - Updating lowpet $pattern value from $currentLowOverall to $potentialOverallLowValue"
+# DEBUG: Write-Host "Get-Overall - Updating lowpet $pattern value from $currentLowOverall to $potentialOverallLowValue"
             $lowpet.$pattern = $potentialOverallLowValue
         }
     elseif($potentialOverallLowValue -le $currentLowOverall){
-Write-Host "Get-Overall - no action: potentialOverallLowValue $potentialOverallLowValue <= $currentLowOverall"
+# DEBUG: Write-Host "Get-Overall - no action: potentialOverallLowValue $potentialOverallLowValue <= $currentLowOverall"
         }
 
     # Handling the Overall High
     if($highpet.keys -notcontains $pattern){
-Write-Host "Get-Overall creating key for highPet $pattern value $potentialOverallHighValue" 
+# DEBUG: Write-Host "Get-Overall creating key for highPet $pattern value $potentialOverallHighValue" 
             $highPet.Add($pattern,$potentialOverallHighValue)
         }
         # For high range, select the lowest value you find
         elseif($potentialOverallHighValue -lt $currentHighOverall){  
-Write-Host "Get-Overall - updating highpet $pattern value from $currentHighOverall to $potentialOverallHighValue"
+# DEBUG: Write-Host "Get-Overall - updating highpet $pattern value from $currentHighOverall to $potentialOverallHighValue"
         $highpet.$pattern = $potentialOverallHighValue
     }
     elseif($potentialOverallHighValue -gt $currentHighOverall){
-Write-Host "Get-Overall - no action: Potential Overall High $potentialOverallHighValue >= $currentHighOverall"
+# DEBUG: Write-Host "Get-Overall - no action: Potential Overall High $potentialOverallHighValue >= $currentHighOverall"
     }
 }
 
@@ -462,14 +449,24 @@ Function Get-Status {
 
 Function Show-Menu {
     Param()
+    
+    if(Test-Path -Path $sourceDBFile){
+        # Found this file, go ahead
+    }
+    else{
+        Write-Host "Cannot locate $sourceDBFile - what's up with that?"
+        pause
+        break
+    }
+    
     do {
     [int]$userMenuChoice = 0
     while ( $userMenuChoice -lt 1 -or $userMenuChoice -gt 5) {
     Write-Host "+=================================================+"
     Write-Host "|    Ancient Anguish Canine Trait Calculations    |"
     Write-Host "+=================================================+"
-    Write-Host "| 1) Compare an unknown canine to a known canine  |"
-    Write-Host "| 2) Compare a known canine to an unknown canine  |"
+    Write-Host "| 1) Compare an UNKNOWN canine to a KNOWN canine  |"
+    Write-Host "| 2) Compare a KNOWN canine to an UNKNOWN canine  |"
     Write-Host "| 3) Report current result in vertical columns    |"
     Write-Host "| 4) Report current status                        |"
     Write-Host "| 5) Quit and Exit                                |"
@@ -603,4 +600,5 @@ $traits = @(
     Known to Unknown sequence: 
 #>
 
+$sourceDBFile = ".\PRIVATE-KNOWNS.csv"
 Show-Menu
