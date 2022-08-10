@@ -602,5 +602,5 @@ $initialDirectory = $PSScriptRoot
     Known to Unknown sequence: #>
 
 Write-Host "Select a CSV file, default example format is KNOWNS.csv" -ForegroundColor Yellow
-$sourceDBFile = Get-File
+$sourceDBFile = Get-File -initialDirectory $initialDirectory
 Show-Menu

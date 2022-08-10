@@ -3,8 +3,19 @@
 - v0.79 - Mute all debugging messages, try/catch for KNOWNS.csv
 - v0.80 - No need for try/catch, just prompt the user to select a CSV file
 
-# How To Use This Repository
-
+# How To Use This Repository (Stat-Canine.ps1)
+If you're already familiar with github, you don't need directions!, if you are not, try this.  FYSA Pet-Relations.ps1 is just a starter and isn't really deeply tested.
+- From the repository main page: https://github.com/IAmAnthem/CanineCalculations
+- Look for the Code button and click the down-carat
+- Select the Download ZIP option
+- Extract the zipfile contents to wherever
+- Navigate to that folder in Windows Explorer
+- Right click on Stat-Canine.ps1 and select Run with PowerShell
+  - If you get a warning that the script is unsigned and you can't run it, you need to change the ExecutionPolicy
+  - Right Click the Windows Start button
+  - Click Windows PowerShell
+  - Type 'Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+  - Try running the script again
 
 
 # Canine Calculations for Ancient Anguish
