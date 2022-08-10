@@ -450,15 +450,6 @@ Function Get-Status {
 Function Show-Menu {
     Param()
     
-    if(Test-Path -Path $sourceDBFile){
-        # Found this file, go ahead
-    }
-    else{
-        Write-Host "Cannot locate $sourceDBFile - what's up with that?"
-        pause
-        break
-    }
-    
     do {
     [int]$userMenuChoice = 0
     while ( $userMenuChoice -lt 1 -or $userMenuChoice -gt 5) {
@@ -564,6 +555,15 @@ Function Format-Vertical
     $reportPet | Format-Table -HideTableHeaders
 }
 
+function Get-File($initialDirectory) {   
+    [void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms')
+    $OpenFileDialog = New-Object System.Windows.Forms.OpenFileDialog
+    if ($initialDirectory) { $OpenFileDialog.initialDirectory = $initialDirectory }
+    $OpenFileDialog.filter = 'All files (*.*)|*.*'
+    [void] $OpenFileDialog.ShowDialog()
+    return $OpenFileDialog.FileName
+}
+
 <# ######### END OF FUNCTIONS ########## Setting up vars  ########## #>
 
 # Setting up hashtables for results, don't need all keys, will add as calculated
@@ -594,11 +594,13 @@ $traits = @(
     'Patience','Procreation','Sufficiency','Targeting','Toughness'
     )
 
+$initialDirectory = $PSScriptRoot
+
 <#  Run through sequence and validate 
         Spreadsheet (uses Uknown to Known method)
     Unknown To Known sequence: Ballad - Cover - Mulapin - Crescendo - Exie = Angrynerd Solution
-    Known to Unknown sequence: 
-#>
+    Known to Unknown sequence: #>
 
-$sourceDBFile = ".\PRIVATE-KNOWNS.csv"
+Write-Host "Select a CSV file, default example format is KNOWNS.csv" -ForegroundColor Yellow
+$sourceDBFile = Get-File
 Show-Menu

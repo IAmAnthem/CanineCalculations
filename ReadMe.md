@@ -1,6 +1,10 @@
 # Release History
 - v0.78 - cleaning up extraneous files from development, I really should use .gitignore better
 - v0.79 - Mute all debugging messages, try/catch for KNOWNS.csv
+- v0.80 - No need for try/catch, just prompt the user to select a CSV file
+
+# How To Use This Repository
+
 
 
 # Canine Calculations for Ancient Anguish
