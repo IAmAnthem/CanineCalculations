@@ -2,8 +2,11 @@
 - v0.80 - No need for try/catch, just prompt the user to select a CSV file
 
 # How To Use This Repository (Stat-Canine.ps1)
-If you're already familiar with github, you don't need directions!, if you are not, try this.  
+If you're already familiar with github, you don't need directions!
+If you are not, try this.  
+
 Pet-Relations.ps1 is just a starter and isn't really deeply tested.
+
 Stat-Canine.ps1 should be working if you have good data to start from
 - From the repository main page: https://github.com/IAmAnthem/CanineCalculations
 - Look for the Code button and click the down-carat
