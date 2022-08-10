@@ -1,6 +1,4 @@
 # Release History
-- v0.78 - cleaning up extraneous files from development, I really should use .gitignore better
-- v0.79 - Mute all debugging messages, try/catch for KNOWNS.csv
 - v0.80 - No need for try/catch, just prompt the user to select a CSV file
 
 # How To Use This Repository (Stat-Canine.ps1)
@@ -145,5 +143,11 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - Source data now includes a STATUS field, and I filter on import, selecting only **Active** canines
   - Allows CSV to contain historical data
     - You're going to need a lot of historical data if you want to make educated guesses at the breeding calculation formulas
+
+# LICENSE
+This project is licensed under the terms of the MIT license.
+
+
+Repository image credit: Image by <a href="https://pixabay.com/users/sarahrichterart-1546275/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3833915">Sarah Richter</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3833915">Pixabay</a>
 
 [^1]: Players are the human beings.  Characters are the in-game persona running around.  A player may have many characters.  If you get into breeding, plan on at least 4 characters.
