@@ -45,10 +45,14 @@ Function Read-Database {
     }
 
 function Get-EvalText {
-    param ()
-    $message = "Please enter a CERTAIN eval, KNOWN to UNKNOWN"
-    $windowTitle = "Compare Known to Unknown"
-    $defaultText = "Enter some text here..."
+    param (
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        $direction        
+    )
+    $message = "Please enter the text from a CERTAIN comparison"
+    $windowTitle = $direction
+    $defaultText = $direction
     $evalText = Read-MultiLineInputBoxDialog -Message $message -WindowTitle $windowTitle -DefaultText $defaultText
     if ($null -eq $evalText) { Write-Host "You clicked Cancel - ending selector function";break }
     else {}
@@ -314,8 +318,7 @@ Function Get-KnownPet{
     Write-Host "|      Select a known pet from the database       |"
     Write-Host "+=================================================+"
         foreach ($line in $petDB){
-            #another thing
-            Write-Host ('{0} - {1} - {2}' -f $petDB.IndexOf($line),$line.Name,$line.Person)
+             Write-Host ('{0} - {1} - {2}' -f $petDB.IndexOf($line),$line.Name,$line.Person)
             }
         $choice = Read-Host -Prompt 'Please chose one of the known pets by number'
         if($choice -in $validChoices){
@@ -488,7 +491,7 @@ Function Update-Unknown {
     $direction    
     )
     $knownPet = Get-KnownPet
-    $evalText = Get-EvalText
+    $evalText = Get-EvalText -direction $direction
     $knowledge = Get-Knowledge $evalText
     if($knowledge -ne "certain"){
         Write-Host "Update-Unknown - WARNING - Comparison may not be certain!" -ForegroundColor Yellow
