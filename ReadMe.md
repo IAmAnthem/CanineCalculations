@@ -1,5 +1,5 @@
 # Release History
-- v0.80 - No need for try/catch, just prompt the user to select a CSV file
+- v0.80 - Softlaunch, solicitation of feedback
 
 # How To Use This Repository (Stat-Canine.ps1)
 If you're already familiar with github, you don't need directions!
