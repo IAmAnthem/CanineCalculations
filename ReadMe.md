@@ -1,5 +1,9 @@
 # Release History
 - v0.80 - Softlaunch, solicitation of feedback
+- v0.81 - Allow for unsolved pets in source CSV
+  - Any non-numeric will mark the trait as UNSOLVED during comparisons
+  - Other known values for that pet should still help you refine your unknown
+  
 
 # How To Get and Run the Script (Stat-Canine.ps1)
 If you're already familiar with github, you don't need directions!
