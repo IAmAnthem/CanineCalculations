@@ -191,10 +191,8 @@ Write-Host "Get-Traits: KnownPet trait $trait is $knownValue"
         elseif($potentialHigh -ge $currentHigh){
 # DEBUG: Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHigh : NO ACTION"
             }
-# DEBUG: 
-Write-Host "Get-Traits: Finished with $trait"
-# DEBUG: 
-pause
+# DEBUG: Write-Host "Get-Traits: Finished with $trait"
+# DEBUG: pause
     }
     }
 }
