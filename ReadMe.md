@@ -26,7 +26,7 @@ Stat-Canine.ps1 should be working if you have good data to start from
     - if you did "compare dasher to my pet", the diection would be "Unknown to Known"
 - Select the KNOWN pet in your comparison by number
 - The text-entry window appears, the title bar reminds you the direction it expects to see
-  - Paste in the entire comparison block like this:
+  - Paste in the entire comparison block and click OK (or hit ENTER) for the comparison to be processed
   - All comparison text must be certain
     - From the player's perspective, you should see **You are certain that...**
     - If you are listening to someone compare out loud, make sure THEY saw the **certain** message
@@ -56,6 +56,10 @@ You are certain that fox 2 is:
 Overall he seems to be inferior.
 They seem to be unrelated.
 ```
+- A warning message will appear if the comparison text does not include CERTAIN
+- `--- --- STATUS: Solved n of 17 --- ---` will report if any traits were solved
+- Select option 3 to see the range of values currently
+- Select 1 or 2 to continue processing comparisons
 
 # Canine Calculations for Ancient Anguish
 
