@@ -19,7 +19,43 @@ Stat-Canine.ps1 should be working if you have good data to start from
   - Click Windows PowerShell
   - Type 'Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
   - Try running the script again
-
+- Select a CSV file to use as your data source (KNOWNS.csv included to show you format)
+- Select the direction you will be operating in
+  - Example:  Dasher is an NPC and changes every time it spawns
+    - if you did "compare my pet to dasher", the direction would be "Known to Unknown"
+    - if you did "compare dasher to my pet", the diection would be "Unknown to Known"
+- Select the KNOWN pet in your comparison by number
+- The text-entry window appears, the title bar reminds you the direction it expects to see
+  - Paste in the entire comparison block like this:
+  - All comparison text must be certain
+    - From the player's perspective, you should see **You are certain that...**
+    - If you are listening to someone compare out loud, make sure THEY saw the **certain** message
+      - Bug Paldin about getting 'out loud' to include "Playername says: I am certain that *target* is:"
+```
+  compare fox 2 to petname
+You look hard at a very large merle grey trained fox comparing to a very
+large light grey trained fox ...
+You are certain that fox 2 is:
+ Alertness seems slightly inferior.
+ Appetite seems slightly inferior.
+ Brutality seems barely better.
+ Development seems slightly inferior.
+ Eluding seems marginally better.
+ Energy seems barely better.
+ Evasion seems slightly better.
+ Ferocity seems marginally inferior.
+ Fortitude seems marginally inferior.
+ Insight seems barely inferior.
+ Might seems slightly better.
+ Nimbleness seems marginally better.
+ Patience seems marginally inferior.
+ Procreation seems slightly inferior.
+ Sufficiency seems barely inferior.
+ Targeting seems marginally better.
+ Toughness seems marginally better.
+Overall he seems to be inferior.
+They seem to be unrelated.
+```
 
 # Canine Calculations for Ancient Anguish
 
@@ -114,6 +150,7 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
     - Is this predictable?
     - redshift/blueshift the results based on (whatever)
 
+
 #### Check the relationship level
   - not really relevant at this point
   - Futureproofing for some other need
@@ -125,6 +162,7 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - This is a long way off and I don't relish the idea
     - Would mean users also need the ability to mark existing records inactive
 
+
 #### Working on Update-Unknown (Get-Traits and Get-Overall)
 - Validation: larger data set, Unknown to Known looks good
 - Validation: larger data set, Known to Unknown looks good
@@ -132,6 +170,8 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 
 #### Source Data (Import-CSV)
+- User request - add logic to allow inclusion of partially-solved canines in KNOWNS.csv
+  - Logic something like (if $arr.field matches any non-numeric (\D), set field value to UNSOLVED)
 - Added a column for active/inactive
 - Starting to get a little clunky with > 20 pets in PRIVATE-KNOWNS.csv
 - I really hate dealing with GUI elements in powershell, just get the logic all sorted then consider a web-enabled approach

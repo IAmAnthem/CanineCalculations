@@ -4,7 +4,11 @@ Develops a set of functions useful in evaluating a canine
 
 #>
 Function Read-Database {
-    Param()
+    Param(
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        $sourceDBFile      
+    )
     # The default behaviour of Import-CSV to import everything as strings
     # Your pet database should be something like KNOWNS.csv
     # A sample file is included in this repository
@@ -16,6 +20,7 @@ Function Read-Database {
         $_.Exception.Message
     }
     $petDB = $petDB | Where-Object Status -EQ "Active"
+<#  FIRST PASS, REVISE TO IGNORE UNSOLVED
     $petDB = $petDB | ForEach-Object {
         #Cast things to integer explicitly
         $_.Alertness    = [int]$_.Alertness
@@ -40,6 +45,121 @@ Function Read-Database {
         # Output object
         $_
         }
+#>
+    $petDB = $petDB | ForEach-Object {
+Write-Host "Read-Database: Object is $_"
+            if($_.Alertness -match "\D"){
+                $_.$trait = [string]"UNSOLVED"
+            }
+            else{
+                $_.Alertness = [int]$_.Alertness
+            }
+            if($_.Appetite -match "\D"){
+                $_.$trait = [string]"UNSOLVED"
+            }
+            else{
+                $_.Appetite = [int]$_.Appetite
+            }
+            if($_.Brutality -match "\D"){
+                $_.$trait = [string]"UNSOLVED"
+            }
+            else{
+                $_.Brutality = [int]$_.Brutality
+            }
+            if($_.Development -match "\D"){
+                $_.Development = [string]"UNSOLVED"
+            }
+            else{
+                $_.Development = [int]$_.Development
+            }
+            if($_.Eluding -match "\D"){
+                $_.Eluding = [string]"UNSOLVED"
+            }
+            else{
+                $_.Eluding = [int]$_.Eluding
+            }
+            if($_.Energy -match "\D"){
+                $_.Energy = [string]"UNSOLVED"
+            }
+            else{
+                $_.Energy = [int]$_.Energy
+            }
+            if($_.Evasion -match "\D"){
+                $_.$trait = [string]"UNSOLVED"
+            }
+            else{
+                $_.Evasion = [int]$_.Evasion
+            }
+            if($_.Ferocity -match "\D"){
+                $_.Ferocity = [string]"UNSOLVED"
+            }
+            else{
+                $_.Ferocity = [int]$_.Ferocity
+            }
+            if($_.Fortitude -match "\D"){
+                $_.Fortitude = [string]"UNSOLVED"
+            }
+            else{
+                $_.Fortitude = [int]$_.Fortitude
+            }
+            if($_.Insight -match "\D"){
+                $_.Insight = [string]"UNSOLVED"
+            }
+            else{
+                $_.Insight = [int]$_.Insight
+            }          
+            if($_.Might -match "\D"){
+                $_.Might = [string]"UNSOLVED"
+            }
+            else{
+                $_.Might = [int]$_.Might
+            }          
+            if($_.Nimbleness -match "\D"){
+                $_.Nimbleness = [string]"UNSOLVED"
+            }
+            else{
+                $_.Nimbleness = [int]$_.Might
+            }
+            if($_.Patience -match "\D"){
+                $_.Patience = [string]"UNSOLVED"
+            }
+            else{
+                $_.Patience = [int]$_.Patience
+            }
+            if($_.Procreation -match "\D"){
+                $_.Procreation = [string]"UNSOLVED"
+            }
+            else{
+                $_.Procreation = [int]$_.Procreation
+            }            
+            if($_.Sufficiency -match "\D"){
+                $_.Sufficiency = [string]"UNSOLVED"
+            }
+            else{
+                $_.Sufficiency = [int]$_.Sufficiency
+            }                                       
+            if($_.Targeting -match "\D"){
+                $_.Targeting = [string]"UNSOLVED"
+            }
+            else{
+                $_.Targeting = [int]$_.Targeting
+            }                                       
+            if($_.Toughness -match "\D"){
+                $_.Toughness = [string]"UNSOLVED"
+            }
+            else{
+                $_.Toughness = [int]$_.Toughness
+            }                                       
+            if($_.TOTAL -match "\D"){
+                $_.TOTAL = [string]"UNSOLVED"
+            }
+            else{
+                $_.TOTAL = [int]$_.TOTAL
+            }                                       
+# Output the object
+        $_
+
+        }
     $petDB = $petDB | Sort-Object -Property Name
     return $petDB
     }
@@ -52,7 +172,7 @@ function Get-EvalText {
     )
     $message = "Please enter the text from a CERTAIN comparison"
     $windowTitle = $direction
-    $defaultText = $direction
+    $defaultText = "Paste in entire compare block here e.g. You are certain ... "
     $evalText = Read-MultiLineInputBoxDialog -Message $message -WindowTitle $windowTitle -DefaultText $defaultText
     if ($null -eq $evalText) { Write-Host "You clicked Cancel - ending selector function";break }
     else {}
@@ -308,9 +428,13 @@ Function Get-Overall {
 }
 
 Function Get-KnownPet{
-    param()     # No params, we're going to start by asking who you compared against
+    param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $sourceDBFile    
+    )
     # Develop picker-code
-    $petDB = Read-Database
+    $petDB = Read-Database -sourceDBFile $sourceDBFile
     $validChoices = 0..($petDB.Count -1)
     $choice = ''
     while ([string]::IsNullOrEmpty($choice)){
@@ -470,8 +594,8 @@ Function Show-Menu {
     [int]$userMenuChoice = Read-Host "Please choose an option"
 
     switch ($userMenuChoice) {
-            1 { Update-Unknown -direction "UnknownToKnown" }
-            2 { Update-Unknown -direction "KnownToUnknown"}
+            1 { Update-Unknown -direction "UnknownToKnown" -sourceDBFile $sourceDBFile}
+            2 { Update-Unknown -direction "KnownToUnknown" -sourceDBFile $sourceDBFile}
             3 { Format-Vertical -lowPet $lowPet -highPet $highPet}
             4 { Get-Status -lowPet $lowPet -highPet $highPet}
             5 { Exit-Script }
@@ -488,9 +612,14 @@ Function Update-Unknown {
     Param(
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()]
-    $direction    
+    $direction,
+    
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $sourceDBFile
     )
-    $knownPet = Get-KnownPet
+
+    $knownPet = Get-KnownPet -sourceDBFile $sourceDBFile
     $evalText = Get-EvalText -direction $direction
     $knowledge = Get-Knowledge $evalText
     if($knowledge -ne "certain"){
