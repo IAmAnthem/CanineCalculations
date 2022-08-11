@@ -9,160 +9,36 @@ Function Read-Database {
         [ValidateNotNullOrEmpty()]
         $sourceDBFile      
     )
-    # The default behaviour of Import-CSV to import everything as strings
-    # Your pet database should be something like KNOWNS.csv
-    # A sample file is included in this repository
-    # I develop/test against PRIVATE-KNOWNS.csv which has data from other players
-    try {
-        $petDB = Import-CSV -Path $sourceDBFile
-    }
-    catch {
-        $_.Exception.Message
-    }
+    $petDB = Import-Csv -Path $sourceDBFile
     $petDB = $petDB | Where-Object Status -EQ "Active"
-<#  FIRST PASS, REVISE TO IGNORE UNSOLVED
+    # If a non-digit is detected, mark the field UNSOLVED, then go fix Get-Traits and Get-Overall to look for that
     $petDB = $petDB | ForEach-Object {
-        #Cast things to integer explicitly
-        $_.Alertness    = [int]$_.Alertness
-        $_.Appetite     = [int]$_.Appetite
-        $_.Brutality    = [int]$_.Brutality
-        $_.Development  = [int]$_.Development
-        $_.Eluding      = [int]$_.Eluding
-        $_.Energy       = [int]$_.Energy
-        $_.Evasion      = [int]$_.Evasion
-        $_.Ferocity     = [int]$_.Ferocity
-        $_.Fortitude    = [int]$_.Fortitude
-        $_.Insight      = [int]$_.Insight
-        $_.Might        = [int]$_.Might
-        $_.Nimbleness   = [int]$_.Nimbleness
-        $_.Patience     = [int]$_.Patience
-        $_.Procreation  = [int]$_.Procreation
-        $_.Sufficiency  = [int]$_.Sufficiency
-        $_.Targeting    = [int]$_.Targeting
-        $_.Toughness    = [int]$_.Toughness
-        $_.TOTAL        = [int]$_.TOTAL
-
-        # Output object
-        $_
-        }
-#>
-    $petDB = $petDB | ForEach-Object {
-Write-Host "Read-Database: Object is $_"
-            if($_.Alertness -match "\D"){
-                $_.$trait = [string]"UNSOLVED"
-            }
-            else{
-                $_.Alertness = [int]$_.Alertness
-            }
-            if($_.Appetite -match "\D"){
-                $_.$trait = [string]"UNSOLVED"
-            }
-            else{
-                $_.Appetite = [int]$_.Appetite
-            }
-            if($_.Brutality -match "\D"){
-                $_.$trait = [string]"UNSOLVED"
-            }
-            else{
-                $_.Brutality = [int]$_.Brutality
-            }
-            if($_.Development -match "\D"){
-                $_.Development = [string]"UNSOLVED"
-            }
-            else{
-                $_.Development = [int]$_.Development
-            }
-            if($_.Eluding -match "\D"){
-                $_.Eluding = [string]"UNSOLVED"
-            }
-            else{
-                $_.Eluding = [int]$_.Eluding
-            }
-            if($_.Energy -match "\D"){
-                $_.Energy = [string]"UNSOLVED"
-            }
-            else{
-                $_.Energy = [int]$_.Energy
-            }
-            if($_.Evasion -match "\D"){
-                $_.$trait = [string]"UNSOLVED"
-            }
-            else{
-                $_.Evasion = [int]$_.Evasion
-            }
-            if($_.Ferocity -match "\D"){
-                $_.Ferocity = [string]"UNSOLVED"
-            }
-            else{
-                $_.Ferocity = [int]$_.Ferocity
-            }
-            if($_.Fortitude -match "\D"){
-                $_.Fortitude = [string]"UNSOLVED"
-            }
-            else{
-                $_.Fortitude = [int]$_.Fortitude
-            }
-            if($_.Insight -match "\D"){
-                $_.Insight = [string]"UNSOLVED"
-            }
-            else{
-                $_.Insight = [int]$_.Insight
-            }          
-            if($_.Might -match "\D"){
-                $_.Might = [string]"UNSOLVED"
-            }
-            else{
-                $_.Might = [int]$_.Might
-            }          
-            if($_.Nimbleness -match "\D"){
-                $_.Nimbleness = [string]"UNSOLVED"
-            }
-            else{
-                $_.Nimbleness = [int]$_.Might
-            }
-            if($_.Patience -match "\D"){
-                $_.Patience = [string]"UNSOLVED"
-            }
-            else{
-                $_.Patience = [int]$_.Patience
-            }
-            if($_.Procreation -match "\D"){
-                $_.Procreation = [string]"UNSOLVED"
-            }
-            else{
-                $_.Procreation = [int]$_.Procreation
-            }            
-            if($_.Sufficiency -match "\D"){
-                $_.Sufficiency = [string]"UNSOLVED"
-            }
-            else{
-                $_.Sufficiency = [int]$_.Sufficiency
-            }                                       
-            if($_.Targeting -match "\D"){
-                $_.Targeting = [string]"UNSOLVED"
-            }
-            else{
-                $_.Targeting = [int]$_.Targeting
-            }                                       
-            if($_.Toughness -match "\D"){
-                $_.Toughness = [string]"UNSOLVED"
-            }
-            else{
-                $_.Toughness = [int]$_.Toughness
-            }                                       
-            if($_.TOTAL -match "\D"){
-                $_.TOTAL = [string]"UNSOLVED"
-            }
-            else{
-                $_.TOTAL = [int]$_.TOTAL
-            }                                       
+        Write-Host "Read-Database: Object is $_ "
+        if($_.Alertness -match "\D")   {$_.Alertness = [string]"UNSOLVED"}   else {$_.Alertness = [int]$_.Alertness}
+        if($_.Appetite -match "\D")    {$_.Appetite = [string]"UNSOLVED"}    else {$_.Appetite = [int]$_.Appetite}
+        if($_.Brutality -match "\D")   {$_.Brutality = [string]"UNSOLVED"}   else {$_.Brutality = [int]$_.Brutality}
+        if($_.Development -match "\D") {$_.Development = [string]"UNSOLVED"} else {$_.Development = [int]$_.Development}
+        if($_.Eluding -match "\D")     {$_.Eluding = [string]"UNSOLVED"}     else {$_.Eluding = [int]$_.Eluding}
+        if($_.Energy -match "\D")      {$_.Energy = [string]"UNSOLVED"}      else {$_.Energy = [int]$_.Energy}
+        if($_.Evasion -match "\D")     {$_.$trait = [string]"UNSOLVED"}      else {$_.Evasion = [int]$_.Evasion}
+        if($_.Ferocity -match "\D")    {$_.Ferocity = [string]"UNSOLVED"}    else {$_.Ferocity = [int]$_.Ferocity}
+        if($_.Fortitude -match "\D")   {$_.Fortitude = [string]"UNSOLVED"}   else {$_.Fortitude = [int]$_.Fortitude}
+        if($_.Insight -match "\D")     {$_.Insight = [string]"UNSOLVED"}     else {$_.Insight = [int]$_.Insight}
+        if($_.Might -match "\D")       {$_.Might = [string]"UNSOLVED"}       else {$_.Might = [int]$_.Might}
+        if($_.Nimbleness -match "\D")  {$_.Nimbleness = [string]"UNSOLVED"}  else {$_.Nimbleness = [int]$_.Might}
+        if($_.Patience -match "\D")    {$_.Patience = [string]"UNSOLVED"}    else {$_.Patience = [int]$_.Patience}
+        if($_.Procreation -match "\D") {$_.Procreation = [string]"UNSOLVED"} else {$_.Procreation = [int]$_.Procreation}
+        if($_.Sufficiency -match "\D") {$_.Sufficiency = [string]"UNSOLVED"} else {$_.Sufficiency = [int]$_.Sufficiency}
+        if($_.Targeting -match "\D")   {$_.Targeting = [string]"UNSOLVED"}   else {$_.Targeting = [int]$_.Targeting}
+        if($_.Toughness -match "\D")   {$_.Toughness = [string]"UNSOLVED"}   else {$_.Toughness = [int]$_.Toughness}
+        if($_.TOTAL -match "\D")       {$_.TOTAL = [string]"UNSOLVED"}       else {$_.TOTAL = [int]$_.TOTAL}
 # Output the object
         $_
-
         }
     $petDB = $petDB | Sort-Object -Property Name
     return $petDB
     }
+
 
 function Get-EvalText {
     param (
@@ -172,7 +48,7 @@ function Get-EvalText {
     )
     $message = "Please enter the text from a CERTAIN comparison"
     $windowTitle = $direction
-    $defaultText = "Paste in entire compare block here e.g. You are certain ... "
+    $defaultText = "Paste in entire compare block here"
     $evalText = Read-MultiLineInputBoxDialog -Message $message -WindowTitle $windowTitle -DefaultText $defaultText
     if ($null -eq $evalText) { Write-Host "You clicked Cancel - ending selector function";break }
     else {}
@@ -231,6 +107,15 @@ Function Get-Traits {
         $pattern = $trait
 # DEBUG: Write-Host "Get-Traits is looking for $trait"
 
+        # First, establish if the known pet has this trait at all - check for string UNSOLVED
+        $knownValue = $knownPet.$trait
+# DEBUG: Write-Host "Get-Traits: $knownValue is the known value I am comparing to"
+# DEBUG: Write-Host "Get-Traits: $direction is the DIRECTION"
+        if($knownValue -eq "UNSOLVED"){
+            Write-Host "Get-Traits: Known pet does not have value for $trait - skipping"
+            return
+        } else {
+
         #Strip down to get the comparison text
         $diffDesc = foreach ($str in $evalText){
             Select-String -InputObject $str -Pattern $pattern
@@ -255,9 +140,6 @@ Function Get-Traits {
 # DEBUG: Write-Host "Get-Traits found highModifier: $traitHighModifier"
 
         # Do math, known value + modifier
-        $knownValue = $knownPet.$trait
-# DEBUG: Write-Host "Get-Traits: $knownValue is the known value I am comparing to"
-# DEBUG: Write-Host "Get-Traits: $direction is the DIRECTION"
         if($direction -eq "UnknownToKnown"){
             $potentialLow  = $knownValue + $traitLowModifier
             $potentialHigh = $knownValue + $traitHighModifier
@@ -338,6 +220,7 @@ Function Get-Traits {
         $highPet.Subtotal = $subtotalHigh
     }
     return
+    }
 }
 
 Function Get-Overall {
@@ -350,7 +233,12 @@ Function Get-Overall {
     [ValidateNotNullOrEmpty()]
     $direction
     )
-    # Get the comparison text
+    # First, establish if the known pet has this trait at all - check for string UNSOLVED
+    $knownValue = $knownPet.TOTAL
+    if ($knownValue -eq "UNSOLVED"){
+        Write-Host "Get-Overall: Known pet is not completely solved, skipping OVERALL comparison" -ForegroundColor Yellow
+        return
+    } else {
     $pattern = "Overall"         # Made it a var since I'll use it for key later
     $overallText = foreach ($str in $evalText){
         Select-String -InputObject $str -Pattern $pattern
@@ -372,7 +260,7 @@ Function Get-Overall {
         }
 # DEBUG: Write-Host "Get-Overall found modifiers low: $overallLowRange - high: $overallHighRange"
     # Do the math, known.total + modifiers
-    $knownValue = $knownPet.TOTAL
+
 # DEBUG: Write-Host "Get-Overall found knownpet TOTAL: $knownValue"
     if($direction -eq "UnknownToKnown"){
         $potentialOverallLowValue = $knownValue + $overallLowRange
@@ -424,6 +312,7 @@ Function Get-Overall {
     }
     elseif($potentialOverallHighValue -gt $currentHighOverall){
 # DEBUG: Write-Host "Get-Overall - no action: Potential Overall High $potentialOverallHighValue >= $currentHighOverall"
+    }
     }
 }
 

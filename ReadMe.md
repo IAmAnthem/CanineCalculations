@@ -1,7 +1,7 @@
 # Release History
 - v0.80 - Softlaunch, solicitation of feedback
 
-# How To Use This Repository (Stat-Canine.ps1)
+# How To Get and Run the Script (Stat-Canine.ps1)
 If you're already familiar with github, you don't need directions!
 If you are not, try this.  
 
@@ -19,6 +19,8 @@ Stat-Canine.ps1 should be working if you have good data to start from
   - Click Windows PowerShell
   - Type 'Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
   - Try running the script again
+
+# Operations within Stat-Canine.ps1
 - Select a CSV file to use as your data source (KNOWNS.csv included to show you format)
 - Select the direction you will be operating in
   - Example:  Dasher is an NPC and changes every time it spawns
