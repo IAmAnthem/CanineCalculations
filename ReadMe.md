@@ -17,6 +17,8 @@ Stat-Canine.ps1 should be working if you have good data to start from
 - Select the Download ZIP option
 - Extract the zipfile contents to wherever
 - Navigate to that folder in Windows Explorer
+- Open KNOWNS.csv and copy the formatting out to a new file like MyPets.csv or something is a good idea
+  - Partially known pets should now be working (i.e. if a trait is "10-20" I mark it unsolved and skip during comparison)
 - Right click on Stat-Canine.ps1 and select Run with PowerShell
   - If you get a warning that the script is unsigned and you can't run it, you need to change the ExecutionPolicy
   - Right Click the Windows Start button
@@ -25,7 +27,7 @@ Stat-Canine.ps1 should be working if you have good data to start from
   - Try running the script again
 
 # Operations within Stat-Canine.ps1
-- Select a CSV file to use as your data source (KNOWNS.csv included to show you format)
+- Select a CSV file to use as your data source (KNOWNS.csv included to show you format, suggest you use your own file like MyPets.csv)
 - Select the direction you will be operating in
   - Example:  Dasher is an NPC and changes every time it spawns
     - if you did "compare my pet to dasher", the direction would be "Known to Unknown"
@@ -33,10 +35,10 @@ Stat-Canine.ps1 should be working if you have good data to start from
 - Select the KNOWN pet in your comparison by number
 - The text-entry window appears, the title bar reminds you the direction it expects to see
   - Paste in the entire comparison block and click OK (or hit ENTER) for the comparison to be processed
-  - All comparison text must be certain
+  - All comparison text **must be certain**
     - From the player's perspective, you should see **You are certain that...**
     - If you are listening to someone compare out loud, make sure THEY saw the **certain** message
-      - Bug Paldin about getting 'out loud' to include "Playername says: I am certain that *target* is:"
+      - Bug Paldin about getting 'out loud' to include **"Playername says: I am certain that *target* is:"**
 ```
   compare fox 2 to petname
 You look hard at a very large merle grey trained fox comparing to a very
