@@ -196,6 +196,8 @@ Write-Host "Get-Traits: Finished with $trait"
 # DEBUG: 
 pause
     }
+    }
+}
 
 function Get-Subtotal {
     param (
