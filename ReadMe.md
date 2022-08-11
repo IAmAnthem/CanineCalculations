@@ -71,13 +71,14 @@ They seem to be unrelated.
 
 # Try it out!
 Included in this repository are three text files, you can use to obtain a verified result.
-- Validation-KnownToUnknown.txt
-- Validation-UnknownToKnown.txt
-- Validation-RESULTS.txt
+- Validation files
+  - Validation-KnownToUnknown.txt
+  - Validation-UnknownToKnown.txt
+  - Validation-RESULTS.txt
 
-- Open the Validation-UnknownToKnown.txt file
+- Open the `Validation-UnknownToKnown.txt` file
 - Launch the script
-- Pick KNOWNS.csv as your source
+- Pick `KNOWNS.csv` as your source
 - Select `1) Compare an UNKNOWN canine to a KNOWN canine`
 - Select the known pet as `1 - Ballad Fireball 730/55 - Dave`
 - Select the first comparison block in the Validation file (Ballad)
@@ -120,8 +121,8 @@ Overall                        721 - 725
 - Continue to refine calculations, select 1 to add another comparison
 - Select known pet # 2 - Cover Rocker
 - Paste in the comparison block for COVER in the Validation-UnknownToKnown.txt file
-- Hit 'ENTER' for calculations to be performed
-  - Notice we've solved more numbers! '--- --- STATUS: Solved 13 of 17 --- ---'
+- Hit `ENTER` for calculations to be performed
+  - Notice we've solved more numbers! `--- --- STATUS: Solved 13 of 17 --- ---`
 - Select Option 3 for the report again
 ```
 Name                           dummy
@@ -148,8 +149,7 @@ Overall                        721 - 723
 - Continue adding comparisons until you see you've solved 17 of 17!
 - Your output result should match the result found in `Validation-RESULTS.txt`
 
-
-# Canine Calculations for Ancient Anguish
+# Blathering on about Ancient Anguish and Rangers
 
 [Ancient Anguish](http://www.anguish.org) is a MUD that has been around a long time.
 
@@ -233,9 +233,9 @@ Some players may choose to not reveal their pet lineage or stats for whatever re
 - Skills: I'm a systems engineer by trade and at heart, I learn enough code to do what I need to do.  
 Currently that's PowerShell, not something sexy like a [Serverless Web Application](https://aws.amazon.com/serverless/build-a-web-app/).  Or some PHP/MySQL web app?  But maybe someday?
 
-### Progress Notes - what am I working on?
+# Progress Notes - what am I working on?
 
-#### Check the knowledge level
+## Check the knowledge level
 
   - `if $knowledge -ne certain, abort` Well we can't do that because "listeners" can't see relationships, pinged Paldin
   - Future development: Determine the variations in think/feel
@@ -243,25 +243,25 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
     - redshift/blueshift the results based on (whatever)
 
 
-#### Check the relationship level
+## Check the relationship level
   - not really relevant at this point
   - Futureproofing for some other need
   - Trying to decide between One Big Table and different tables for Traits / Relationships
 
-#### Work on Menu functionality
+## Work on Menu functionality
 - WISHLIST
   - Insert this pet into database (prompt for fields to fill in for real name/owner/whatnot?) and updatecsv
   - This is a long way off and I don't relish the idea
     - Would mean users also need the ability to mark existing records inactive
 
 
-#### Working on Update-Unknown (Get-Traits and Get-Overall)
+## Working on Update-Unknown (Get-Traits and Get-Overall)
 - Validation: larger data set, Unknown to Known looks good
 - Validation: larger data set, Known to Unknown looks good
 - Validation: mixed mode comparisons (KtoU, then UtoK, etc etc - seems OK from limited test)
 
 
-#### Source Data (Import-CSV)
+## Source Data (Import-CSV)
 - User request - add logic to allow inclusion of partially-solved canines in KNOWNS.csv
   - Logic something like (if $arr.field matches any non-numeric (\D), set field value to UNSOLVED)
   - Changed code but don't have data to test against, have to mock up something from my actual-knowns
@@ -274,7 +274,7 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - Cheat: Borrow users source-data and write the view code in Google Sheets?  
   Inelegant and not portable.  *Why am I considering this?*
 
-#### Selecting Known Pet
+## Selecting Known Pet
 - Would you prefer a GUI pick-list?
   - Click to select a known pet, click OK to proceed with inputting the comparison
 - CHANGES
@@ -283,7 +283,7 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
     - You're going to need a lot of historical data if you want to make educated guesses at the breeding calculation formulas
 
 
-#### Verbosity
+## Verbosity
 - Currently I use an inelegant '# DEBUG: Write-Host "Some Message"' and uncomment the write-host messages
   - This is not the way.
   - Read up on The Way.  Probably Write-Verbose
