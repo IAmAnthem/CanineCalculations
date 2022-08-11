@@ -184,20 +184,30 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 #### Source Data (Import-CSV)
 - User request - add logic to allow inclusion of partially-solved canines in KNOWNS.csv
   - Logic something like (if $arr.field matches any non-numeric (\D), set field value to UNSOLVED)
+  - Changed code but don't have data to test against, have to mock up something from my actual-knowns
 - Added a column for active/inactive
+- Added file-picker to select CSV, but this doesn't work in VSCode
+  - Figure out why
 - Starting to get a little clunky with > 20 pets in PRIVATE-KNOWNS.csv
 - I really hate dealing with GUI elements in powershell, just get the logic all sorted then consider a web-enabled approach
-- Would you prefer a GUI pick-list?
-  - Click to select a known pet, click OK to proceed with inputting the comparison
 - WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, WebApp would need to provide a filtered / pivoted data view
   - Cheat: Borrow users source-data and write the view code in Google Sheets?  
   Inelegant and not portable.  *Why am I considering this?*
 
 #### Selecting Known Pet
+- Would you prefer a GUI pick-list?
+  - Click to select a known pet, click OK to proceed with inputting the comparison
 - CHANGES
   - Source data now includes a STATUS field, and I filter on import, selecting only **Active** canines
   - Allows CSV to contain historical data
     - You're going to need a lot of historical data if you want to make educated guesses at the breeding calculation formulas
+
+
+#### Verbosity
+- Currently I use an inelegant '# DEBUG: Write-Host "Some Message"' and uncomment the write-host messages
+  - This is not the way.
+  - Read up on The Way.  Probably Write-Verbose
+
 
 # LICENSE
 This project is licensed under the terms of the MIT license.

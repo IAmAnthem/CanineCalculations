@@ -1,0 +1,27 @@
+VALIDATION RESULTS
+Solving for: BAGGINS
+
+All one direction, or any combination, should result in this stat:
+
+
+
+Name                           dummy
+Alertness                      29
+Appetite                       45
+Brutality                      32
+Development                    43
+Eluding                        53
+Energy                         29
+Evasion                        56
+Ferocity                       51
+Fortitude                      46
+Insight                        34
+Might                          40
+Nimbleness                     53
+Patience                       35
+Procreation                    52
+Sufficiency                    36
+Targeting                      40
+Toughness                      49
+Subtotal                       723 - 723
+Overall                        723 - 723
