@@ -13,7 +13,7 @@ Function Read-Database {
     $petDB = $petDB | Where-Object Status -EQ "Active"
     # If a non-digit is detected, mark the field UNSOLVED, then go fix Get-Traits and Get-Overall to look for that
     $petDB = $petDB | ForEach-Object {
-        Write-Host "Read-Database: Object is $_ "
+# DEBUG: Write-Host "Read-Database: Object is $_ "
         if($_.Alertness -match "\D")   {$_.Alertness = [string]"UNSOLVED"}   else {$_.Alertness = [int]$_.Alertness}
         if($_.Appetite -match "\D")    {$_.Appetite = [string]"UNSOLVED"}    else {$_.Appetite = [int]$_.Appetite}
         if($_.Brutality -match "\D")   {$_.Brutality = [string]"UNSOLVED"}   else {$_.Brutality = [int]$_.Brutality}
@@ -105,14 +105,17 @@ Function Get-Traits {
     foreach($trait in $traits){
         # DO STUFF
         $pattern = $trait
-# DEBUG: Write-Host "Get-Traits is looking for $trait"
+# DEBUG: 
+Write-Host "Get-Traits is looking for $trait"
 
         # First, establish if the known pet has this trait at all - check for string UNSOLVED
         $knownValue = $knownPet.$trait
+# DEBUG:
+Write-Host "Get-Traits: KnownPet trait $trait is $knownValue"
 # DEBUG: Write-Host "Get-Traits: $knownValue is the known value I am comparing to"
 # DEBUG: Write-Host "Get-Traits: $direction is the DIRECTION"
         if($knownValue -eq "UNSOLVED"){
-            Write-Host "Get-Traits: Known pet does not have value for $trait - skipping"
+            Write-Host "Get-Traits: Known pet does not have value for $trait - skipping" -ForegroundColor Yellow
             return
         } else {
 
@@ -188,13 +191,30 @@ Function Get-Traits {
         elseif($potentialHigh -ge $currentHigh){
 # DEBUG: Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHigh : NO ACTION"
             }
-# DEBUG: Write-Host "Get-Traits: Finished with $trait"
-# DEBUG: pause
+# DEBUG: 
+Write-Host "Get-Traits: Finished with $trait"
+# DEBUG: 
+pause
     }
+
+function Get-Subtotal {
+    param (
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        $lowPet,
+
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        $highPet
+    )
+    # Aha, bad logic, you can't subtotal yet because you haven't cycled, move subtotal to a new func
     # Having completed updating lowPet and highPet, we need subtotals, calculate fresh each compare
+Write-Host "Get-Subtotal: Starting Subtotal"
     $subtotalLow = 0
     $subtotalHigh = 0
     foreach($trait in $traits){
+Write-Host "Get-Traits: Subtotal subtotalLow adding lowPet trait $trait value $lowPet.$trait "
+# This is going to bug on trait missing add an if statement
         $subtotalLow = $subtotalLow + $lowPet.$trait
         $subtotalHigh = $subtotalHigh + $highPet.$trait
     }
@@ -221,7 +241,6 @@ Function Get-Traits {
     }
     return
     }
-}
 
 Function Get-Overall {
     Param(
@@ -517,6 +536,7 @@ Function Update-Unknown {
     $textName = ($knownPet | Select-Object -Property Name).Name
     Write-Host "Update-Unknown: Using $textName as Known Pet" -ForegroundColor Yellow
     Get-Traits -evalText $evalText -direction $direction
+    Get-Subtotal -lowPet $lowPet -highPet $highPet
     Get-Overall -evalText $evalText -direction $direction
     Get-Status -lowPet $lowPet -highPet $highPet
 }
