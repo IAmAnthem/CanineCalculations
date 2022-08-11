@@ -105,13 +105,11 @@ Function Get-Traits {
     foreach($trait in $traits){
         # DO STUFF
         $pattern = $trait
-# DEBUG: 
-Write-Host "Get-Traits is looking for $trait"
+# DEBUG: Write-Host "Get-Traits is looking for $trait"
 
         # First, establish if the known pet has this trait at all - check for string UNSOLVED
         $knownValue = $knownPet.$trait
-# DEBUG:
-Write-Host "Get-Traits: KnownPet trait $trait is $knownValue"
+# DEBUG: Write-Host "Get-Traits: KnownPet trait $trait is $knownValue"
 # DEBUG: Write-Host "Get-Traits: $knownValue is the known value I am comparing to"
 # DEBUG: Write-Host "Get-Traits: $direction is the DIRECTION"
         if($knownValue -eq "UNSOLVED"){
@@ -209,11 +207,11 @@ function Get-Subtotal {
     )
     # Aha, bad logic, you can't subtotal yet because you haven't cycled, move subtotal to a new func
     # Having completed updating lowPet and highPet, we need subtotals, calculate fresh each compare
-Write-Host "Get-Subtotal: Starting Subtotal"
+# DEBUG: Write-Host "Get-Subtotal: Starting Subtotal"
     $subtotalLow = 0
     $subtotalHigh = 0
     foreach($trait in $traits){
-Write-Host "Get-Traits: Subtotal subtotalLow adding lowPet trait $trait value $lowPet.$trait "
+# DEBUG: Write-Host "Get-Subtotal: Subtotal subtotalLow adding lowPet trait $trait value $lowPet.$trait "
 # This is going to bug on trait missing add an if statement
         $subtotalLow = $subtotalLow + $lowPet.$trait
         $subtotalHigh = $subtotalHigh + $highPet.$trait

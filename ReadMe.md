@@ -69,6 +69,86 @@ They seem to be unrelated.
 - Select option 3 to see the range of values currently
 - Select 1 or 2 to continue processing comparisons
 
+# Try it out!
+Included in this repository are three text files, you can use to obtain a verified result.
+- Validation-KnownToUnknown.txt
+- Validation-UnknownToKnown.txt
+- Validation-RESULTS.txt
+
+- Open the Validation-UnknownToKnown.txt file
+- Launch the script
+- Pick KNOWNS.csv as your source
+- Select `1) Compare an UNKNOWN canine to a KNOWN canine`
+- Select the known pet as `1 - Ballad Fireball 730/55 - Dave`
+- Select the first comparison block in the Validation file (Ballad)
+- Paste the entire block into the input window
+- Hit `ENTER` or click `OK` button, calculations are performed
+  - Note the `--- --- STATUS: Solved 5 ot 17 --- ---`
+  - This is the same output as Option 4 in the menu
+- Select `3) Report current result in vertical columns` to review what know so far
+  - Any `solved` traits will be a single number
+  - Any `ranges` will appear as lowNumber - highNumber
+  - Subtotal is a ranged subtotal of what we've calculated
+  - Overall is only reporting the comparison we found in the string `Overall she seems to be ?????`
+    - This can be useful, look at the results so far
+      - Subtotal = 700 - 728
+      - Overall  = 721 - 725
+    - Even though we don't have it solved, we know for sure it must be in the range of $Overall
+
+```
+Name                           dummy
+Alertness                      28 - 30
+Appetite                       43 - 45
+Brutality                      32
+Development                    43 - 45
+Eluding                        53 - 55
+Energy                         27 - 29
+Evasion                        55 - 57
+Ferocity                       49 - 51
+Fortitude                      45 - 47
+Insight                        30 - 34
+Might                          38 - 42
+Nimbleness                     48
+Patience                       33 - 35
+Procreation                    51 - 53
+Sufficiency                    36
+Targeting                      40
+Toughness                      49
+Subtotal                       700 - 728
+Overall                        721 - 725
+```
+- Continue to refine calculations, select 1 to add another comparison
+- Select known pet # 2 - Cover Rocker
+- Paste in the comparison block for COVER in the Validation-UnknownToKnown.txt file
+- Hit 'ENTER' for calculations to be performed
+  - Notice we've solved more numbers! '--- --- STATUS: Solved 13 of 17 --- ---'
+- Select Option 3 for the report again
+```
+Name                           dummy
+Alertness                      29
+Appetite                       45
+Brutality                      32
+Development                    43 - 44
+Eluding                        53
+Energy                         29
+Evasion                        55 - 56
+Ferocity                       51
+Fortitude                      46
+Insight                        34
+Might                          40
+Nimbleness                     48 - 44
+Patience                       35
+Procreation                    51 - 53
+Sufficiency                    36
+Targeting                      40
+Toughness                      49
+Subtotal                       716 - 716
+Overall                        721 - 723
+```
+- Continue adding comparisons until you see you've solved 17 of 17!
+- Your output result should match the result found in `Validation-RESULTS.txt`
+
+
 # Canine Calculations for Ancient Anguish
 
 [Ancient Anguish](http://www.anguish.org) is a MUD that has been around a long time.
@@ -151,7 +231,7 @@ You know who you are.
 - Privacy: The only data you see by example here has been OK'd by the data owner.  
 Some players may choose to not reveal their pet lineage or stats for whatever reason.
 - Skills: I'm a systems engineer by trade and at heart, I learn enough code to do what I need to do.  
-Currently that's PowerShell, not something sexy like a [Serverless Web Application](https://aws.amazon.com/serverless/build-a-web-app/).  But maybe someday?
+Currently that's PowerShell, not something sexy like a [Serverless Web Application](https://aws.amazon.com/serverless/build-a-web-app/).  Or some PHP/MySQL web app?  But maybe someday?
 
 ### Progress Notes - what am I working on?
 
