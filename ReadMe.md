@@ -236,6 +236,11 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 # Progress Notes - what am I working on?
 
 
+## New-BreedingPlan.ps1
+- Take a set of knowns and devise a three-stage breeding plan
+  - Challenges: gender decisions
+  - Query: last-step gender?
+
 ## Data collection - an analysis of uncertain canine comparisons
 - Need new characters (maybe 10? 12?) with traited canines of known stat (or at least very close to known).
   - Figure out more alt names, because OCD
