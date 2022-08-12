@@ -235,6 +235,19 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 # Progress Notes - what am I working on?
 
+
+## Data collection - an analysis of uncertain canine comparisons
+- Need new characters (maybe 10? 12?) with traited canines of known stat (or at least very close to known).
+  - Figure out more alt names, because OCD
+- Cycle alts against a known that's reasonably solvable for them (don't try solving a 700+ with a collection of 300s)
+- Drop output into think/feel buckets, include a datestamp and note time to reboot
+  - randomizer has a good chance of changing per-boot, so be prepared for it to change
+- Run data through statting script in think/feel groups and compare outputs in kvp format
+  - Does the group of 'think' statters reach a consensus stat?
+  - Does the group of 'feel' statters reach a consensus stat?
+  - If so how do they compare to true values?
+
+
 ## Check the knowledge level
 
   - `if $knowledge -ne certain, abort` Well we can't do that because "listeners" can't see relationships, pinged Paldin
@@ -247,6 +260,7 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - not really relevant at this point
   - Futureproofing for some other need
   - Trying to decide between One Big Table and different tables for Traits / Relationships
+
 
 ## Work on Menu functionality
 - WISHLIST
@@ -273,6 +287,7 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 - WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, WebApp would need to provide a filtered / pivoted data view
   - Cheat: Borrow users source-data and write the view code in Google Sheets?  
   Inelegant and not portable.  *Why am I considering this?*
+
 
 ## Selecting Known Pet
 - Would you prefer a GUI pick-list?
