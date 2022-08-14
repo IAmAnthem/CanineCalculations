@@ -25,26 +25,7 @@ You are certain that cream puppy is:
  Toughness seems much better.
 Overall he seems to be outstandingly better.
 
-INFLIGHT STATUS
-Alertness        10 - 19                                                                                      
-Appetite         5 - 9                                                                                        
-Brutality        10 - 19                                                                                      
-Development      2 - 4                                                                                        
-Eluding          20 - 70                                                                                      
-Energy           1                                                                                            
-Evasion          20 - 70                                                                                      
-Ferocity         20 - 70                                                                                      
-Fortitude        20 - 70                                                                                      
-Insight          20 - 70                                                                                      
-Might            10 - 19                                                                                      
-Nimbleness       10 - 19                                                                                      
-Patience         10 - 19                                                                                      
-Procreation      10 - 19                                                                                      
-Sufficiency      10 - 19                                                                                      
-Targeting        20 - 70                                                                                      
-Toughness        20 - 70                                                                                      
-Subtotal         218 - 637                                                                                    
-Overall           71 - 1700
+
 
 
 
@@ -71,26 +52,7 @@ Angrynerd says: Toughness seems inferior.
 Angrynerd says: Overall he seems to be totally inferior.
 Angrynerd says: They seem to be unrelated.
 
-INFLIGHT STATUS
-Alertness        10 - 13                                                                                      
-Appetite         5 - 9                                                                                        
-Brutality        10 - 17                                                                                      
-Development      2 - 4                                                                                        
-Eluding          46 - 50                                                                                      
-Energy           1                                                                                          
-Evasion          20 - 38                                                                                      
-Ferocity         20 - 31                                                                                      
-Fortitude        25 - 34                                                                                      
-Insight          25 - 29                                                                                      
-Might            10 - 19                                                                                      
-Nimbleness       10 - 19                                                                                      
-Patience         10 - 13                                                                                      
-Procreation      10 - 19                                                                                      
-Sufficiency      10 - 19                                                                                      
-Targeting        20                                                                                           
-Toughness        27 - 36                                                                                      
-Subtotal         261 - 371                                                                                    
-Overall           71 - 633
+
 
 
 BAGGINS
@@ -116,26 +78,7 @@ Baggins says: Toughness seems very inferior.
 Baggins says: Overall he seems to be totally inferior.
 Baggins says: They seem to be unrelated.
 
-INFLIGHT STATUS
-Alertness       10 - 13                                                                                      
-Appetite         5 - 9                                                                                        
-Brutality       10 - 12                                                                                      
-Development      2 - 4                                                                                        
-Eluding         49 - 50                                                                                      
-Energy          1                                                                                            
-Evasion         20 - 36                                                                                      
-Ferocity        20 - 31                                                                                      
-Fortitude       27 - 34                                                                                      
-Insight         25 - 29                                                                                      
-Might           10 - 19                                                                                      
-Nimbleness      10 - 19                                                                                      
-Patience        10 - 13                                                                                      
-Procreation     10 - 19                                                                                      
-Sufficiency     10 - 16                                                                                      
-Targeting       20                                                                                           
-Toughness       27 - 29                                                                                      
-Subtotal        266 - 354                                                                                    
-Overall         71 - 633  
+
 
 
 
@@ -164,26 +107,7 @@ You are certain that cream puppy is:
 Overall he seems to be totally inferior.
 They seem to be unrelated.
 
-INFLIGHT STATUS
-Alertness     10 - 13                                                                                      
-Appetite       5 - 9                                                                                        
-Brutality     10 - 12                                                                                      
-Development    2 - 4                                                                                        
-Eluding       49                                                                                           
-Energy        1                                                                                            
-Evasion       20 - 33                                                                                      
-Ferocity      20 - 31                                                                                      
-Fortitude     27 - 33                                                                                      
-Insight       25 - 29                                                                                      
-Might         10 - 19                                                                                      
-Nimbleness    10 - 19                                                                                      
-Patience      10 - 13                                                                                      
-Procreation   10 - 19                                                                                      
-Sufficiency   10 - 16                                                                                      
-Targeting     20                                                                                           
-Toughness     29                                                                                           
-Subtotal      268 - 349                                                                                    
-Overall        71 - 633
+
 
 
 
@@ -212,26 +136,6 @@ You are certain that cream puppy is:
 Overall he seems to be totally inferior.
 They seem to be unrelated.
 
-INFLIGHT STATUS
-Alertness       10 - 13                                                                                      
-Appetite         5 - 9                                                                                        
-Brutality       10 - 12                                                                                      
-Development      2 - 4                                                                                        
-Eluding         49                                                                                           
-Energy           1                                                                                            
-Evasion         33                                                                                           
-Ferocity        20 - 31                                                                                      
-Fortitude       27 - 33                                                                                      
-Insight         26 - 29                                                                                      
-Might           10 - 19                                                                                      
-Nimbleness      10 - 19                                                                                      
-Patience        10 - 13                                                                                      
-Procreation     10 - 19                                                                                      
-Sufficiency     11 - 16                                                                                      
-Targeting       20                                                                                           
-Toughness       29                                                                                           
-Subtotal        283 - 349                                                                                    
-Overall          71 - 633 
 
 
 CRESCENDO
@@ -259,26 +163,6 @@ You are certain that cream puppy is:
 Overall he seems to be totally inferior.
 They seem to be unrelated.
 
-INFLIGHT STATUS
-Alertness       10 - 13                                                                                      
-Appetite         5 - 9                                                                                        
-Brutality       12                                                                                           
-Development      2 - 4                                                                                        
-Eluding         49                                                                                           
-Energy           1                                                                                            
-Evasion         33                                                                                           
-Ferocity        20 - 26                                                                                      
-Fortitude       27 - 33                                                                                      
-Insight         28 - 29                                                                                      
-Might           10 - 19                                                                                      
-Nimbleness      10 - 19                                                                                      
-Patience        10 - 13                                                                                      
-Procreation     10 - 19                                                                                      
-Sufficiency     13 - 16                                                                                      
-Targeting       20                                                                                           
-Toughness       29                                                                                           
-Subtotal        289 - 344                                                                                    
-Overall          71 - 627 
 
 
 DIRGE
@@ -307,26 +191,6 @@ You are certain that cream puppy is:
 Overall he seems to be totally inferior.
 They seem to be unrelated.
 
-Alertness       10 - 13                                                                                      
-Appetite         5 - 9                                                                                        
-Brutality       12                                                                                           
-Development      2 - 4                                                                                        
-Eluding         49                                                                                           
-Energy           1                                                                                            
-Evasion         33                                                                                           
-Ferocity        20 - 26                                                                                      
-Fortitude       27 - 29                                                                                      
-Insight         28 - 29                                                                                      
-Might           10 - 19                                                                                      
-Nimbleness      10 - 19                                                                                      
-Patience        10 - 11                                                                                      
-Procreation     10 - 19                                                                                      
-Sufficiency     13 - 16                                                                                      
-Targeting       20                                                                                           
-Toughness       29                                                                                           
-Subtotal       289 - 338                                                                                    
-Overall         71 - 621 
-
 
 
 DOLI
@@ -351,25 +215,6 @@ Doli says: Toughness seems better.
 Doli says: Overall he seems to be much better.
 Doli says: They seem to be unrelated.
 
-Alertness      10 - 12                                                                                      
-Appetite        5 - 9                                                                                        
-Brutality      12                                                                                           
-Development     3 - 4                                                                                        
-Eluding        49                                                                                           
-Energy          1                                                                                            
-Evasion        33                                                                                           
-Ferocity       20 - 21                                                                                      
-Fortitude      27 - 29                                                                                      
-Insight        28                                                                                           
-Might          16                                                                                           
-Nimbleness     13 - 15                                                                                      
-Patience       10                                                                                           
-Procreation    11 - 15                                                                                      
-Sufficiency    13 - 16                                                                                      
-Targeting      20                                                                                           
-Toughness      29                                                                                           
-Subtotal       300 - 319                                                                                    
-Overall        267 - 317
 
 ----
 
@@ -458,26 +303,6 @@ Grogu says: Toughness seems inferior.
 Grogu says: Overall he seems to be totally inferior.
 Grogu says: They seem to be unrelated.
 
-Alertness      10 - 12                                                                                      
-Appetite        5 - 9                                                                                        
-Brutality      12                                                                                           
-Development     3 - 4                                                                                        
-Eluding        49                                                                                           
-Energy          1                                                                                            
-Evasion        33                                                                                           
-Ferocity       20 - 21                                                                                      
-Fortitude      27 - 29                                                                                      
-Insight        28                                                                                           
-Might          16                                                                                           
-Nimbleness     13                                                                                           
-Patience       10                                                                                           
-Procreation    11 - 14                                                                                      
-Sufficiency    13 - 15                                                                                      
-Targeting      20                                                                                           
-Toughness      29                                                                                           
-Subtotal       300 - 315                                                                                    
-Overall        267 - 317
-
 
 -------
 
@@ -508,26 +333,6 @@ You are certain that cream puppy is:
 Overall he seems to be totally inferior.
 They seem to be unrelated.
 
-INFLIGHT STATUS
-Alertness      10 - 12                                                                                      
-Appetite        5 - 9                                                                                        
-Brutality      12                                                                                           
-Development     3 - 4                                                                                        
-Eluding        49                                                                                           
-Energy          1                                                                                            
-Evasion        33                                                                                           
-Ferocity       20                                                                                           
-Fortitude      29                                                                                           
-Insight        28                                                                                           
-Might          16                                                                                           
-Nimbleness     13                                                                                           
-Patience       10                                                                                           
-Procreation    11 - 14                                                                                      
-Sufficiency    13 - 15                                                                                      
-Targeting      20                                                                                           
-Toughness      29                                                                                           
-Subtotal       302 - 314                                                                                    
-Overall        267 - 317
 
 ------------
 
@@ -554,26 +359,6 @@ JonSnow says: Toughness seems inferior.
 JonSnow says: Overall he seems to be totally inferior.
 JonSnow says: They seem to be unrelated.
 
-INFLIGHT STATUS
-Alertness      10 - 12                                                                                      
-Appetite        5 - 9                                                                                        
-Brutality      12                                                                                           
-Development     3 - 4                                                                                        
-Eluding        49                                                                                           
-Energy          1                                                                                            
-Evasion        33                                                                                           
-Ferocity       20                                                                                           
-Fortitude      29                                                                                           
-Insight        28                                                                                           
-Might          16                                                                                           
-Nimbleness     13                                                                                           
-Patience       10                                                                                           
-Procreation    11 - 14                                                                                      
-Sufficiency    14 - 15                                                                                      
-Targeting      20                                                                                           
-Toughness      29                                                                                           
-Subtotal       303 - 314                                                                                    
-Overall        267 - 317
 
 --------------------
 
@@ -602,26 +387,6 @@ You are certain that cream puppy is:
 Overall he seems to be totally inferior.
 They seem to be unrelated.
 
-INFLIGHT STATUS
-Alertness      11 - 12                                                                                      
-Appetite        5 - 9                                                                                        
-Brutality      12                                                                                           
-Development     3 - 4                                                                                        
-Eluding        49                                                                                           
-Energy          1                                                                                            
-Evasion        33                                                                                           
-Ferocity       20                                                                                           
-Fortitude      29                                                                                           
-Insight        28                                                                                           
-Might          16                                                                                           
-Nimbleness     13                                                                                           
-Patience       10                                                                                           
-Procreation    11 - 14                                                                                      
-Sufficiency    14 - 15                                                                                      
-Targeting      20                                                                                           
-Toughness      29                                                                                           
-Subtotal      304 - 314                                                                                    
-Overall       267 - 317 
 
 
 ---------------
@@ -679,45 +444,6 @@ You are certain that cream puppy is:
  Toughness seems slightly inferior.
 Overall he seems to be totally inferior.
 They seem to be unrelated.
-
-Alertness       11 - 12                                                                                      
-Appetite         5 - 9                                                                                        
-Brutality       12                                                                                           
-Development      3 - 4                                                                                        
-Eluding         49                                                                                           
-Energy           1                                                                                            
-Evasion         33                                                                                           
-Ferocity        20                                                                                           
-Fortitude       29                                                                                           
-Insight         28                                                                                           
-Might           16        
-### WHY ### - WAS SOLVED                                                                                  
-Nimbleness      13 - 9
-
-VERBOSE: Get-Traits: Looping through traits for Nimbleness
-VERBOSE: Get-Traits: KnownPet trait Nimbleness is 29
-WTF?  That's not right! should be 42
-
-VERBOSE: Get-Traits: Comparing in direction UnknownToKnown
-VERBOSE: Get-Traits: working on string: Nimbleness seems very inferior.
-VERBOSE: Get-Traits: Nimbleness lowModifier: -70
-VERBOSE: Get-Traits: Nimbleness highModifier: -20
-VERBOSE: Get-Traits: UnknownToKnown: -41 is 29 + -70
-VERBOSE: Get-Traits: UnknownToKnown: 9 is 29 + -20
-VERBOSE: Get-Traits: checking lowPet: current estimate LOW for Nimbleness is 13
-VERBOSE: Get-Traits: Checking highPet: current estimate HIGH for Nimbleness is 13
-VERBOSE: Get-Traits: lowPet: NO ACTION : -41 <= 13
-VERBOSE: Get-Traits: highPet: UPDATING Nimbleness : 9 < 13
-VERBOSE: Get-Traits: Nimbleness finished
-                                                                                       
-Patience10                                                                                           
-Procreation11 -14                                                                                      
-Sufficiency                   15                                                                                           
-Targeting                      20                                                                                           
-Toughness                      29                                                                                           
-Subtotal                       305 - 310                                                                                    
-Overall                        267 - 317 
-
 
 
 ---------------
@@ -797,3 +523,23 @@ Treehugger says: They seem to be unrelated.
 A very large mist light grey trained fox runs off in search of Treehugger.
 Treehugger left the game.
 
+Name                           dummy                                                                                                          
+Alertness                      11 - 12                                                                                                        
+Appetite                       5 - 9                                                                                                          
+Brutality                      12                                                                                                             
+Development                    3 - 4                                                                                                          
+Eluding                        49                                                                                                             
+Energy                         1                                                                                                              
+Evasion                        33                                                                                                             
+Ferocity                       20                                                                                                             
+Fortitude                      29                                                                                                             
+Insight                        28                                                                                                             
+Might                          16                                                                                                             
+Nimbleness                     12 - 14                                                                                                        
+Patience                       10                                                                                                             
+Procreation                    11 - 14                                                                                                        
+Sufficiency                    15                                                                                                             
+Targeting                      20                                                                                                             
+Toughness                      29                                                                                                             
+Subtotal                       304 - 315                                                                                                      
+Overall                        267 - 317 
