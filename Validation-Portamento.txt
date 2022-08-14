@@ -1,0 +1,799 @@
+Portamento
+
+
+A ZERODOG
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to a gigantic steel trained dog
+...
+You are certain that cream puppy is:
+ Alertness seems better.
+ Appetite seems slightly better.
+ Brutality seems better.
+ Development seems marginally better.
+ Eluding seems much better.
+ Energy seems barely better.
+ Evasion seems much better.
+ Ferocity seems much better.
+ Fortitude seems much better.
+ Insight seems much better.
+ Might seems better.
+ Nimbleness seems better.
+ Patience seems better.
+ Procreation seems better.
+ Sufficiency seems better.
+ Targeting seems much better.
+ Toughness seems much better.
+Overall he seems to be outstandingly better.
+
+INFLIGHT STATUS
+Alertness        10 - 19                                                                                      
+Appetite         5 - 9                                                                                        
+Brutality        10 - 19                                                                                      
+Development      2 - 4                                                                                        
+Eluding          20 - 70                                                                                      
+Energy           1                                                                                            
+Evasion          20 - 70                                                                                      
+Ferocity         20 - 70                                                                                      
+Fortitude        20 - 70                                                                                      
+Insight          20 - 70                                                                                      
+Might            10 - 19                                                                                      
+Nimbleness       10 - 19                                                                                      
+Patience         10 - 19                                                                                      
+Procreation      10 - 19                                                                                      
+Sufficiency      10 - 19                                                                                      
+Targeting        20 - 70                                                                                      
+Toughness        20 - 70                                                                                      
+Subtotal         218 - 637                                                                                    
+Overall           71 - 1700
+
+
+
+ANGRYNERD
+Angrynerd looks hard at a tiny cream puppy and then again at a very large
+merle grey trained fox comparing them.
+Angrynerd says: Alertness seems inferior.
+Angrynerd says: Appetite seems very inferior.
+Angrynerd says: Brutality seems inferior.
+Angrynerd says: Development seems very inferior.
+Angrynerd says: Eluding seems slightly inferior.
+Angrynerd says: Energy seems very inferior.
+Angrynerd says: Evasion seems very inferior.
+Angrynerd says: Ferocity seems very inferior.
+Angrynerd says: Fortitude seems inferior.
+Angrynerd says: Insight seems slightly inferior.
+Angrynerd says: Might seems very inferior.
+Angrynerd says: Nimbleness seems very inferior.
+Angrynerd says: Patience seems very inferior.
+Angrynerd says: Procreation seems very inferior.
+Angrynerd says: Sufficiency seems inferior.
+Angrynerd says: Targeting seems very inferior.
+Angrynerd says: Toughness seems inferior.
+Angrynerd says: Overall he seems to be totally inferior.
+Angrynerd says: They seem to be unrelated.
+
+INFLIGHT STATUS
+Alertness        10 - 13                                                                                      
+Appetite         5 - 9                                                                                        
+Brutality        10 - 17                                                                                      
+Development      2 - 4                                                                                        
+Eluding          46 - 50                                                                                      
+Energy           1                                                                                          
+Evasion          20 - 38                                                                                      
+Ferocity         20 - 31                                                                                      
+Fortitude        25 - 34                                                                                      
+Insight          25 - 29                                                                                      
+Might            10 - 19                                                                                      
+Nimbleness       10 - 19                                                                                      
+Patience         10 - 13                                                                                      
+Procreation      10 - 19                                                                                      
+Sufficiency      10 - 19                                                                                      
+Targeting        20                                                                                           
+Toughness        27 - 36                                                                                      
+Subtotal         261 - 371                                                                                    
+Overall           71 - 633
+
+
+BAGGINS
+Baggins looks hard at a small cream puppy and then again at a very large
+cinnamon trained fox comparing them.
+Baggins says: Alertness seems inferior.
+Baggins says: Appetite seems very inferior.
+Baggins says: Brutality seems very inferior.
+Baggins says: Development seems very inferior.
+Baggins says: Eluding seems marginally inferior.
+Baggins says: Energy seems very inferior.
+Baggins says: Evasion seems very inferior.
+Baggins says: Ferocity seems very inferior.
+Baggins says: Fortitude seems inferior.
+Baggins says: Insight seems slightly inferior.
+Baggins says: Might seems very inferior.
+Baggins says: Nimbleness seems very inferior.
+Baggins says: Patience seems very inferior.
+Baggins says: Procreation seems very inferior.
+Baggins says: Sufficiency seems very inferior.
+Baggins says: Targeting seems very inferior.
+Baggins says: Toughness seems very inferior.
+Baggins says: Overall he seems to be totally inferior.
+Baggins says: They seem to be unrelated.
+
+INFLIGHT STATUS
+Alertness       10 - 13                                                                                      
+Appetite         5 - 9                                                                                        
+Brutality       10 - 12                                                                                      
+Development      2 - 4                                                                                        
+Eluding         49 - 50                                                                                      
+Energy          1                                                                                            
+Evasion         20 - 36                                                                                      
+Ferocity        20 - 31                                                                                      
+Fortitude       27 - 34                                                                                      
+Insight         25 - 29                                                                                      
+Might           10 - 19                                                                                      
+Nimbleness      10 - 19                                                                                      
+Patience        10 - 13                                                                                      
+Procreation     10 - 19                                                                                      
+Sufficiency     10 - 16                                                                                      
+Targeting       20                                                                                           
+Toughness       27 - 29                                                                                      
+Subtotal        266 - 354                                                                                    
+Overall         71 - 633  
+
+
+
+BALLAD
+compare cream puppy to petname
+You look hard at an infant cream puppy comparing to a very large cinnamon
+trained fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems very inferior.
+ Development seems very inferior.
+ Eluding seems marginally inferior.
+ Energy seems very inferior.
+ Evasion seems very inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems very inferior.
+ Targeting seems inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+INFLIGHT STATUS
+Alertness     10 - 13                                                                                      
+Appetite       5 - 9                                                                                        
+Brutality     10 - 12                                                                                      
+Development    2 - 4                                                                                        
+Eluding       49                                                                                           
+Energy        1                                                                                            
+Evasion       20 - 33                                                                                      
+Ferocity      20 - 31                                                                                      
+Fortitude     27 - 33                                                                                      
+Insight       25 - 29                                                                                      
+Might         10 - 19                                                                                      
+Nimbleness    10 - 19                                                                                      
+Patience      10 - 13                                                                                      
+Procreation   10 - 19                                                                                      
+Sufficiency   10 - 16                                                                                      
+Targeting     20                                                                                           
+Toughness     29                                                                                           
+Subtotal      268 - 349                                                                                    
+Overall        71 - 633
+
+
+
+
+COVER
+You look hard at an infant cream puppy comparing to a very large light grey
+trained fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems inferior.
+ Development seems very inferior.
+ Eluding seems marginally inferior.
+ Energy seems very inferior.
+ Evasion seems inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems slightly inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems inferior.
+ Targeting seems inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+INFLIGHT STATUS
+Alertness       10 - 13                                                                                      
+Appetite         5 - 9                                                                                        
+Brutality       10 - 12                                                                                      
+Development      2 - 4                                                                                        
+Eluding         49                                                                                           
+Energy           1                                                                                            
+Evasion         33                                                                                           
+Ferocity        20 - 31                                                                                      
+Fortitude       27 - 33                                                                                      
+Insight         26 - 29                                                                                      
+Might           10 - 19                                                                                      
+Nimbleness      10 - 19                                                                                      
+Patience        10 - 13                                                                                      
+Procreation     10 - 19                                                                                      
+Sufficiency     11 - 16                                                                                      
+Targeting       20                                                                                           
+Toughness       29                                                                                           
+Subtotal        283 - 349                                                                                    
+Overall          71 - 633 
+
+
+CRESCENDO
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to a very large light grey
+trained fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems inferior.
+ Development seems very inferior.
+ Eluding seems similar.
+ Energy seems very inferior.
+ Evasion seems very inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems marginally inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems inferior.
+ Targeting seems inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+INFLIGHT STATUS
+Alertness       10 - 13                                                                                      
+Appetite         5 - 9                                                                                        
+Brutality       12                                                                                           
+Development      2 - 4                                                                                        
+Eluding         49                                                                                           
+Energy           1                                                                                            
+Evasion         33                                                                                           
+Ferocity        20 - 26                                                                                      
+Fortitude       27 - 33                                                                                      
+Insight         28 - 29                                                                                      
+Might           10 - 19                                                                                      
+Nimbleness      10 - 19                                                                                      
+Patience        10 - 13                                                                                      
+Procreation     10 - 19                                                                                      
+Sufficiency     13 - 16                                                                                      
+Targeting       20                                                                                           
+Toughness       29                                                                                           
+Subtotal        289 - 344                                                                                    
+Overall          71 - 627 
+
+
+DIRGE
+Fluid jumps up on you and licks you happily!
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to a huge merle grey trained
+fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems inferior.
+ Development seems very inferior.
+ Eluding seems marginally inferior.
+ Energy seems very inferior.
+ Evasion seems very inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems inferior.
+ Targeting seems inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+Alertness       10 - 13                                                                                      
+Appetite         5 - 9                                                                                        
+Brutality       12                                                                                           
+Development      2 - 4                                                                                        
+Eluding         49                                                                                           
+Energy           1                                                                                            
+Evasion         33                                                                                           
+Ferocity        20 - 26                                                                                      
+Fortitude       27 - 29                                                                                      
+Insight         28 - 29                                                                                      
+Might           10 - 19                                                                                      
+Nimbleness      10 - 19                                                                                      
+Patience        10 - 11                                                                                      
+Procreation     10 - 19                                                                                      
+Sufficiency     13 - 16                                                                                      
+Targeting       20                                                                                           
+Toughness       29                                                                                           
+Subtotal       289 - 338                                                                                    
+Overall         71 - 621 
+
+
+
+DOLI
+Doli looks hard at a tiny cream puppy and then again at an enormous golden trained jackal comparing them.
+Doli says: Alertness seems marginally better.
+Doli says: Appetite seems inferior.
+Doli says: Brutality seems marginally better.
+Doli says: Development seems marginally inferior.
+Doli says: Eluding seems much better.
+Doli says: Energy seems inferior.
+Doli says: Evasion seems better.
+Doli says: Ferocity seems marginally better.
+Doli says: Fortitude seems slightly better.
+Doli says: Insight seems slightly better.
+Doli says: Might seems barely inferior.
+Doli says: Nimbleness seems marginally inferior.
+Doli says: Patience seems similar.
+Doli says: Procreation seems slightly inferior.
+Doli says: Sufficiency seems slightly better.
+Doli says: Targeting seems slightly better.
+Doli says: Toughness seems better.
+Doli says: Overall he seems to be much better.
+Doli says: They seem to be unrelated.
+
+Alertness      10 - 12                                                                                      
+Appetite        5 - 9                                                                                        
+Brutality      12                                                                                           
+Development     3 - 4                                                                                        
+Eluding        49                                                                                           
+Energy          1                                                                                            
+Evasion        33                                                                                           
+Ferocity       20 - 21                                                                                      
+Fortitude      27 - 29                                                                                      
+Insight        28                                                                                           
+Might          16                                                                                           
+Nimbleness     13 - 15                                                                                      
+Patience       10                                                                                           
+Procreation    11 - 15                                                                                      
+Sufficiency    13 - 16                                                                                      
+Targeting      20                                                                                           
+Toughness      29                                                                                           
+Subtotal       300 - 319                                                                                    
+Overall        267 - 317
+
+----
+
+
+EXIE
+Shaker arrives.
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to a very large light grey
+trained fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems inferior.
+ Development seems very inferior.
+ Eluding seems barely better.
+ Energy seems very inferior.
+ Evasion seems very inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems inferior.
+ Procreation seems very inferior.
+ Sufficiency seems inferior.
+ Targeting seems inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+
+
+
+--------
+
+Grazioso
+Hoover arrives.
+A very large cinnamon trained fox wags her tail.
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to a very large merle grey
+trained fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems inferior.
+ Development seems very inferior.
+ Eluding seems slightly inferior.
+ Energy seems very inferior.
+ Evasion seems very inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems slightly inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems inferior.
+ Targeting seems very inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+---
+
+
+GROGU
+Grogu looks hard at a tiny cream puppy and then again at a very large snowy
+trained fox comparing them.
+Grogu says: Alertness seems slightly inferior.
+Grogu says: Appetite seems very inferior.
+Grogu says: Brutality seems slightly inferior.
+Grogu says: Development seems very inferior.
+Grogu says: Eluding seems slightly better.
+Grogu says: Energy seems very inferior.
+Grogu says: Evasion seems very inferior.
+Grogu says: Ferocity seems inferior.
+Grogu says: Fortitude seems inferior.
+Grogu says: Insight seems similar.
+Grogu says: Might seems inferior.
+Grogu says: Nimbleness seems very inferior.
+Grogu says: Patience seems inferior.
+Grogu says: Procreation seems very inferior.
+Grogu says: Sufficiency seems inferior.
+Grogu says: Targeting seems inferior.
+Grogu says: Toughness seems inferior.
+Grogu says: Overall he seems to be totally inferior.
+Grogu says: They seem to be unrelated.
+
+Alertness      10 - 12                                                                                      
+Appetite        5 - 9                                                                                        
+Brutality      12                                                                                           
+Development     3 - 4                                                                                        
+Eluding        49                                                                                           
+Energy          1                                                                                            
+Evasion        33                                                                                           
+Ferocity       20 - 21                                                                                      
+Fortitude      27 - 29                                                                                      
+Insight        28                                                                                           
+Might          16                                                                                           
+Nimbleness     13                                                                                           
+Patience       10                                                                                           
+Procreation    11 - 14                                                                                      
+Sufficiency    13 - 15                                                                                      
+Targeting      20                                                                                           
+Toughness      29                                                                                           
+Subtotal       300 - 315                                                                                    
+Overall        267 - 317
+
+
+-------
+
+
+IMPETUOSO
+Cali arrives.
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to an enormous almond trained
+fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems very inferior.
+ Development seems very inferior.
+ Eluding seems marginally better.
+ Energy seems very inferior.
+ Evasion seems inferior.
+ Ferocity seems inferior.
+ Fortitude seems similar.
+ Insight seems slightly inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems inferior.
+ Targeting seems inferior.
+ Toughness seems slightly inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+INFLIGHT STATUS
+Alertness      10 - 12                                                                                      
+Appetite        5 - 9                                                                                        
+Brutality      12                                                                                           
+Development     3 - 4                                                                                        
+Eluding        49                                                                                           
+Energy          1                                                                                            
+Evasion        33                                                                                           
+Ferocity       20                                                                                           
+Fortitude      29                                                                                           
+Insight        28                                                                                           
+Might          16                                                                                           
+Nimbleness     13                                                                                           
+Patience       10                                                                                           
+Procreation    11 - 14                                                                                      
+Sufficiency    13 - 15                                                                                      
+Targeting      20                                                                                           
+Toughness      29                                                                                           
+Subtotal       302 - 314                                                                                    
+Overall        267 - 317
+
+------------
+
+JONSNOW
+JonSnow looks hard at a tiny cream puppy and then again at a very large snowy
+trained fox comparing them.
+JonSnow says: Alertness seems inferior.
+JonSnow says: Appetite seems very inferior.
+JonSnow says: Brutality seems inferior.
+JonSnow says: Development seems very inferior.
+JonSnow says: Eluding seems slightly inferior.
+JonSnow says: Energy seems very inferior.
+JonSnow says: Evasion seems very inferior.
+JonSnow says: Ferocity seems very inferior.
+JonSnow says: Fortitude seems inferior.
+JonSnow says: Insight seems slightly inferior.
+JonSnow says: Might seems very inferior.
+JonSnow says: Nimbleness seems very inferior.
+JonSnow says: Patience seems very inferior.
+JonSnow says: Procreation seems very inferior.
+JonSnow says: Sufficiency seems inferior.
+JonSnow says: Targeting seems inferior.
+JonSnow says: Toughness seems inferior.
+JonSnow says: Overall he seems to be totally inferior.
+JonSnow says: They seem to be unrelated.
+
+INFLIGHT STATUS
+Alertness      10 - 12                                                                                      
+Appetite        5 - 9                                                                                        
+Brutality      12                                                                                           
+Development     3 - 4                                                                                        
+Eluding        49                                                                                           
+Energy          1                                                                                            
+Evasion        33                                                                                           
+Ferocity       20                                                                                           
+Fortitude      29                                                                                           
+Insight        28                                                                                           
+Might          16                                                                                           
+Nimbleness     13                                                                                           
+Patience       10                                                                                           
+Procreation    11 - 14                                                                                      
+Sufficiency    14 - 15                                                                                      
+Targeting      20                                                                                           
+Toughness      29                                                                                           
+Subtotal       303 - 314                                                                                    
+Overall        267 - 317
+
+--------------------
+
+LULLABY
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to a very large mist light grey
+trained fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems inferior.
+ Development seems very inferior.
+ Eluding seems barely inferior.
+ Energy seems very inferior.
+ Evasion seems very inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems inferior.
+ Targeting seems very inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+INFLIGHT STATUS
+Alertness      11 - 12                                                                                      
+Appetite        5 - 9                                                                                        
+Brutality      12                                                                                           
+Development     3 - 4                                                                                        
+Eluding        49                                                                                           
+Energy          1                                                                                            
+Evasion        33                                                                                           
+Ferocity       20                                                                                           
+Fortitude      29                                                                                           
+Insight        28                                                                                           
+Might          16                                                                                           
+Nimbleness     13                                                                                           
+Patience       10                                                                                           
+Procreation    11 - 14                                                                                      
+Sufficiency    14 - 15                                                                                      
+Targeting      20                                                                                           
+Toughness      29                                                                                           
+Subtotal      304 - 314                                                                                    
+Overall       267 - 317 
+
+
+---------------
+
+MULAPIN
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to a very large silver trained
+fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems inferior.
+ Development seems very inferior.
+ Eluding seems marginally inferior.
+ Energy seems very inferior.
+ Evasion seems very inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems slightly inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems very inferior.
+ Targeting seems inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+
+
+
+
+POM
+compare cream puppy to coyote out loud
+You look hard at a small cream puppy comparing to a large slate grey trained
+coyote ...
+You are certain that cream puppy is:
+ Alertness seems marginally inferior.
+ Appetite seems very inferior.
+ Brutality seems inferior.
+ Development seems inferior.
+ Eluding seems marginally better.
+ Energy seems inferior.
+ Evasion seems inferior.
+ Ferocity seems slightly inferior.
+ Fortitude seems slightly inferior.
+ Insight seems marginally inferior.
+ Might seems inferior.
+ Nimbleness seems very inferior.
+ Patience seems inferior.
+ Procreation seems very inferior.
+ Sufficiency seems marginally inferior.
+ Targeting seems marginally better.
+ Toughness seems slightly inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+Alertness       11 - 12                                                                                      
+Appetite         5 - 9                                                                                        
+Brutality       12                                                                                           
+Development      3 - 4                                                                                        
+Eluding         49                                                                                           
+Energy           1                                                                                            
+Evasion         33                                                                                           
+Ferocity        20                                                                                           
+Fortitude       29                                                                                           
+Insight         28                                                                                           
+Might           16        
+### WHY ### - WAS SOLVED                                                                                  
+Nimbleness      13 - 9
+
+VERBOSE: Get-Traits: Looping through traits for Nimbleness
+VERBOSE: Get-Traits: KnownPet trait Nimbleness is 29
+WTF?  That's not right! should be 42
+
+VERBOSE: Get-Traits: Comparing in direction UnknownToKnown
+VERBOSE: Get-Traits: working on string: Nimbleness seems very inferior.
+VERBOSE: Get-Traits: Nimbleness lowModifier: -70
+VERBOSE: Get-Traits: Nimbleness highModifier: -20
+VERBOSE: Get-Traits: UnknownToKnown: -41 is 29 + -70
+VERBOSE: Get-Traits: UnknownToKnown: 9 is 29 + -20
+VERBOSE: Get-Traits: checking lowPet: current estimate LOW for Nimbleness is 13
+VERBOSE: Get-Traits: Checking highPet: current estimate HIGH for Nimbleness is 13
+VERBOSE: Get-Traits: lowPet: NO ACTION : -41 <= 13
+VERBOSE: Get-Traits: highPet: UPDATING Nimbleness : 9 < 13
+VERBOSE: Get-Traits: Nimbleness finished
+                                                                                       
+Patience10                                                                                           
+Procreation11 -14                                                                                      
+Sufficiency                   15                                                                                           
+Targeting                      20                                                                                           
+Toughness                      29                                                                                           
+Subtotal                       305 - 310                                                                                    
+Overall                        267 - 317 
+
+
+
+---------------
+
+REFRAIN
+compare cream puppy to petname
+You look hard at a tiny cream puppy comparing to a very large ebony trained
+fox ...
+You are certain that cream puppy is:
+ Alertness seems inferior.
+ Appetite seems very inferior.
+ Brutality seems very inferior.
+ Development seems very inferior.
+ Eluding seems marginally inferior.
+ Energy seems very inferior.
+ Evasion seems very inferior.
+ Ferocity seems very inferior.
+ Fortitude seems inferior.
+ Insight seems slightly inferior.
+ Might seems very inferior.
+ Nimbleness seems very inferior.
+ Patience seems very inferior.
+ Procreation seems very inferior.
+ Sufficiency seems inferior.
+ Targeting seems very inferior.
+ Toughness seems inferior.
+Overall he seems to be totally inferior.
+They seem to be unrelated.
+
+
+REPO
+Repo looks hard at a tiny cream puppy and then again at a very large merle
+grey trained fox comparing them.
+Repo says: Alertness seems inferior.
+Repo says: Appetite seems very inferior.
+Repo says: Brutality seems inferior.
+Repo says: Development seems very inferior.
+Repo says: Eluding seems slightly inferior.
+Repo says: Energy seems very inferior.
+Repo says: Evasion seems very inferior.
+Repo says: Ferocity seems very inferior.
+Repo says: Fortitude seems inferior.
+Repo says: Insight seems slightly inferior.
+Repo says: Might seems very inferior.
+Repo says: Nimbleness seems very inferior.
+Repo says: Patience seems very inferior.
+Repo says: Procreation seems very inferior.
+Repo says: Sufficiency seems inferior.
+Repo says: Targeting seems inferior.
+Repo says: Toughness seems inferior.
+Repo says: Overall he seems to be totally inferior.
+Repo says: They seem to be partially related.
+
+
+
+TREEHUGGER
+Treehugger looks hard at a tiny cream puppy and then again at a very large mist light grey trained fox comparing them.
+Treehugger says: Alertness seems very inferior.
+Treehugger says: Appetite seems very inferior.
+Treehugger says: Brutality seems very inferior.
+Treehugger says: Development seems very inferior.
+Treehugger says: Eluding seems marginally inferior.
+Treehugger says: Energy seems very inferior.
+Treehugger says: Evasion seems very inferior.
+Treehugger says: Ferocity seems very inferior.
+Treehugger says: Fortitude seems inferior.
+Treehugger says: Insight seems slightly inferior.
+Treehugger says: Might seems very inferior.
+Treehugger says: Nimbleness seems very inferior.
+Treehugger says: Patience seems very inferior.
+Treehugger says: Procreation seems very inferior.
+Treehugger says: Sufficiency seems very inferior.
+Treehugger says: Targeting seems very inferior.
+Treehugger says: Toughness seems inferior.
+Treehugger says: Overall he seems to be totally inferior.
+Treehugger says: They seem to be unrelated.
+A very large mist light grey trained fox runs off in search of Treehugger.
+Treehugger left the game.
+

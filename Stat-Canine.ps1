@@ -1,19 +1,80 @@
-<# Stat-Canine.ps1
+# requires -version 5
+<#
+SYNOPSIS
+    Develops a set of functions useful in evaluating a canine
+DESCRIPTION
+    Import a CSV table of known canines, paste in comparisons, output a result (even if partially solved)
+PARAMETER <Parameter_Name>
+    VerbosePreference can be set to Continue for verbose outputs
+INPUTS
+    Select a CSV file at startup
+OUTPUTS
+    Outputs a result in format-table
+    Maybe add a log output
+NOTES
+  Version:        0.9
+  Author:         David Winn
+  Creation Date:  8/13/2022
+  Purpose/Change: Initial script development
+  
+EXAMPLE
+  <Example goes here. Repeat this attribute for more than one example>
+  #>
 
-Develops a set of functions useful in evaluating a canine
+# [Initialisations]
 
-#>
+[CmdletBinding()]
+PARAM ($VerbosePreference)
+
+# [Declarations]
+
+# Setting up hashtables for results, don't need all keys, will add as calculated
+$lowPet = [ordered]@{Name="dummy"}
+$highPet = [ordered]@{Name="dummy"}
+$petDB = @()
+
+# Syntax: passing a hash value with a number in quotes casts as string, without is int
+
+$baseArray = @(
+    [PSCustomObject]@{evalText="totally inferior";     low=-1700; high=-71}
+    [PSCustomObject]@{evalText="very inferior";        low=-70;   high=-20}
+    [PSCustomObject]@{evalText="inferior";             low=-19;   high=-10}
+    [PSCustomObject]@{evalText="slightly inferior";    low=-9;    high=-5}
+    [PSCustomObject]@{evalText="marginally inferior";  low=-4;    high=-2}
+    [PSCustomObject]@{evalText="barely inferior";      low=-1;    high=-1}
+    [PSCustomObject]@{evalText="similar";              low=0;     high=0}
+    [PSCustomObject]@{evalText="barely better";        low=1;     high=1}
+    [PSCustomObject]@{evalText="marginally better";    low=2;     high=4}
+    [PSCustomObject]@{evalText="slightly better";      low=5;     high=9}
+    [PSCustomObject]@{evalText="better";               low=10;    high=19}
+    [PSCustomObject]@{evalText="much better";          low=20;    high=70}
+    [PSCustomObject]@{evalText="outstandingly better"; low=71;    high=1700}
+    )
+
+$traits = @(
+    'Alertness','Appetite','Brutality','Development','Eluding','Energy',
+    'Evasion','Ferocity','Fortitude','Insight','Might','Nimbleness',
+    'Patience','Procreation','Sufficiency','Targeting','Toughness'
+    )
+
+$initialDirectory = $PSScriptRoot
+
+#-----------------------------------------------------------[Functions]------------------------------------------------------------
+
 Function Read-Database {
     Param(
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         $sourceDBFile      
     )
+# NOT WORKING Write-Verbose "Read-Database: Opening $sourceDBFile.Fullname"
     $petDB = Import-Csv -Path $sourceDBFile
+Write-Verbose "Read-Database: import-CSV is $petDB"
     $petDB = $petDB | Where-Object Status -EQ "Active"
     # If a non-digit is detected, mark the field UNSOLVED, then go fix Get-Traits and Get-Overall to look for that
     $petDB = $petDB | ForEach-Object {
 # DEBUG: Write-Host "Read-Database: Object is $_ "
+# NOT WORKING Write-Verbose: "Read-Database: Object is $_ "
         if($_.Alertness -match "\D")   {$_.Alertness = [string]"UNSOLVED"}   else {$_.Alertness = [int]$_.Alertness}
         if($_.Appetite -match "\D")    {$_.Appetite = [string]"UNSOLVED"}    else {$_.Appetite = [int]$_.Appetite}
         if($_.Brutality -match "\D")   {$_.Brutality = [string]"UNSOLVED"}   else {$_.Brutality = [int]$_.Brutality}
@@ -25,7 +86,7 @@ Function Read-Database {
         if($_.Fortitude -match "\D")   {$_.Fortitude = [string]"UNSOLVED"}   else {$_.Fortitude = [int]$_.Fortitude}
         if($_.Insight -match "\D")     {$_.Insight = [string]"UNSOLVED"}     else {$_.Insight = [int]$_.Insight}
         if($_.Might -match "\D")       {$_.Might = [string]"UNSOLVED"}       else {$_.Might = [int]$_.Might}
-        if($_.Nimbleness -match "\D")  {$_.Nimbleness = [string]"UNSOLVED"}  else {$_.Nimbleness = [int]$_.Might}
+        if($_.Nimbleness -match "\D")  {$_.Nimbleness = [string]"UNSOLVED"}  else {$_.Nimbleness = [int]$_.Nimbleness}
         if($_.Patience -match "\D")    {$_.Patience = [string]"UNSOLVED"}    else {$_.Patience = [int]$_.Patience}
         if($_.Procreation -match "\D") {$_.Procreation = [string]"UNSOLVED"} else {$_.Procreation = [int]$_.Procreation}
         if($_.Sufficiency -match "\D") {$_.Sufficiency = [string]"UNSOLVED"} else {$_.Sufficiency = [int]$_.Sufficiency}
@@ -37,8 +98,8 @@ Function Read-Database {
         }
     $petDB = $petDB | Sort-Object -Property Name
     return $petDB
-    }
 
+    }
 
 function Get-EvalText {
     param (
@@ -105,13 +166,13 @@ Function Get-Traits {
     foreach($trait in $traits){
         # DO STUFF
         $pattern = $trait
-# DEBUG: Write-Host "Get-Traits is looking for $trait"
-
+# DEBUG: Write-Host "Get-Traits: STARTING $trait"
+Write-Verbose "Get-Traits: Looping through traits for $trait "
         # First, establish if the known pet has this trait at all - check for string UNSOLVED
+Write-Verbose "Get-Traits: knownPet is $knownPet.Name"
         $knownValue = $knownPet.$trait
-# DEBUG: Write-Host "Get-Traits: KnownPet trait $trait is $knownValue"
-# DEBUG: Write-Host "Get-Traits: $knownValue is the known value I am comparing to"
-# DEBUG: Write-Host "Get-Traits: $direction is the DIRECTION"
+Write-Verbose "Get-Traits: KnownPet trait $trait is $knownValue "
+Write-Verbose "Get-Traits: Comparing in direction $direction"
         if($knownValue -eq "UNSOLVED"){
             Write-Host "Get-Traits: Known pet does not have value for $trait - skipping" -ForegroundColor Yellow
             return
@@ -126,6 +187,7 @@ Function Get-Traits {
 
         $diffDesc = $diffDesc.ToString().TrimStart()           # Remove padding
 # DEBUG: Write-Host "Get-Traits working on this string: $diffDesc"
+Write-Verbose "Get-Traits: working on string: $diffDesc"
         $diffDesc = $diffDesc -replace '(^(?:\S+\s+\n?){1,2})',''  # Remove 1st 2 words
         $diffDesc = $diffDesc.Replace('.','')
 # DEBUG: Write-Host "Get-Traits string: $diffDesc is ready"
@@ -137,22 +199,25 @@ Function Get-Traits {
             $traitHighModifier = $row.high
             }
         }
-# DEBUG: Write-Host "Get-Traits found lowModifier: $traitLowModifier"
-# DEBUG: Write-Host "Get-Traits found highModifier: $traitHighModifier"
-
+Write-Verbose "Get-Traits: $trait lowModifier: $traitLowModifier"
+Write-Verbose "Get-Traits: $trait highModifier: $traitHighModifier"
         # Do math, known value + modifier
         if($direction -eq "UnknownToKnown"){
             $potentialLow  = $knownValue + $traitLowModifier
             $potentialHigh = $knownValue + $traitHighModifier
-# DEBUG: Write-Host "Get-Traits: case is UnknownToKnown - sum KnownValue and Modifier resulting in $trait low $potentialLow high $potentialHigh"
+Write-Verbose "Get-Traits: UnknownToKnown: $potentialLow is $knownValue + $traitLowModifier"
+Write-Verbose "Get-Traits: UnknownToKnown: $potentialHigh is $knownValue + $traitHighModifier"
         }
         elseif ($direction -eq "KnownToUnknown") {
             $potentialLow  = $knownValue - $traitHighModifier
             $potentialHigh = $knownValue - $traitLowModifier
 # DEBUG: Write-Host "Get-Traits direction is $direction for $trait low $potentialLow high $potentialHigh"
+Write-Verbose "Get-Traits: KnownToUnknown: $potentialLow is $knownValue - $traitHighModifier"
+Write-Verbose "Get-Traits: KnownToUnknown: $potentialHigh is $knownValue - $traitLowModifier"
         }
         elseif ($direction -notin "UnknownToKnown","KnownToUnknown"){
-# DEBUG: Write-Host "Get-Traits: Something wrong in direction $direction - breaking"
+# DEBUG: 
+Write-Host "Get-Traits: Something wrong in direction $direction - breaking" -ForegroundColor Yellow
             break
         }
         # Get the current low and high estimates
@@ -160,37 +225,44 @@ Function Get-Traits {
         $currentHigh = $highPet.$trait
 # DEBUG: Write-Host "Get-Traits current estimate of LOW is $currentLow"
 # DEBUG: Write-Host "Get-Traits current estimate of HIGH is $currentHigh"
+Write-Verbose "Get-Traits: checking lowPet: current estimate LOW for $trait is $currentLow"
+Write-Verbose "Get-Traits: Checking highPet: current estimate HIGH for $trait is $currentHigh"
+
         # LOW PET
         # Does the key exist?
         if($lowPet.Keys -notcontains $trait){
 # DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialLow in lowPet"
+Write-Verbose "Get-Traits: lowPet: Creating Key/Value $trait $potentialLow in lowPet"
             $lowPet.Add($trait,$potentialLow)
             }
         # Simplify the logic, spreadsheet does this: for an array of low ranges (20, 21, 22, 23) select the highest
         # so if $potentialLow > $currentLow, replace value
         elseif($potentialLow -gt $currentLow){
 # DEBUG: Write-Host "Get-Traits potential LOW value $potentialLow higher than current : UPDATING"
+Write-Verbose "Get-Traits: lowPet: UPDATING $trait : $potentialLow > $currentLow"
             $lowPet.$trait = $potentialLow
             }
         elseif($potentialLow -le $currentLow){
-# DEBUG: Write-Host "Get-Traits potential LOW value $potentialLow <= $currentLow : NO ACTION"
+Write-Verbose "Get-Traits: lowPet: NO ACTION : $potentialLow <= $currentLow"
             }
 
         # HIGH PET
         if($highPet.Keys -notcontains $trait){
 # DEBUG: Write-Host "Get-Traits creating key/value $trait $potentialHigh in highPet"
+Write-Verbose "Get-Traits: highPet: Creating Key/Value $trait $potentialHigh in highPet"
             $highPet.Add($trait,$potentialHigh)
             }
         # Again, lets keep it simple. spreadsheet does this: for an array of high ranges (23, 24, 25, 26) pick the lowest
         elseif($potentialHigh -lt $currentHigh){
 # DEBUG: Write-Host "Get-Traits potential HIGH value $potentialHigh lower than current $currentHigh : UPDATING"
+Write-Verbose "Get-Traits: highPet: UPDATING $trait : $potentialHigh < $currentHigh"
             $highPet.$trait = $potentialHigh
             }
         elseif($potentialHigh -ge $currentHigh){
-# DEBUG: Write-Host "Get-Traits potential HIGH value $potentialHigh >= current $currentHigh : NO ACTION"
+Write-Verbose "Get-Traits: highPet: NO ACTION : $potentialHigh >= $currentHigh"
             }
-# DEBUG: Write-Host "Get-Traits: Finished with $trait"
-# DEBUG: pause
+Write-Verbose "Get-Traits: FINISHED $trait"
+    $trait = $null
     }
     }
 }
@@ -341,6 +413,7 @@ Function Get-KnownPet{
     )
     # Develop picker-code
     $petDB = Read-Database -sourceDBFile $sourceDBFile
+# DEBUG POINT
     $validChoices = 0..($petDB.Count -1)
     $choice = ''
     while ([string]::IsNullOrEmpty($choice)){
@@ -552,8 +625,7 @@ Function Exit-Script {
 [PSCustomObject]$lowpet  | Export-Csv -NoTypeInformation -Path .\lowPet.csv
 #>
 
-Function Format-Vertical
-{
+Function Format-Vertical {
     Param(
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
@@ -594,7 +666,8 @@ Function Format-Vertical
     $reportPet | Format-Table -HideTableHeaders
 }
 
-function Get-File($initialDirectory) {   
+Function Get-File($initialDirectory) {   
+    Write-Verbose "Get-File: This doesn't work in VSCode, find a new method?"
     [void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms')
     $OpenFileDialog = New-Object System.Windows.Forms.OpenFileDialog
     if ($initialDirectory) { $OpenFileDialog.initialDirectory = $initialDirectory }
@@ -603,42 +676,8 @@ function Get-File($initialDirectory) {
     return $OpenFileDialog.FileName
 }
 
-<# ######### END OF FUNCTIONS ########## Setting up vars  ########## #>
+#-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-# Setting up hashtables for results, don't need all keys, will add as calculated
-$lowPet = [ordered]@{Name="dummy"}
-$highPet = [ordered]@{Name="dummy"}
-
-
-# Syntax: passing a hash value with a number in quotes casts as string, without is int
-$baseArray = @(
-    [PSCustomObject]@{evalText="totally inferior";     low=-1700; high=-71}
-    [PSCustomObject]@{evalText="very inferior";        low=-70;   high=-21}
-    [PSCustomObject]@{evalText="inferior";             low=-20;   high=-10}
-    [PSCustomObject]@{evalText="slightly inferior";    low=-9;    high=-5}
-    [PSCustomObject]@{evalText="marginally inferior";  low=-4;    high=-2}
-    [PSCustomObject]@{evalText="barely inferior";      low=-1;    high=-1}
-    [PSCustomObject]@{evalText="similar";              low=0;     high=0}
-    [PSCustomObject]@{evalText="barely better";        low=1;     high=1}
-    [PSCustomObject]@{evalText="marginally better";    low=2;     high=4}
-    [PSCustomObject]@{evalText="slightly better";      low=5;     high=9}
-    [PSCustomObject]@{evalText="better";               low=10;    high=20}
-    [PSCustomObject]@{evalText="much better";          low=21;    high=70}
-    [PSCustomObject]@{evalText="outstandingly better"; low=71;    high=1700}
-    )
-
-$traits = @(
-    'Alertness','Appetite','Brutality','Development','Eluding','Energy',
-    'Evasion','Ferocity','Fortitude','Insight','Might','Nimbleness',
-    'Patience','Procreation','Sufficiency','Targeting','Toughness'
-    )
-
-$initialDirectory = $PSScriptRoot
-
-<#  Run through sequence and validate 
-        Spreadsheet (uses Uknown to Known method)
-    Unknown To Known sequence: Ballad - Cover - Mulapin - Crescendo - Exie = Angrynerd Solution
-    Known to Unknown sequence: #>
 
 Write-Host "Select a CSV file, default example format is KNOWNS.csv" -ForegroundColor Yellow
 $sourceDBFile = Get-File -initialDirectory $initialDirectory
