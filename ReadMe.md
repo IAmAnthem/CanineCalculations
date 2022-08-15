@@ -3,7 +3,8 @@
 - v0.81 - Allow for unsolved pets in source CSV
   - Any non-numeric will mark the trait as UNSOLVED during comparisons
   - Other known values for that pet should still help you refine your unknown
-- V0.82 - Fix incorrect casting of Nimbleness, still need test for partial-knowns
+- v0.82 - Fix incorrect casting of Nimbleness, still need test for partial-knowns
+- v0.83 - Add GUI selector to pick character / pet before pasting in comparison
   
 
 # How To Get and Run the Script (Stat-Canine.ps1)

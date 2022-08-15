@@ -74,13 +74,14 @@ Function Get-Selection{
     $petDB = Read-Database -sourceDBFile $sourceDBFile
 
     $Form = New-Object System.Windows.Forms.Form
-    $Form.width = 350
-    $Form.height = 150
+    # $label = New-Object System.Windows.Forms.Label
+    $Form.width = 550
+    $Form.height = 250
     $Form.StartPosition = 'CenterScreen'
-    $Form.Text = $FormText
+    $Form.Text = "Character / Canine Selection Window"
     $DropDown = new-object System.Windows.Forms.ComboBox
     $DropDown.Location = new-object System.Drawing.Size(100,10)
-    $DropDown.Size = new-object System.Drawing.Size(200,30)
+    $DropDown.Size = new-object System.Drawing.Size(254,30)
     ###
     ForEach ($Item in $petDB) {
         $DropDown.Items.Add($Item.Name)
@@ -91,13 +92,13 @@ Function Get-Selection{
 
     $DropDownLabel = new-object System.Windows.Forms.Label
     $DropDownLabel.Location = new-object System.Drawing.Size(10,10)
-    $DropDownLabel.size = new-object System.Drawing.Size(100,20)
+    $DropDownLabel.size = new-object System.Drawing.Size(100,40)
     $DropDownLabel.Text = $args
     $Form.Controls.Add($DropDownLabel)
     $Button = new-object System.Windows.Forms.Button
-    $Button.Location = new-object System.Drawing.Size(100,50)
-    $Button.Size = new-object System.Drawing.Size(100,20)
-    $Button.Text = "OK"
+    $Button.Location = new-object System.Drawing.Size(100,100)
+    $Button.Size = new-object System.Drawing.Size(300,100)
+    $Button.Text = "Select Character and Pet"
 
     $Button.Add_Click({$Script:Choice=$DropDown.SelectedIndex;$Script:knownPet=$petDB[$Choice];$Form.Close()})
     
