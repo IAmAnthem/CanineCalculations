@@ -27,6 +27,8 @@ EXAMPLE
 PARAM ($VerbosePreference)
 
 # [Declarations]
+[Void][System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+[Void][System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
 
 # Setting up hashtables for results, don't need all keys, will add as calculated
 $lowPet = [ordered]@{Name="dummy"}
@@ -61,6 +63,50 @@ $initialDirectory = $PSScriptRoot
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
+Function Get-Selection{
+    param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    $sourceDBFile    
+    )
+    [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+    [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
+    $petDB = Read-Database -sourceDBFile $sourceDBFile
+
+    $Form = New-Object System.Windows.Forms.Form
+    $Form.width = 350
+    $Form.height = 150
+    $Form.StartPosition = 'CenterScreen'
+    $Form.Text = $FormText
+    $DropDown = new-object System.Windows.Forms.ComboBox
+    $DropDown.Location = new-object System.Drawing.Size(100,10)
+    $DropDown.Size = new-object System.Drawing.Size(200,30)
+    ###
+    ForEach ($Item in $petDB) {
+        $DropDown.Items.Add($Item.Name)
+        }
+    ###
+    $DropDown.SelectedIndex = 0
+    $Form.Controls.Add($DropDown)
+
+    $DropDownLabel = new-object System.Windows.Forms.Label
+    $DropDownLabel.Location = new-object System.Drawing.Size(10,10)
+    $DropDownLabel.size = new-object System.Drawing.Size(100,20)
+    $DropDownLabel.Text = $args
+    $Form.Controls.Add($DropDownLabel)
+    $Button = new-object System.Windows.Forms.Button
+    $Button.Location = new-object System.Drawing.Size(100,50)
+    $Button.Size = new-object System.Drawing.Size(100,20)
+    $Button.Text = "OK"
+
+    $Button.Add_Click({$Script:Choice=$DropDown.SelectedIndex;$Script:knownPet=$petDB[$Choice];$Form.Close()})
+    
+    $form.Controls.Add($Button)
+    $Form.Add_Shown({$Form.Activate()})
+    $Form.ShowDialog()
+    $Script:Answer=[System.Windows.Forms.MessageBox]::Show('Proceed ? ','You selected: ' + $knownPet.Name,'YesNoCancel','Information')
+    return $Script:knownPet
+}
 Function Read-Database {
     Param(
         [Parameter(Mandatory)]
@@ -262,8 +308,7 @@ Write-Verbose "Get-Traits: highPet: UPDATING $trait : $potentialHigh < $currentH
 Write-Verbose "Get-Traits: highPet: NO ACTION : $potentialHigh >= $currentHigh"
             }
 Write-Verbose "Get-Traits: FINISHED $trait"
-    $trait = $null
-    }
+        }
     }
 }
 
@@ -405,6 +450,7 @@ Function Get-Overall {
     }
 }
 
+<#
 Function Get-KnownPet{
     param(
     [Parameter(Mandatory)]
@@ -437,6 +483,7 @@ Function Get-KnownPet{
         }
     return $knownPet
     }
+#>
 
 Function Read-MultiLineInputBoxDialog {
     Param(
@@ -598,7 +645,8 @@ Function Update-Unknown {
     $sourceDBFile
     )
 
-    $knownPet = Get-KnownPet -sourceDBFile $sourceDBFile
+#    $knownPet = Get-KnownPet -sourceDBFile $sourceDBFile
+    $knownPet = Get-Selection -sourceDBFile $sourceDBFile
     $evalText = Get-EvalText -direction $direction
     $knowledge = Get-Knowledge $evalText
     if($knowledge -ne "certain"){

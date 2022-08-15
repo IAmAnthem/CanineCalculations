@@ -1,16 +1,17 @@
-NAME,OWNER,TRAITS,GENDER,CLOSE1,CLOSE2,PARTIAL1,PARTIAL2,PARTIAL3,PARTIAL4
-Impetuoso Cali 600/40,Dave,600,F,Ballad Fireball 730/55,Nope Joy 477/31,Ballad Shocker 723/57,Hem Cassia 727/53,Ballad Finale 670/43,Nope Mixty 296/18
-Dirge Fluid 692/57,Dave,692,F,Dirge Mach 685/57,Ardent Minsi 686/52,Dirge Shimmy 677/52,May Myrna 697/54,Exie Shaker 694/53,Ardent Caddie 673/44
-Mulapin MU8,Dave,709,F,Mulapin MU7,So Floofy 718/57,Mulapin MU6,Genuine Alice 712/58,Lullaby Sandman 722/57,So Breef 690/51
-,,,,,,,,,
-Crescendo Eddie 698/51,Dave,698,M,Crescendo Horne 700/49,Angwish Piquet 674/47,Crescendo Marked 666/48,May Myrna 697/54,Dirge Pirelle 661/46,Angwish Oran 668/40
-Exie Shaker 694/53,Dave,694,M,Exie Hook 695/53,Morsel Narah 683/53,Exie Crook 685/51,May Myrna 697/54,Cover Fuel 679/49,Morsel Molly 675/50
-Lullaby Sandman 722/57,Dave,722,M,Calico BarkFox 710/55,Lullaby Nikita 704/55,Calico Barkbox 687/52,Dirge Fluid 692/57,Lullaby Sovn 704/53,Mitten Delaine 697/49
-Refrain Hobby 714/52,Dave,714,M,Refrain Booger 684/47,So Floofy 718/57,Primrose Pshaw 676/46,Refrain Whoops 690/49,Lullaby Sandman 722/57,So Breef 690/51
-Ballad Fireball 730/55,Dave,730,M,Ballad Shocker 723/57,Hem Cassia 727/53,Calico BarkFox 710/55,Ballad Nina 703/48,Refrain Hobby 714/52,Hem Pixel 696/49
-Cover Rocker 714/60,Dave,714,M,Cover Nobby 710/54,Genuine Alice 712/58,Cover Amon 698/50,So Floofy 718/57,Ballad Fireball 730/55,Genuine Bootle 688/56
-Grazioso Hoover 718/54,Dave,718,M,Grazioso Tairn 703/55,Hem Cassia 727/53,Grazioso Feegle 684/48,May Myrna 697/54,Refrain Hobby 714/52,Hem Pixel 696/49
-Grazioso GR3,Dave,718,M,Grazioso Hoover 718/54,Latke Heidi 718/59,Grazioso Tairn 703/55,Hem Cassia 727/53,Cover Rocker 714/60,Latke Elsie 703/58
-Mulapin Mercury 688/54,Dave,688,M,Calico BarkFox 710/55,Mulapin Marple 660/52,Calico Barkbox 687/52,Dirge Fluid 692/57,Mulapin Tracker 605/49,Hem Cassia 727/53
-Mulapin MU6,Dave,692,M,Mulapin Mercury 688/54,Mitten Delaine 697/49,Calico BarkFox 710/55,Mulapin Marple 660/52,Crescendo Eddie 698/51,Mitten Buffy 683/53
-Mulapin MU7,Dave,702,M,Mulapin MU6,Genuine Alice 712/58,Mulapin Mercury 688/54,Mitten Delaine 697/49,Ballad Fireball 730/55,Genuine Bootle 688/56
+NAME,OWNER,TRAITS,GENDER,CLOSE1,CLOSE2,PARTIAL1,PARTIAL2,PARTIAL3,PARTIAL4,Status
+Impetuoso Cali 600/40,Dave,600,F,Ballad Fireball 730/55,Nope Joy 477/31,Ballad Shocker 723/57,Hem Cassia 727/53,Ballad Finale 670/43,Nope Mixty 296/18,Active
+Dirge Fluid 692/57,Dave,692,F,Dirge Mach 685/57,Ardent Minsi 686/52,Dirge Shimmy 677/52,May Myrna 697/54,Exie Shaker 694/53,Ardent Caddie 673/44,Active
+Mulapin MU8,Dave,709,F,Mulapin MU7,So Floofy 718/57,Mulapin MU6,Genuine Alice 712/58,Lullaby Sandman 722/57,So Breef 690/51,Active
+,,,,,,,,,,
+Crescendo Eddie 698/51,Dave,698,M,Crescendo Horne 700/49,Angwish Piquet 674/47,Crescendo Marked 666/48,May Myrna 697/54,Dirge Pirelle 661/46,Angwish Oran 668/40,Active
+Exie Shaker 694/53,Dave,694,M,Exie Hook 695/53,Morsel Narah 683/53,Exie Crook 685/51,May Myrna 697/54,Cover Fuel 679/49,Morsel Molly 675/50,Active
+Lullaby Sandman 722/57,Dave,722,M,Calico BarkFox 710/55,Lullaby Nikita 704/55,Calico Barkbox 687/52,Dirge Fluid 692/57,Lullaby Sovn 704/53,Mitten Delaine 697/49,Active
+Refrain Hobby 714/52,Dave,714,M,Refrain Booger 684/47,So Floofy 718/57,Primrose Pshaw 676/46,Refrain Whoops 690/49,Lullaby Sandman 722/57,So Breef 690/51,Active
+Ballad Fireball 730/55,Dave,730,M,Ballad Shocker 723/57,Hem Cassia 727/53,Calico BarkFox 710/55,Ballad Nina 703/48,Refrain Hobby 714/52,Hem Pixel 696/49,Active
+Cover Rocker 714/60,Dave,714,M,Cover Nobby 710/54,Genuine Alice 712/58,Cover Amon 698/50,So Floofy 718/57,Ballad Fireball 730/55,Genuine Bootle 688/56,Active
+Grazioso Hoover 718/54,Dave,718,M,Grazioso Tairn 703/55,Hem Cassia 727/53,Grazioso Feegle 684/48,May Myrna 697/54,Refrain Hobby 714/52,Hem Pixel 696/49,Active
+Grazioso GR3,Dave,718,M,Grazioso Hoover 718/54,Latke Heidi 718/59,Grazioso Tairn 703/55,Hem Cassia 727/53,Cover Rocker 714/60,Latke Elsie 703/58,Active
+Mulapin Mercury 688/54,Dave,688,M,Calico BarkFox 710/55,Mulapin Marple 660/52,Calico Barkbox 687/52,Dirge Fluid 692/57,Mulapin Tracker 605/49,Hem Cassia 727/53,Active
+Mulapin MU6,Dave,692,M,Mulapin Mercury 688/54,Mitten Delaine 697/49,Calico BarkFox 710/55,Mulapin Marple 660/52,Crescendo Eddie 698/51,Mitten Buffy 683/53,Active
+Mulapin MU7,Dave,702,M,Mulapin MU6,Genuine Alice 712/58,Mulapin Mercury 688/54,Mitten Delaine 697/49,Ballad Fireball 730/55,Genuine Bootle 688/56,Active
+Portamento Roger 304/11,Dave,304,M,NPC,Arynia Ivy,NPC,NPC,Arynia Max,Repo Boomer 123/22,Active
