@@ -237,6 +237,8 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 # Progress Notes - what am I working on?
 
+## PoshGUI
+- Can this all happen in a single pane of glass?  Stay Tuned.
 
 ## New-BreedingPlan.ps1
 - Take a set of knowns and devise a three-stage breeding plan
