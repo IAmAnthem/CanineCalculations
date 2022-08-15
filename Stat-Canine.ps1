@@ -131,9 +131,8 @@ Function Output-ResultBox{
     $outputBox.Font = $font
     $outputForm.Controls.Add($outputBox)
     $myText = $reportPet | Format-Table -HideTableHeaders | Out-String
-    $test = $myText | Where { $_ -ne "" }
+    $test = $myText | Where-Object { $_ -ne "" }
     $outputBox.Text = $test
-#    $outputBox.Text = $myText
     [void] $outputForm.ShowDialog()
 }
 
