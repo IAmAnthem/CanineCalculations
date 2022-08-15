@@ -108,6 +108,36 @@ Function Get-Selection{
     $Script:Answer=[System.Windows.Forms.MessageBox]::Show('Proceed ? ','You selected: ' + $knownPet.Name,'YesNoCancel','Information')
     return $Script:knownPet
 }
+
+Function Output-ResultBox{
+    Param(
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        $reportPet
+        )
+    $outputForm = New-Object System.Windows.Forms.Form
+    $outputForm.TopMost = $true
+    $outputForm.Size = New-Object System.Drawing.Size(700,700)
+    $outputForm.StartPosition = "CenterScreen"
+    $outputForm.Text = "Result of comparisons"
+    $outputForm.Add_Shown({$outputForm.Activate()})
+
+    $outputBox = New-Object System.Windows.Forms.TextBox
+    $outputBox.Location = New-Object System.Drawing.Size(10,10)
+    $outputBox.Size = New-Object System.Drawing.Size(665,640)
+    $outputBox.Multiline = $true
+    $outputBox.ScrollBars = "Vertical"
+    $font = New-Object System.Drawing.Font("Consolas",9,[System.Drawing.FontStyle]::Regular)
+    $outputBox.Font = $font
+    $outputForm.Controls.Add($outputBox)
+    $myText = $reportPet | Format-Table -HideTableHeaders | Out-String
+    $test = $myText | Where { $_ -ne "" }
+    $outputBox.Text = $test
+#    $outputBox.Text = $myText
+    [void] $outputForm.ShowDialog()
+}
+
+
 Function Read-Database {
     Param(
         [Parameter(Mandatory)]
@@ -451,41 +481,6 @@ Function Get-Overall {
     }
 }
 
-<#
-Function Get-KnownPet{
-    param(
-    [Parameter(Mandatory)]
-    [ValidateNotNullOrEmpty()]
-    $sourceDBFile    
-    )
-    # Develop picker-code
-    $petDB = Read-Database -sourceDBFile $sourceDBFile
-# DEBUG POINT
-    $validChoices = 0..($petDB.Count -1)
-    $choice = ''
-    while ([string]::IsNullOrEmpty($choice)){
-    Write-Host "+=================================================+"
-    Write-Host "|      Select a known pet from the database       |"
-    Write-Host "+=================================================+"
-        foreach ($line in $petDB){
-             Write-Host ('{0} - {1} - {2}' -f $petDB.IndexOf($line),$line.Name,$line.Person)
-            }
-        $choice = Read-Host -Prompt 'Please chose one of the known pets by number'
-        if($choice -in $validChoices){
-            Write-Host (' --- Your choice of: [{0}] is valid.' -f $choice)
-            $knownPet = $petDB[$choice]
-            }
-            else{
-            Write-Warning (' [{0}] is not a valid selection.' -f $choice)
-            Write-Warning '--- TRY AGAIN'
-            pause
-            $choice = ''
-            }
-        }
-    return $knownPet
-    }
-#>
-
 Function Read-MultiLineInputBoxDialog {
     Param(
     [Parameter(Mandatory)]
@@ -705,14 +700,16 @@ Function Format-Vertical {
 
     $subtotalLow  = ($lowPet.Subtotal).ToString()
     $subtotalHigh = ($highPet.Subtotal).ToString()
-    $rangeSubtotal = $subtotalLow + " - " + $subtotalHigh
+    $rangeSubtotal = $subtotalLow + " to " + $subtotalHigh
     $reportPet.Add("Subtotal",$rangeSubtotal)
 
     $lowOverall   = ($lowPet.Overall).ToString()
     $highOverall  = ($highPet.Overall).ToString()
-    $rangeOverall = $lowOverall + " - " + $highOverall
+    $rangeOverall = $lowOverall + " to " + $highOverall
     $reportPet.Add("Overall",$rangeOverall)
-    $reportPet | Format-Table -HideTableHeaders
+#    $reportPet | Format-Table -HideTableHeaders
+    Output-ResultBox -reportPet $reportPet
+    return $reportPet
 }
 
 Function Get-File($initialDirectory) {   
