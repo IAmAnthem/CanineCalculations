@@ -3,3 +3,4 @@ PRIVATE-BREEDERS.csv
 *.txt
 !Validation-*.txt
 launch.json
+*.log
