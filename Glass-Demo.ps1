@@ -34,40 +34,41 @@ $traits = @(
 Add-Type -AssemblyName PresentationCore, PresentationFramework
 
 $Xaml = @"
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="1000" Height="800">
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="1200" Height="900">
 <Grid Name="MasterGrid" Margin="0,0,0,0">
 
 <Label VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Canine Comparator" Margin="0,0,0,0" Name="RightTopLabel" Height="39" Background="#473e72" Foreground="#e2eeed" FontFamily="Consolas" FontSize="26"/>
-<StackPanel HorizontalAlignment="Left" Height="648" VerticalAlignment="Top" Width="182" Margin="0,41,0,0">
-<Button Content="Load Database" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="10,12,0,0" Height="27" Name="LoadDbButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="165" Margin="5,15,0,0"/>
+<StackPanel HorizontalAlignment="Left" Height="648" VerticalAlignment="Top" Width="192" Margin="0,41,0,0">
+<Button Content="Load Database" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="LoadDbButton"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Select Mode" Height="24" Width="179" Margin="50,5,0,0"/>
 <RadioButton HorizontalAlignment="Left" VerticalAlignment="Top" Content="Unknown To Known" Height="35" Width="179" Margin="10,2,0,0" Name="UtoKButton" IsChecked="True"/>
 <RadioButton HorizontalAlignment="Left" VerticalAlignment="Top" Content="Known To Unknown" Height="32" Width="179" Margin="10,2,0,0" Name="KtoUButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="165" Margin="5,15,0,0"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Pick Known Character/Pet" Height="24" Width="179" Margin="20,5,0,0"/>
-<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="175" Name="CharSelect" Height="32" ItemsSource="{Binding internalJSON}" DisplayMemberPath="Name" Margin="5,5,0,0" VerticalContentAlignment="Bottom"/>
-<Button Content="Process Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="10,12,0,0" Height="27" Name="ProcessCompButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="165" Margin="5,15,0,0"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="155" TextWrapping="Wrap" Margin="10,12,0,0" Name="NameBox"/>
-<Button Content="Set Name (Unique)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="10,12,0,0" Height="27" Name="SetNameButton"/>
-<Button Content="Export Result" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="10,12,0,0" Height="27" Name="ExportResultCompButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="165" Margin="5,15,0,0"/>
-<Button Content="Reset Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="10,12,0,0" Height="27" Name="ResetButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="165" Margin="5,15,0,0"/>
-
+<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Name="CharSelect" Height="32" ItemsSource="{Binding internalJSON}" DisplayMemberPath="Name" Margin="8,15,0,0" VerticalContentAlignment="Bottom"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="178" TextWrapping="Wrap" Margin="10,12,0,0" Name="NameBox"/>
+<Button Content="Set Name (Unique)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="SetNameButton"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
+<Button Content="Export Result CSV" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ExportCSVButton"/>
+<Button Content="Export Result Table" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ExportTableButton"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
+<Button Content="Reset Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ResetButton"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
 </StackPanel>
 <StackPanel HorizontalAlignment="Left" Height="435" VerticalAlignment="Top" Width="390" Margin="240,50,0,0">
 <Label HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Paste in comparison text below" Height="24" Width="388" Name="InputBoxLabel"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="405" Width="390" TextWrapping="Wrap" Name="InputBox" AcceptsReturn="True"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="415" Width="390" TextWrapping="Wrap" Name="InputBox" AcceptsReturn="True"/>
 </StackPanel>
 <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="435" Margin="642,75,0,0" AlternationCount="2" AlternatingRowBackground="Bisque" Name="ReportPetGrid" ItemsSource="{Binding emptyReportPet}"/>
-<Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="" Margin="1,0,0,30" Name="selectionIndicatorLabel" Width="190" Height="35" Background="#d4e2db" Foreground="#231955"/>
-<Label HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Current Known shown above" Margin="2,0,0,0" Name="verifySelectionLabel"/>
-<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="390" Margin="240,489,0,0" Name="DebugBorder">
-<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,0,0,0" Name="DebugLabel" Width="388" Height="30" Background="#dcf03f" Foreground="#000000"/>
+<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="300" Margin="670,660,0,0" Name="DebugBorder">
+<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0" Name="DebugLabel" Width="298" Height="30" Background="#dcf03f" Foreground="#000000"/>
 </Border>
+
 <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Latest Status Here" Margin="240,535,0,0" Width="390" Height="220" Name="DebugTextBox" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+<Button Content="Process Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="388" Margin="241,495,0,0" Height="27" Name="ProcessCompButton" Background="#7ed321" BorderThickness="2,2,2,2"/>
+<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1198" Height="50" Margin="0,0,0,0" Name="CSVGrid"/>
 </Grid>
 </Window>
 "@
@@ -100,11 +101,9 @@ Function Select-Known() {
     $selectedString = $CharSelect.Text
     if ($selectedString -eq ""){
         $selectedString = "Select from dropdown"
-        $selectionIndicatorLabel.Content = $selectedString
         $InputBox.Text = ""
         Write-Status -Message "Select-Known: Picked String $selectedString"
     }
-    $selectionIndicatorLabel.Content = $selectedString
     $InputBox.Text = ""
     if ($Script:petDB.Count -eq 0){
         Write-Verbose "Select-Known: internalDB not loaded - throwing user a message"
@@ -189,39 +188,19 @@ Function New-Comparison($reportPet) {
     
     # Generate reportPet
     $Script:reportPet = New-ReportPet -lowPet $lowPet -highPet $highPet
-
-    Write-Verbose "New-Comparison: BREAKPOINT - is reportPet populating correctly?"
     
+    # Transform reportPet Hashtable to an Object with Properties because not Enumerable
+    [array]$tmpObj = ConvertTo-Object $Script:reportPet
+    $Script:reportPetCSV = $tmpObj
+
+    Write-Verbose "New-Comparison: HTBREAKPOINT - reportPet and reportPetCSV populating correctly?"
+
     # Populate DataGrid somehow
     $ReportPetGrid.ItemsSource = $Script:reportPet
-}
-
-<#
-Function Update-Unknown {
-    Param(
-    [Parameter(Mandatory)]
-    [ValidateNotNullOrEmpty()]
-    $direction,
     
-    [Parameter(Mandatory)]
-    [ValidateNotNullOrEmpty()]
-    $sourceDBFile
-    )
-
-    $knownPet = Get-Selection -sourceDBFile $sourceDBFile
-    $evalText = Get-EvalText -direction $direction
-    $knowledge = Get-Knowledge $evalText
-    if($knowledge -ne "certain"){
-        Write-Host "Update-Unknown - WARNING - Comparison may not be certain!" -ForegroundColor Yellow
-        }
-    $textName = ($knownPet | Select-Object -Property Name).Name
-    Write-Host "Update-Unknown: Using $textName as Known Pet" -ForegroundColor Yellow
-    Get-Traits -evalText $evalText -direction $direction
-    Get-Subtotal -lowPet $lowPet -highPet $highPet
-    Get-Overall -evalText $evalText -direction $direction
-    Get-Status -lowPet $lowPet -highPet $highPet
+    # Populate the csvstyle data grid
+    $CSVGrid.ItemsSource = $Script:reportPetCSV
 }
-#>
 
 function Get-EvalText() {
     $Script:evalText = $InputBox.Text
@@ -372,24 +351,25 @@ function Get-Subtotal {
         $subtotalLow = $subtotalLow + $lowPet.$trait
         $subtotalHigh = $subtotalHigh + $highPet.$trait
     }
+
     # if $lowpet.keys -notcontains Subtotal add key/value
-     if($lowPet.Keys -notcontains "Subtotal"){
+     if($lowPet.Keys -notcontains "TOTAL"){
         Write-Verbose "Get-Subtotal: SUBTOTAL LOW creating key/value Subtotal of $subtotalLow"
-        $lowPet.Add("Subtotal",$subtotalLow)
+        $lowPet.Add("TOTAL",$subtotalLow)
         }
     else{
         Write-Verbose "Get-Subtotal: SUBTOTAL LOW - Updating key/value Subtotal to $subtotalLow"
-        $lowPet.Subtotal = $subtotalLow
+        $lowPet.TOTAL = $subtotalLow
         }
 
     # if $highpet.keys -notcontains Subtotal add key/value
-    if($highPet.Keys -notcontains "Subtotal"){
+    if($highPet.Keys -notcontains "TOTAL"){
         Write-Verbose "Get-Subtotal: SUBTOTAL HIGH creating key/value Subtotal of $subtotalHigh"
-        $highPet.Add("Subtotal",$subtotalHigh)
+        $highPet.Add("TOTAL",$subtotalHigh)
     }
     else{
         Write-Verbose "Get-Subtotal: SUBTOTAL HIGH updating key/value Subtotal to $subtotalHigh"
-        $highPet.Subtotal = $subtotalHigh
+        $highPet.TOTAL = $subtotalHigh
     }
 }
 
@@ -539,26 +519,58 @@ Function New-ReportPet {
         }      
     }
 
-    $subtotalLow  = ($lowPet.Subtotal).ToString()
-    $subtotalHigh = ($highPet.Subtotal).ToString()
+    $subtotalLow  = ($lowPet.TOTAL).ToString()
+    $subtotalHigh = ($highPet.TOTAL).ToString()
+    if($subtotalLow -eq $subtotalHigh){
+        $reportPet.Add("TOTAL",$subtotalLow)
+    }
+    else{
     $rangeSubtotal = $subtotalLow + " to " + $subtotalHigh
-    $reportPet.Add("Subtotal",$rangeSubtotal)
+    $reportPet.Add("TOTAL",$rangeSubtotal)
+    }
 
     $lowOverall   = ($lowPet.Overall).ToString()
     $highOverall  = ($highPet.Overall).ToString()
+    if($lowOverall -eq $highOverall){
+        $reportPet.Add("Overall",$lowOverall)
+    }
+    else{
     $rangeOverall = $lowOverall + " to " + $highOverall
     $reportPet.Add("Overall",$rangeOverall)
+    }
+
+    # If TOTAL is an integer, remove the key 'Overall'
+    if($reportPet.Total.Contains("to")){
+        # Leave HT alone, keep Overall
+    }
+    else{
+        #remove the Overall    
+        $reportPet.Remove('Overall')
+    }
+
     Write-Verbose "New-ReportPet: BREAKPOINT - is reportPet populating correctly?"
     Write-Status -Message "New-ReportPet: reportPet ready for viewing"
     return $reportPet
 }
 
+function ConvertTo-Object($hashtable) 
+{
+   $object = New-Object PSObject
+   $hashtable.GetEnumerator() | 
+      ForEach-Object { Add-Member -inputObject $object `
+	  	-memberType NoteProperty -name $_.Name -value $_.Value }
+   $object
+}
+
 #endregion 
-#region Update reportPet
+#region Update reportPet Display
 Function Update-ReportPetName(){
     $Script:reportPet.Name = $NameBox.Text
     $ReportPetGrid.ItemsSource = $null
     $ReportPetGrid.ItemsSource = $Script:reportPet
+    $Script:reportPetCSV[0].Name = $NameBox.Text
+    $CSVGrid.ItemsSource = $null
+    $CSVGrid.ItemsSource = $Script:reportPetCSV    
     Write-Verbose "Update-ReportPetName: BREAKPOINT is script reportPetName changing?"
     Write-Status -Message "Update-ReportPetName: Changed NAME value in reportPet"
 }
@@ -606,11 +618,11 @@ $UtoKButton.Add_Checked({Set-UtoK $this $_})
 $UtoKButton.Add_Initialized({Set-UtoK $this $_})
 $KtoUButton.Add_Checked({Set-KtoU $this $_})
 $CharSelect.Add_DropDownClosed({Select-Known $this $_})
-$ProcessCompButton.Add_Click({New-Comparison $this $_})
 $SetNameButton.Add_Click({Update-ReportPetName $this $_})
 $ResetButton.Add_Click({Reset-Result $this $_})
 $DebugLabel.Add_Click({Clear-DebugTextBox $this $_})
 $DebugTextBox.Add_TextChanged({Update-DebugTextBoxPosition $this $_})
+$ProcessCompButton.Add_Click({New-Comparison $this $_})
 
 $State = [PSCustomObject]@{}
 
@@ -665,7 +677,7 @@ $DataObject =  ConvertFrom-Json @"
     {"Key":"Sufficiency","Value":"UNKNOWN"},
     {"Key":"Targeting","Value":"UNKNOWN"},
     {"Key":"Toughness","Value":"UNKNOWN"},
-	{"Key":"Subtotal","Value":"UNKNOWN"},
+	{"Key":"TOTAL","Value":"UNKNOWN"},
 	{"Key":"Overall","Value":"UNKNOWN"}
 ],
 "internalJSON":
