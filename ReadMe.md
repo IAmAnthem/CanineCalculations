@@ -5,42 +5,48 @@
   - Other known values for that pet should still help you refine your unknown
 - v0.82 - Fix incorrect casting of Nimbleness, still need test for partial-knowns
 - v0.83 - Add GUI selector to pick character / pet before pasting in comparison
+- v0.90 - Refactor everything using Windows Presentation Framework (WPF)
   
 
-# How To Get and Run the Script (Stat-Canine.ps1)
+# How To Get and Run the Script (Canine-Comparator-GUI.ps1)
 If you're already familiar with github, you don't need directions!
 If you are not, try this.  
 
 Pet-Relations.ps1 is just a starter and isn't really deeply tested.
 
-Stat-Canine.ps1 should be working if you have good data to start from
+Canine-Comparator-GUI.ps1 should be working if you have good data to start from
 - From the repository main page: https://github.com/IAmAnthem/CanineCalculations
 - Look for the Code button and click the down-carat
 - Select the Download ZIP option
 - Extract the zipfile contents to wherever
 - Navigate to that folder in Windows Explorer
 - Open KNOWNS.csv and copy the formatting out to a new file like MyPets.csv or something is a good idea
-  - Partially known pets should now be working (i.e. if a trait is "10-20" I mark it unsolved and skip during comparison)
-- Right click on Stat-Canine.ps1 and select Run with PowerShell
+  - Partially known pets should now be working (i.e. if a trait is "10-20" or "10 to 20" I mark it unsolved and skip during comparison)
+- Right click on Canine-Comparator-GUI.ps1 and select Run with PowerShell
   - If you get a warning that the script is unsigned and you can't run it, you need to change the ExecutionPolicy
   - Right Click the Windows Start button
   - Click Windows PowerShell
-  - Type 'Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+  - Type `'Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser`
   - Try running the script again
 
-# Operations within Stat-Canine.ps1
-- Select a CSV file to use as your data source (KNOWNS.csv included to show you format, suggest you use your own file like MyPets.csv)
-- Select the direction you will be operating in
+# Operations within Canine-Comparator-GUI.ps1
+- Click Load Database
+  - Select a CSV file to use as your data source (KNOWNS.csv included to show you format, suggest you use your own file like MyPets.csv)
+  - PROTIP: You can actually programmatically retrieve a CSV from Google Docs
+    - I might add this with some sort of saved-configuration file so you can set up your source and pull it fresh each time
+    - Note for me: `curl 'https://docs.google.com/spreadsheets/d/<yourkey>/export?exportFormat=csv',`
+- Select the radio button indicating the direction you will be operating in
   - Example:  Dasher is an NPC and changes every time it spawns
     - if you did "compare my pet to dasher", the direction would be "Known to Unknown"
     - if you did "compare dasher to my pet", the diection would be "Unknown to Known"
-- Select the KNOWN pet in your comparison by number
-- The text-entry window appears, the title bar reminds you the direction it expects to see
-  - Paste in the entire comparison block and click OK (or hit ENTER) for the comparison to be processed
-  - All comparison text **must be certain**
-    - From the player's perspective, you should see **You are certain that...**
-    - If you are listening to someone compare out loud, make sure THEY saw the **certain** message
-      - Bug Paldin about getting 'out loud' to include **"Playername says: I am certain that *target* is:"**
+- Select the KNOWN pet in your comparison by picking from the dropdown list
+- To the right is a big text-entry window
+  - Paste in the entire comparison block
+  - Click Process Comparison for math and display operations
+    - All comparison text **must be certain**
+      - From the player's perspective, you should see **You are certain that...**
+      - If you are listening to someone compare out loud, make sure THEY saw the **certain** message
+        - Bug Paldin about getting 'out loud' to include **"Playername says: I am certain that *target* is:"**
 ```
   compare fox 2 to petname
 You look hard at a very large merle grey trained fox comparing to a very
@@ -66,10 +72,18 @@ You are certain that fox 2 is:
 Overall he seems to be inferior.
 They seem to be unrelated.
 ```
-- A warning message will appear if the comparison text does not include CERTAIN
+- A debugging / status window exists below the Process Comparison button
+  - Various messages will report progress, status, and if you did something wrong
 - `--- --- STATUS: Solved n of 17 --- ---` will report if any traits were solved
-- Select option 3 to see the range of values currently
-- Select 1 or 2 to continue processing comparisons
+- Continue refining by selecting additional comparators from the dropdown and pasting in the comparison
+- Change the placeholder "Name" value from "dummy" to whatever you want
+  - Above the Set Name (Unique) button is text input box.  Type whatever you want here.
+    - Use truely unique Name fields, or the dropdown won't work properly if you add this data to your CSV
+- Share your results with someone by copying the hashtable at the far right
+  - copy / paste should work fine with Ancient Anguish (converse mode)
+  - Appearance is also reasonable in Facebook Messenger
+- Export buttons are currently unavailable
+  - What do you want this to do, if anything?
 
 # Try it out!
 Included in this repository are three text files, you can use to obtain a verified result.
@@ -81,21 +95,22 @@ Included in this repository are three text files, you can use to obtain a verifi
 - Open the `Validation-UnknownToKnown.txt` file
 - Launch the script
 - Pick `KNOWNS.csv` as your source
-- Select `1) Compare an UNKNOWN canine to a KNOWN canine`
-- Select the known pet as `1 - Ballad Fireball 730/55 - Dave`
+- Select `UNKNOWN canine to a KNOWN canine`
+- Select the known pet as `Ballad Fireball 730/55`
 - Select the first comparison block in the Validation file (Ballad)
 - Paste the entire block into the input window
-- Hit `ENTER` or click `OK` button, calculations are performed
-  - Note the `--- --- STATUS: Solved 5 ot 17 --- ---`
-  - This is the same output as Option 4 in the menu
-- Select `3) Report current result in vertical columns` to review what know so far
+- Click `Process Comparison` button, calculations are performed
+  - Note the `--- --- STATUS: Solved 5 of 17 --- ---`
+- Review the Column-based output to the right
   - Any `solved` traits will be a single number
-  - Any `ranges` will appear as lowNumber - highNumber
-  - Subtotal is a ranged subtotal of what we've calculated
+  - Any `ranges` will appear as `lowNumber to highNumber`
+  - TOTAL is a ranged subtotal of what we've calculated
   - Overall is only reporting the comparison we found in the string `Overall she seems to be ?????`
     - This can be useful, look at the results so far
-      - Subtotal = 700 - 728
-      - Overall  = 721 - 725
+      ```
+      TOTAL = 700 - 728
+      Overall  = 721 - 725
+      ```
     - Even though we don't have it solved, we know for sure it must be in the range of $Overall
 
 ```
@@ -117,15 +132,15 @@ Procreation                    51 - 53
 Sufficiency                    36
 Targeting                      40
 Toughness                      49
-Subtotal                       700 - 728
+TOTAL                          700 - 728
 Overall                        721 - 725
 ```
 - Continue to refine calculations, select 1 to add another comparison
 - Select known pet # 2 - Cover Rocker
 - Paste in the comparison block for COVER in the Validation-UnknownToKnown.txt file
-- Hit `ENTER` for calculations to be performed
+- Click *Process Comparison*  for calculations to be performed
   - Notice we've solved more numbers! `--- --- STATUS: Solved 13 of 17 --- ---`
-- Select Option 3 for the report again
+- Review the output again
 ```
 Name                           dummy
 Alertness                      29
@@ -145,7 +160,7 @@ Procreation                    51 - 53
 Sufficiency                    36
 Targeting                      40
 Toughness                      49
-Subtotal                       716 - 716
+TOTAL                          716 - 716
 Overall                        721 - 723
 ```
 - Continue adding comparisons until you see you've solved 17 of 17!
