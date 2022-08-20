@@ -34,40 +34,39 @@ $traits = @(
 Add-Type -AssemblyName PresentationCore, PresentationFramework
 
 $Xaml = @"
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="1210" Height="900" Title="Canine Comparator" WindowStartupLocation="CenterScreen" Name="MyWindow">
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="1210" Height="950" Title="Canine Comparator" WindowStartupLocation="CenterScreen" Name="MyWindow">
 <Grid Name="MasterGrid" Margin="0,0,0,0">
 
 <Label VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Canine Comparator" Margin="0,0,0,0" Name="RightTopLabel" Height="39" Background="#473e72" Foreground="#e2eeed" FontFamily="Consolas" FontSize="26"/>
-<StackPanel HorizontalAlignment="Left" Height="648" VerticalAlignment="Top" Width="192" Margin="0,41,0,0">
-<Button Content="Load Database" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="LoadDbButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
-<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Select Mode" Height="24" Width="179" Margin="50,5,0,0"/>
-<RadioButton HorizontalAlignment="Left" VerticalAlignment="Top" Content="Unknown To Known" Height="35" Width="179" Margin="10,2,0,0" Name="UtoKButton" IsChecked="True"/>
-<RadioButton HorizontalAlignment="Left" VerticalAlignment="Top" Content="Known To Unknown" Height="32" Width="179" Margin="10,2,0,0" Name="KtoUButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
-<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Pick Known Character/Pet" Height="24" Width="179" Margin="20,5,0,0"/>
-<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Name="CharSelect" Height="32" ItemsSource="{Binding internalJSON}" DisplayMemberPath="Name" Margin="8,15,0,0" VerticalContentAlignment="Bottom"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="178" TextWrapping="Wrap" Margin="10,12,0,0" Name="NameBox"/>
-<Button Content="Set Name (Unique)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="SetNameButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
-<Button Content="Export Result Table" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ExportTableButton"/>
-<Button Content="Export Result CSV" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ExportCSVButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
-<Button Content="Reset Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ResetButton"/>
-<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
+<StackPanel HorizontalAlignment="Left" Height="730" VerticalAlignment="Top" Width="230" Margin="0,41,0,0">
+<Button Content="Load Database" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="LoadDbButton" Background="#7ed321" Foreground="#000000"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
+<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Select Mode" Height="24" Width="179" Margin="60,5,0,0"/>
+<RadioButton HorizontalAlignment="Left" VerticalAlignment="Top" Content="Unknown To Known" Height="35" Width="179" Margin="25,0,0,0" Name="UtoKButton" IsChecked="True"/>
+<RadioButton HorizontalAlignment="Left" VerticalAlignment="Top" Content="Known To Unknown" Height="32" Width="179" Margin="25,0,0,0" Name="KtoUButton"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
+<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Pick Known Character/Pet" Height="24" Width="179" Margin="35,5,0,0"/>
+<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Name="CharSelect" Height="32" ItemsSource="{Binding internalJSON}" DisplayMemberPath="Name" Margin="8,12,0,0" VerticalContentAlignment="Bottom" Background="#7ed321"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="210" TextWrapping="Wrap" Margin="8,12,0,0" Name="NameBox"/>
+<Button Content="Set Name (Unique)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="SetNameButton" Background="#f5a623"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
+<Button Content="Export Result Table" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="ExportTableButton" Opacity="0.5"/>
+<Button Content="Export Result CSV" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="ExportCSVButton" Opacity="0.5"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
+<Button Content="Reset Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="ResetButton" Background="#4a90e2"/>
+<Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
 </StackPanel>
-<StackPanel HorizontalAlignment="Left" Height="435" VerticalAlignment="Top" Width="390" Margin="240,50,0,0">
+
+<StackPanel HorizontalAlignment="Left" Height="730" VerticalAlignment="Top" Width="437" Margin="240,50,0,0">
 <Label HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Paste in comparison text below" Height="24" Width="388" Name="InputBoxLabel"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="415" Width="390" TextWrapping="Wrap" Name="InputBox" AcceptsReturn="True"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="413" Width="430" TextWrapping="Wrap" Name="InputBox" AcceptsReturn="True"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Latest Status Here" Margin="0,50,0,0" Width="430" Height="220" Name="DebugTextBox" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
 </StackPanel>
-<DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="435" Margin="642,75,0,0" AlternationCount="2" AlternatingRowBackground="Bisque" Name="ReportPetGrid" ItemsSource="{Binding emptyReportPet}"/>
-
-
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Latest Status Here" Margin="240,535,0,0" Width="390" Height="220" Name="DebugTextBox" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
-<Button Content="Process Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="388" Margin="241,495,0,0" Height="27" Name="ProcessCompButton" Background="#7ed321" BorderThickness="2,2,2,2"/>
-<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1184" Height="50" Margin="5,0,0,5" Name="CSVGrid"/>
-<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="640,538,0,0" Name="DebugLabel" Width="156" Height="214" Background="#dcf03f" Foreground="#000000"/>
+<DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="435" Margin="700,75,0,0" AlternationCount="2" AlternatingRowBackground="Bisque" Name="ReportPetGrid" ItemsSource="{Binding emptyReportPet}"/>
+<Button Content="Process Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="430" Margin="241,497,0,0" Height="27" Name="ProcessCompButton" Background="#7ed321" BorderThickness="2,2,2,2"/>
+<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1184" Height="65" Margin="5,0,0,15" Name="CSVGrid"/>
+<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="700,538,0,0" Name="DebugLabel" Width="156" Height="214" Background="#dcf03f" Foreground="#000000"/>
 </Grid>
 </Window>
 "@
@@ -84,11 +83,16 @@ $Xaml = @"
 Function Set-UtoK() {
     $Script:direction = "UnknownToKnown"
     Write-Status -Message "Setting Direction: $direction"
+    $UtoKButton.IsChecked=($true)
+    $KtoUButton.IsChecked=($false)
+    
 }
 
 Function Set-KtoU() {
     $Script:direction = "KnownToUnknown"
     Write-Status -Message "Setting Direction: $Script:direction"
+    $UtoKButton.IsChecked=($false)
+    $KtoUButton.IsChecked=($true)
 }
 #endregion 
 #region Select from DB
@@ -148,6 +152,132 @@ Function Read-Database(){
         }
     $Script:petDB = $Script:petDB | Sort-Object -Property Name
 }
+
+function File-Picker(){
+    $csvFilePath = New-WPFOpenFileDialog -WindowsTitle 'CSV Selector' -Path '$MyInvocation.MyCommand.Path' -Filter "CSV files (*.csv)|*.csv|All files (*.*)|*.*"
+    Write-Status -Message "File-Picker: selected $csvFilePath"
+    Read-CSVFile $csvFilePath
+    # Change the InputsSource on the file picker
+    $CharSelect.ItemsSource = $Script:petDB
+    $CharSelect.DisplayMemberPath = "Name"
+}
+
+function New-WPFOpenFileDialog {
+<#
+    .SYNOPSIS
+        The New-WFOpenFileDialog function will ask the user to select one of multiple files.
+        The function will return the literal path of the file(s) selected
+     
+    .DESCRIPTION
+        The New-WFOpenFileDialog function will ask the user to select one of multiple files.
+        The function will return the literal path of the file(s) selected
+     
+    .PARAMETER WindowsTitle
+        Specifies the Title of the window.
+     
+    .PARAMETER Path
+        Specifies the Path where the dialog will open.
+     
+    .PARAMETER Filter
+        Specifies the extension filter.Default is "All files (*.*)|*.*"
+            Other example:
+                "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                "Photos files (*.jpg)|*.png|All files (*.*)|*.*";
+                         
+    .PARAMETER AllowMultiSelect
+        Allow the user to select multiple files.
+     
+    .EXAMPLE
+        PS C:\> New-WPFOpenFileDialog -WindowsTitle 'Upload' -Path 'c:\"
+     
+    .NOTES
+        Author: Francois-Xavier Cat
+        Twitter:@LazyWinAdm
+        www.lazywinadmin.com
+        github.com/lazywinadmin
+#>
+    
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [Alias('Title')]
+        [String]$WindowsTitle,
+        
+        [Parameter(Mandatory = $true)]
+        [String]$Path,
+        
+        [String]$Filter = "All files (*.*)|*.*",
+        
+        [switch]$AllowMultiSelect
+    )
+    
+    BEGIN
+    {
+        Add-Type -AssemblyName System.Windows.Forms
+    }
+    PROCESS
+    {
+        
+        # Create Object and add properties
+        $OpenFileDialog = New-Object -TypeName System.Windows.Forms.OpenFileDialog
+        $OpenFileDialog.InitialDirectory = $Path
+        $OpenFileDialog.CheckPathExists = $true
+        $OpenFileDialog.CheckFileExists = $true
+        $OpenFileDialog.Title = $WindowTitle
+        
+        IF ($PSBoundParameters["Filter"]) { $OpenFileDialog.Filter = $Filter }
+        IF ($PSBoundParameters["AllowMultiSelect"]) { $OpenFileDialog.MultiSelect = $true }
+        
+        IF ($PSCmdlet.ShouldProcess('OpenFileDialog','Will prompt to select a file'))
+        {
+            # Show the Dialog
+            $OpenFileDialog.ShowHelp = $True
+            [void]$OpenFileDialog.ShowDialog()
+        }
+    }
+    END
+    {
+        # Return the selected file
+        IF ($PSBoundParameters["AllowMultiSelect"]) { $OpenFileDialog.Filenames }
+        
+        # Return the selected files
+        IF (-not $PSBoundParameters["AllowMultiSelect"]) { $OpenFileDialog.Filename }
+    }
+}
+
+function Read-CSVFile($csvFilePath){
+    Write-Status -Message "Read-CSVFile: trying Import-CSV"
+    $Script:petDB = Import-CSV -Path $csvFilePath
+    $Script:petDB = $Script:petDB | Where-Object -Property Status -eq "Active"
+    $Script:petDB = $Script:petDB | Sort-Object -Property Name
+    # Import-CSV brings in NoteProperty as string.  Cast as needed.
+    $Script:petDB = $Script:petDB | ForEach-Object {
+        if($_.Alertness -match "\D")   {$_.Alertness = [string]"UNSOLVED"}   else {$_.Alertness = [int]$_.Alertness}
+        if($_.Appetite -match "\D")    {$_.Appetite = [string]"UNSOLVED"}    else {$_.Appetite = [int]$_.Appetite}
+        if($_.Brutality -match "\D")   {$_.Brutality = [string]"UNSOLVED"}   else {$_.Brutality = [int]$_.Brutality}
+        if($_.Development -match "\D") {$_.Development = [string]"UNSOLVED"} else {$_.Development = [int]$_.Development}
+        if($_.Eluding -match "\D")     {$_.Eluding = [string]"UNSOLVED"}     else {$_.Eluding = [int]$_.Eluding}
+        if($_.Energy -match "\D")      {$_.Energy = [string]"UNSOLVED"}      else {$_.Energy = [int]$_.Energy}
+        if($_.Evasion -match "\D")     {$_.$trait = [string]"UNSOLVED"}      else {$_.Evasion = [int]$_.Evasion}
+        if($_.Ferocity -match "\D")    {$_.Ferocity = [string]"UNSOLVED"}    else {$_.Ferocity = [int]$_.Ferocity}
+        if($_.Fortitude -match "\D")   {$_.Fortitude = [string]"UNSOLVED"}   else {$_.Fortitude = [int]$_.Fortitude}
+        if($_.Insight -match "\D")     {$_.Insight = [string]"UNSOLVED"}     else {$_.Insight = [int]$_.Insight}
+        if($_.Might -match "\D")       {$_.Might = [string]"UNSOLVED"}       else {$_.Might = [int]$_.Might}
+        if($_.Nimbleness -match "\D")  {$_.Nimbleness = [string]"UNSOLVED"}  else {$_.Nimbleness = [int]$_.Nimbleness}
+        if($_.Patience -match "\D")    {$_.Patience = [string]"UNSOLVED"}    else {$_.Patience = [int]$_.Patience}
+        if($_.Procreation -match "\D") {$_.Procreation = [string]"UNSOLVED"} else {$_.Procreation = [int]$_.Procreation}
+        if($_.Sufficiency -match "\D") {$_.Sufficiency = [string]"UNSOLVED"} else {$_.Sufficiency = [int]$_.Sufficiency}
+        if($_.Targeting -match "\D")   {$_.Targeting = [string]"UNSOLVED"}   else {$_.Targeting = [int]$_.Targeting}
+        if($_.Toughness -match "\D")   {$_.Toughness = [string]"UNSOLVED"}   else {$_.Toughness = [int]$_.Toughness}
+        if($_.TOTAL -match "\D")       {$_.TOTAL = [string]"UNSOLVED"}       else {$_.TOTAL = [int]$_.TOTAL}
+# Output the object
+        $_
+        }
+    $Script:petDB = $Script:petDB | Sort-Object -Property Name
+    Write-Status -Message "Read-CSVFile: petDB loaded, populating dropdown selector"
+}
+
 #endregion 
 #region Process Comparison Data
 function New-Comparison($reportPet) {
@@ -552,14 +682,23 @@ Function Update-ReportPetName(){
 Function Reset-Result(){
     # Reset things back to on-load condition
     # lowPet and highPet are used to generate reportPet
+    Clear-Variable -Name lowPet -Scope Script
+    Clear-Variable -Name highPet -Scope Script
+    Clear-Variable -Name reportPet -Scope Script
+    Set-Variable -Name knownPet -Value @() -Option AllScope
+    Set-Variable -Name evalText -Value "" -Option AllScope
     $Script:lowPet = [ordered]@{Name="dummy"}
     $Script:highPet = [ordered]@{Name="dummy"}
     $Script:reportPet = [ordered]@{Name="dummy"}
     $Script:knownPet = @()
+    $Script:evalText = ""
     $ReportPetGrid.ItemsSource = $null
     $CSVGrid.ItemsSource = $null
     $InputBox.Text = ""
     Clear-DebugTextBox
+    Set-UtoK
+    Write-Status -Message "Reset-Result: Select a new comparator from dropdown"
+    $CharSelect.SelectedItem = ""
 }
 #endregion 
 #region DebugWindow
@@ -597,7 +736,8 @@ $Window = [Windows.Markup.XamlReader]::Parse($Xaml)
 $xml.SelectNodes("//*[@Name]") | ForEach-Object { Set-Variable -Name $_.Name -Value $Window.FindName($_.Name) }
 
 
-$LoadDbButton.Add_Click({Read-Database $this $_})
+$MyWindow.Add_Loaded({Set-UtoK $this $_})
+$LoadDbButton.Add_Click({File-Picker $this $_})
 $UtoKButton.Add_Checked({Set-UtoK $this $_})
 $UtoKButton.Add_Initialized({Set-UtoK $this $_})
 $KtoUButton.Add_Checked({Set-KtoU $this $_})
@@ -639,10 +779,7 @@ function FillDataContext($props){
        }
    }
 
-
-
 $DataObject =  ConvertFrom-Json @"
-
 {
 "emptyReportPet": [
     {"Key":"Name","Value":"No Comparisons Started"},
@@ -692,261 +829,9 @@ $DataObject =  ConvertFrom-Json @"
         "TOTAL":  "0",
         "Person":  "Anyone",
         "Status":  "Active"
-    },
-    {
-        "Name":  "Mulapin Ringo 733/54",
-        "Character":  "Mulapin",
-        "Gender":  "M",
-        "Alertness":  "30",
-        "Appetite":  "48",
-        "Brutality":  "26",
-        "Development":  "36",
-        "Eluding":  "52",
-        "Energy":  "37",
-        "Evasion":  "59",
-        "Ferocity":  "55",
-        "Fortitude":  "47",
-        "Insight":  "36",
-        "Might":  "47",
-        "Nimbleness":  "54",
-        "Patience":  "34",
-        "Procreation":  "54",
-        "Sufficiency":  "37",
-        "Targeting":  "38",
-        "Toughness":  "43",
-        "TOTAL":  "733",
-        "Person":  "Dave",
-        "Status":  "Active"
-    },
-    {
-        "Name":  "Lullaby Sandman 722/57",
-        "Character":  "Lullaby",
-        "Gender":  "M",
-        "Alertness":  "30",
-        "Appetite":  "46",
-        "Brutality":  "27",
-        "Development":  "38",
-        "Eluding":  "50",
-        "Energy":  "29",
-        "Evasion":  "56",
-        "Ferocity":  "57",
-        "Fortitude":  "45",
-        "Insight":  "39",
-        "Might":  "46",
-        "Nimbleness":  "57",
-        "Patience":  "32",
-        "Procreation":  "57",
-        "Sufficiency":  "31",
-        "Targeting":  "41",
-        "Toughness":  "41",
-        "TOTAL":  "722",
-        "Person":  "Dave",
-        "Status":  "Active"
-    },
-    {
-        "Name":  "Grazioso Hoover 718/54",
-        "Character":  "Grazioso",
-        "Gender":  "M",
-        "Alertness":  "24",
-        "Appetite":  "47",
-        "Brutality":  "28",
-        "Development":  "39",
-        "Eluding":  "54",
-        "Energy":  "35",
-        "Evasion":  "58",
-        "Ferocity":  "54",
-        "Fortitude":  "45",
-        "Insight":  "35",
-        "Might":  "46",
-        "Nimbleness":  "52",
-        "Patience":  "34",
-        "Procreation":  "54",
-        "Sufficiency":  "29",
-        "Targeting":  "40",
-        "Toughness":  "44",
-        "TOTAL":  "718",
-        "Person":  "Dave",
-        "Status":  "Active"
-    },
-    {
-        "Name":  "Exie Shaker 694/53",
-        "Character":  "Exie",
-        "Gender":  "M",
-        "Alertness":  "22",
-        "Appetite":  "47",
-        "Brutality":  "30",
-        "Development":  "43",
-        "Eluding":  "48",
-        "Energy":  "33",
-        "Evasion":  "55",
-        "Ferocity":  "44",
-        "Fortitude":  "46",
-        "Insight":  "39",
-        "Might":  "40",
-        "Nimbleness":  "55",
-        "Patience":  "29",
-        "Procreation":  "53",
-        "Sufficiency":  "30",
-        "Targeting":  "38",
-        "Toughness":  "42",
-        "TOTAL":  "694",
-        "Person":  "Dave",
-        "Status":  "Active"
-    },
-    {
-        "Name":  "Dirge Fluid 692/57",
-        "Character":  "Dirge",
-        "Gender":  "F",
-        "Alertness":  "26",
-        "Appetite":  "50",
-        "Brutality":  "25",
-        "Development":  "41",
-        "Eluding":  "51",
-        "Energy":  "29",
-        "Evasion":  "53",
-        "Ferocity":  "52",
-        "Fortitude":  "39",
-        "Insight":  "39",
-        "Might":  "43",
-        "Nimbleness":  "51",
-        "Patience":  "31",
-        "Procreation":  "57",
-        "Sufficiency":  "29",
-        "Targeting":  "33",
-        "Toughness":  "43",
-        "TOTAL":  "692",
-        "Person":  "Dave",
-        "Status":  "Active"
-    },
-    {
-        "Name":  "Crescendo Eddie 698/51",
-        "Character":  "Crescendo",
-        "Gender":  "M",
-        "Alertness":  "29",
-        "Appetite":  "51",
-        "Brutality":  "31",
-        "Development":  "34",
-        "Eluding":  "49",
-        "Energy":  "31",
-        "Evasion":  "55",
-        "Ferocity":  "46",
-        "Fortitude":  "45",
-        "Insight":  "32",
-        "Might":  "44",
-        "Nimbleness":  "54",
-        "Patience":  "34",
-        "Procreation":  "51",
-        "Sufficiency":  "32",
-        "Targeting":  "39",
-        "Toughness":  "41",
-        "TOTAL":  "698",
-        "Person":  "Dave",
-        "Status":  "Active"
-    },
-    {
-        "Name":  "Cover Rocker 714/60",
-        "Character":  "Cover",
-        "Gender":  "M",
-        "Alertness":  "29",
-        "Appetite":  "49",
-        "Brutality":  "26",
-        "Development":  "40",
-        "Eluding":  "53",
-        "Energy":  "33",
-        "Evasion":  "52",
-        "Ferocity":  "55",
-        "Fortitude":  "46",
-        "Insight":  "35",
-        "Might":  "40",
-        "Nimbleness":  "50",
-        "Patience":  "35",
-        "Procreation":  "60",
-        "Sufficiency":  "30",
-        "Targeting":  "37",
-        "Toughness":  "44",
-        "TOTAL":  "714",
-        "Person":  "Dave",
-        "Status":  "Active"
-    },
-    {
-        "Name":  "Ballad Fireball 730/55",
-        "Character":  "Ballad",
-        "Gender":  "M",
-        "Alertness":  "26",
-        "Appetite":  "47",
-        "Brutality":  "32",
-        "Development":  "41",
-        "Eluding":  "51",
-        "Energy":  "31",
-        "Evasion":  "53",
-        "Ferocity":  "53",
-        "Fortitude":  "43",
-        "Insight":  "39",
-        "Might":  "47",
-        "Nimbleness":  "52",
-        "Patience":  "37",
-        "Procreation":  "55",
-        "Sufficiency":  "36",
-        "Targeting":  "39",
-        "Toughness":  "48",
-        "TOTAL":  "730",
-        "Person":  "Dave",
-        "Status":  "Active"
-    },
-    {
-        "Name":  "Mulapin Gringo 709/53",
-        "Character":  "Mulapin",
-        "Gender":  "M",
-        "Alertness":  "24",
-        "Appetite":  "45",
-        "Brutality":  "27",
-        "Development":  "36",
-        "Eluding":  "56",
-        "Energy":  "35",
-        "Evasion":  "59",
-        "Ferocity":  "52",
-        "Fortitude":  "47",
-        "Insight":  "34",
-        "Might":  "45",
-        "Nimbleness":  "49",
-        "Patience":  "36",
-        "Procreation":  "53",
-        "Sufficiency":  "30",
-        "Targeting":  "35",
-        "Toughness":  "46",
-        "TOTAL":  "709",
-        "Person":  "Dave",
-        "Status":  "Inactive"
-    },
-    {
-        "Name":  "Guest Puppeh",
-        "Character":  "Guest",
-        "Gender":  "U",
-        "Alertness":  "1",
-        "Appetite":  "2",
-        "Brutality":  "3",
-        "Development":  "4",
-        "Eluding":  "5",
-        "Energy":  "6",
-        "Evasion":  "7",
-        "Ferocity":  "8",
-        "Fortitude":  "9",
-        "Insight":  "10",
-        "Might":  "11",
-        "Nimbleness":  "12",
-        "Patience":  "13",
-        "Procreation":  "14",
-        "Sufficiency":  "15",
-        "Targeting":  "16",
-        "Toughness":  "0-1",
-        "TOTAL":  "136-137",
-        "Person":  "Anyone",
-        "Status":  "Active"
     }
 ]
-
 }
-
 "@
 
 $DataContext = New-Object System.Collections.ObjectModel.ObservableCollection[Object]
