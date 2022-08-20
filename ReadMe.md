@@ -1,3 +1,7 @@
+# Glam Shot
+![alt text](https://github.com/IAmAnthem/CanineCalculations/blob/15c73ac96f3e9b0a71748816fea11ca41bc6c353/GUI-v0.90.PNG)
+
+
 # Release History
 - v0.80 - Softlaunch, solicitation of feedback
 - v0.81 - Allow for unsolved pets in source CSV
