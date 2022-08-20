@@ -34,7 +34,7 @@ $traits = @(
 Add-Type -AssemblyName PresentationCore, PresentationFramework
 
 $Xaml = @"
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="1200" Height="900">
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="1210" Height="900" Title="Canine Comparator" WindowStartupLocation="CenterScreen" Name="MyWindow">
 <Grid Name="MasterGrid" Margin="0,0,0,0">
 
 <Label VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Canine Comparator" Margin="0,0,0,0" Name="RightTopLabel" Height="39" Background="#473e72" Foreground="#e2eeed" FontFamily="Consolas" FontSize="26"/>
@@ -51,8 +51,8 @@ $Xaml = @"
 <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="178" TextWrapping="Wrap" Margin="10,12,0,0" Name="NameBox"/>
 <Button Content="Set Name (Unique)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="SetNameButton"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
-<Button Content="Export Result CSV" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ExportCSVButton"/>
 <Button Content="Export Result Table" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ExportTableButton"/>
+<Button Content="Export Result CSV" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ExportCSVButton"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
 <Button Content="Reset Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="10,12,0,0" Height="27" Name="ResetButton"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="180" Margin="5,15,0,0"/>
@@ -62,13 +62,12 @@ $Xaml = @"
 <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="415" Width="390" TextWrapping="Wrap" Name="InputBox" AcceptsReturn="True"/>
 </StackPanel>
 <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="435" Margin="642,75,0,0" AlternationCount="2" AlternatingRowBackground="Bisque" Name="ReportPetGrid" ItemsSource="{Binding emptyReportPet}"/>
-<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="300" Margin="670,660,0,0" Name="DebugBorder">
-<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0" Name="DebugLabel" Width="298" Height="30" Background="#dcf03f" Foreground="#000000"/>
-</Border>
+
 
 <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Latest Status Here" Margin="240,535,0,0" Width="390" Height="220" Name="DebugTextBox" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
 <Button Content="Process Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="388" Margin="241,495,0,0" Height="27" Name="ProcessCompButton" Background="#7ed321" BorderThickness="2,2,2,2"/>
-<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1198" Height="50" Margin="0,0,0,0" Name="CSVGrid"/>
+<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1184" Height="50" Margin="5,0,0,5" Name="CSVGrid"/>
+<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="640,538,0,0" Name="DebugLabel" Width="156" Height="214" Background="#dcf03f" Foreground="#000000"/>
 </Grid>
 </Window>
 "@
@@ -79,12 +78,12 @@ $Xaml = @"
 
 
 #region Logic
-#Write your code here
+
 #endregion 
 #region Set-Direction
 Function Set-UtoK() {
     $Script:direction = "UnknownToKnown"
-    Write-Status -Message "Setting Direction: $Script:direction"
+    Write-Status -Message "Setting Direction: $direction"
 }
 
 Function Set-KtoU() {
@@ -112,20 +111,18 @@ Function Select-Known() {
     else {
     $Script:knownPet = $Script:petDB | Where-Object -Property Name -eq $selectedString
     Write-Verbose "Select-Known: Picked from petDB $Script:knownPet"
-    $tempStr = $Script:knownPet | Out-String
-    Write-Status -Message "Select-Known: Picked object $tempStr"
+    Write-Status -Message "Select-Known: Picked from petDB $selectedString"
     }
 }
 
 Function Read-Database(){
     # Stick a selector here to allow pick an external CSV
     # For now lets carry my known values in the script so I can build all functionality
-    Write-Status -Message "Read-Database: Internal JSON loaded as petDB"
+    Write-Status -Message "Read-Database: Reading Internal JSON loaded as petDB"
     $Script:petDB = $DataObject.internalJSON  # Produces the same array I got from Import-CSV 
     $Script:petDB = $Script:petDB | Where-Object -Property Status -eq "Active"
     $Script:petDB = $Script:petDB | Sort-Object -Property Name
     Write-Verbose "Read-Database: Using JSON from DataObject"
-    Write-Verbose "Read-Database: BREAKPOINT - check data types"
     # Just like Import-CSV, my numerical values have come in as strings.  Cast them properly.
     $Script:petDB = $Script:petDB | ForEach-Object {
         if($_.Alertness -match "\D")   {$_.Alertness = [string]"UNSOLVED"}   else {$_.Alertness = [int]$_.Alertness}
@@ -153,26 +150,26 @@ Function Read-Database(){
 }
 #endregion 
 #region Process Comparison Data
-Function New-Comparison($reportPet) {
+function New-Comparison($reportPet) {
     # Ensure a direction is selected
     if ($Script:direction -notin "UnknownToKnown","KnownToUnknown"){
-        Write-Verbose "New-Comparison: value in direction variable is not valid"
         Write-Status -Message "New-Comparison: Select a direction of comparison from radio buttons"
         return
     }
-      Write-Verbose "New-Comparison: Checking direction as: $Script:direction"
       Write-Status -Message "New-Comparison: Direction indicator is $Script:direction"
 
     # Ensure a knownPet exists
     if ($knownPet.Count -eq 0){
-        Write-Verbose "New-Comparison: No knownPet data - how do I popup?"
+        Write-Status -Message "New-Comparison: No knownPet selected"
+        return
     }
     # Read the text from inputbox
-    Get-EvalText
-
-    # Check for knowledge level - Omitting
-    # Get-Knowledge -evalText $Script:evalText
-
+    $Script:evalText = Get-EvalText
+    if($Script:evalText.count -lt 5){
+        Write-Status -Message "Get-EvalText: Not enough lines from inputBox to continue"
+        return
+    }
+    
     # Generate lowPet, highPet
     Get-Traits -evalText $Script:evalText
 
@@ -186,52 +183,28 @@ Function New-Comparison($reportPet) {
     # Maybe some cool wacky button things someday
     Get-Status -lowPet $lowPet -highPet $highPet
     
-    # Generate reportPet
+    # Generate reportPet hashtable
     $Script:reportPet = New-ReportPet -lowPet $lowPet -highPet $highPet
     
     # Transform reportPet Hashtable to an Object with Properties because not Enumerable
-    [array]$tmpObj = ConvertTo-Object $Script:reportPet
-    $Script:reportPetCSV = $tmpObj
+    [array]$Script:reportPetCSV = Format-CSVrow -hashtable $script:reportPet
 
-    Write-Verbose "New-Comparison: HTBREAKPOINT - reportPet and reportPetCSV populating correctly?"
-
-    # Populate DataGrid somehow
+    # Populate vertical DataGrid
     $ReportPetGrid.ItemsSource = $Script:reportPet
     
-    # Populate the csvstyle data grid
+    # Populate horizontal data grid
     $CSVGrid.ItemsSource = $Script:reportPetCSV
 }
 
 function Get-EvalText() {
-    $Script:evalText = $InputBox.Text
+    $tmp = $InputBox.Text
     # Split a giant chunk of string input into lines
-    $Script:evalText = $evalText.Split([Environment]::NewLine, [System.StringSplitOptions]::RemoveEmptyEntries)
-    if($Script:evalText.count -lt 5){
-        Write-Verbose "Get-EvalText: evalText array of lines seems too short: $Script:evalText"
-        Write-Status -Message "Get-EvalText: Not enough text in eval to continue, Dave should be smarter and write something that can handle 4-trait evals"
-        return
-    }
-    Write-Verbose "Get-EvalText: reading InputBox content to be: $evalText"
+    $tmp = $tmp.Split([Environment]::NewLine, [System.StringSplitOptions]::RemoveEmptyEntries)
+    Write-Status "Get-EvalText: loaded text from input box"
+    return $tmp
 }
 
-function Get-Knowledge {
-    param(
-    [Parameter(Mandatory)]
-    [ValidateNotNullOrEmpty()]
-    $evalText
-    )
-    $knowledgePattern = "think","feel","certain"
-    foreach($pattern in $knowledgePattern){
-        Write-Verbose "Get-Knowledge: Checking $pattern"
-        if($evalText -match $pattern){
-            $knowledge = $pattern
-            } else {
-            $knowledge = "KNOWLEDGE level is missing"
-            }
-        }
-}
-
-Function Get-Traits {
+function Get-Traits {
     Param(
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()]
@@ -251,7 +224,6 @@ Function Get-Traits {
             Write-Message -Message "Get-Traits: Known pet does not have a value for $trait - skipping"
             return
         } else {
-
         #Strip down to get the comparison text
         $diffDesc = foreach ($str in $evalText){
             Select-String -InputObject $str -Pattern $pattern
@@ -329,7 +301,6 @@ Function Get-Traits {
         Write-Verbose "Get-Traits: FINISHED $trait"
         }
     }
-    Write-Verbose "Get-Traits: BREAKPOINT - Evaulate status of lowPet and highPet"
     Write-Status -Message "Get-Traits: Completed comparison data"
 }
 
@@ -347,7 +318,7 @@ function Get-Subtotal {
     $subtotalLow = 0
     $subtotalHigh = 0
     foreach($trait in $traits){
-# This might bug on trait missing?  Needs more testing
+    # This might bug on trait missing?  Needs more testing
         $subtotalLow = $subtotalLow + $lowPet.$trait
         $subtotalHigh = $subtotalHigh + $highPet.$trait
     }
@@ -373,8 +344,8 @@ function Get-Subtotal {
     }
 }
 
-Function Get-Overall {
-    Param(
+function Get-Overall {
+    param(
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()]
     $evalText,
@@ -465,8 +436,8 @@ Function Get-Overall {
     Write-Status -Message "Get-Overall: Finished processing"
 }
 
-Function Get-Status {
-    Param(
+function Get-Status {
+    param(
     [Parameter(Mandatory)]
     [ValidateNotNullOrEmpty()]
     $lowPet,
@@ -489,8 +460,8 @@ Function Get-Status {
     Write-Status -Message "Get-Status: --- --- Solved $i of $total --- ---"
 }
 
-Function New-ReportPet {
-    Param(
+function New-ReportPet {
+    param(
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         $lowPet,
@@ -549,17 +520,20 @@ Function New-ReportPet {
     }
 
     Write-Verbose "New-ReportPet: BREAKPOINT - is reportPet populating correctly?"
-    Write-Status -Message "New-ReportPet: reportPet ready for viewing"
     return $reportPet
 }
 
-function ConvertTo-Object($hashtable) 
-{
+function ConvertTo-Object($hashtable){
    $object = New-Object PSObject
    $hashtable.GetEnumerator() | 
       ForEach-Object { Add-Member -inputObject $object `
 	  	-memberType NoteProperty -name $_.Name -value $_.Value }
    $object
+}
+
+function Format-CSVrow($hashtable){
+    [array]$tmpObj = ConvertTo-Object $hashtable
+    return $tmpObj
 }
 
 #endregion 
@@ -578,11 +552,12 @@ Function Update-ReportPetName(){
 Function Reset-Result(){
     # Reset things back to on-load condition
     # lowPet and highPet are used to generate reportPet
-    $lowPet = [ordered]@{Name="dummy"}
-    $highPet = [ordered]@{Name="dummy"}
+    $Script:lowPet = [ordered]@{Name="dummy"}
+    $Script:highPet = [ordered]@{Name="dummy"}
     $Script:reportPet = [ordered]@{Name="dummy"}
-    $knownPet = @()
-    $ReportPetGrid.ItemsSource = "{Binding emptyReportPet}"
+    $Script:knownPet = @()
+    $ReportPetGrid.ItemsSource = $null
+    $CSVGrid.ItemsSource = $null
     $InputBox.Text = ""
     Clear-DebugTextBox
 }
@@ -598,6 +573,15 @@ Function Clear-DebugTextBox(){
 
 Function Update-DebugTextBoxPosition(){
     $DebugTextBox.ScrollToEnd()
+}
+#endregion 
+#region ExportData
+Function Export-MyTable(){
+    Write-Status -Message "Export-MyData: Button not yet implemented"
+}
+
+Function Export-MyRow(){
+    Write-Status -Message "Export-MyRow: Button not yet implemented"
 }
 #endregion 
 
@@ -619,10 +603,12 @@ $UtoKButton.Add_Initialized({Set-UtoK $this $_})
 $KtoUButton.Add_Checked({Set-KtoU $this $_})
 $CharSelect.Add_DropDownClosed({Select-Known $this $_})
 $SetNameButton.Add_Click({Update-ReportPetName $this $_})
+$ExportTableButton.Add_Click({Export-MyTable $this $_})
+$ExportCSVButton.Add_Click({Export-MyRow $this $_})
 $ResetButton.Add_Click({Reset-Result $this $_})
-$DebugLabel.Add_Click({Clear-DebugTextBox $this $_})
 $DebugTextBox.Add_TextChanged({Update-DebugTextBoxPosition $this $_})
 $ProcessCompButton.Add_Click({New-Comparison $this $_})
+$DebugLabel.Add_Click({Clear-DebugTextBox $this $_})
 
 $State = [PSCustomObject]@{}
 
