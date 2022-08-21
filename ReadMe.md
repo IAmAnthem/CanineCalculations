@@ -315,7 +315,79 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
       - Microsoft provides some help here I think
 
 ### Walkthrough of setup (Careful what goes into the repo!)
-- 
+1. Go to Google developer console [API dashboard](https://console.cloud.google.com/projectselector2/apis/dashboard?supportedpurview=project)
+2. Create `Create Project`
+  1. Set Name to `CanineComparatorTest`
+  2. Select `Create`
+3. On Dashboard, click ENABLE APIS AND SERVICES
+4. In the search box, enter sheets and click Google Sheets API
+  1. click ENABLE
+5. On Dashboard, click Credentials in the left navigation pane 
+  1. click CONFIGURE CONSENT SCREEN. 
+  2. If asked to select a User Type, select External, then click Create
+  3. Enter data in the App Name name field (for example, `Canine Comparator Test`)
+  4. Enter your email in the fields that ask for it, then click SAVE AND CONTINUE
+  5. Click ADD OR REMOVE SCOPES
+    1. Select Google Sheets API
+    2. click Update
+  6. Click SAVE AND CONTINUE
+  7. Click ADD USERS
+    1. enter your Google email and click ADD
+  8. Click Save and Continue
+  9. Review Oath consent screen summary and click Back to Dashboard
+6. On Dashboard, click Credentials in the left navigation pane
+7. Click Create credentials (dropdown) and select Oauth client ID
+  1. From Application type dropdown
+    1. Select Desktop app application type
+    2. Enter a name for the client(for example, Canine Comparator creds)
+    3. Click Create
+  2. Copy your client ID and client secret to a file on your computer
+    1. PROTECT THIS - it will have fill access to your data!
+    2. BACK THIS UP - keep it in more than one secure location
+  3. Download the JSON file too, because maybe we'll use that too
+    1. PROTECT / BACK UP as above
+8. Create a PowerShell script to get user consent and a refresh token.
+  1. Create this script
+
+```
+# Develop Auth
+function Get-GSheetsToken {
+    param (
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        $jsonPath
+    )
+    $testJSON = Get-Content -Path $jsonPath | ConvertFrom-Json
+
+    Write-Host $testJSON.installed.client_id
+    Write-Host $testJSON.installed.project_id
+    Write-Host $testJSON.installed.auth_uri
+    Write-Host $testJSON.installed.token_uri
+    Write-Host $testJSON.installed.auth_provider_x509_cert_url
+    Write-Host $testJSON.installed.client_secret
+    Write-Host $testJSON.installed.redirect_uris
+    
+    $clientId = $testJSON.installed.client_id
+    $clientSecret = $testJSON.installed.client_secret
+    $scope = "https://www.googleapis.com/auth/spreadsheets"
+    # $scopes = "https://www.googleapis.com/auth/drive", "https://www.googleapis.com/auth/gmail.send"
+    
+    # Start-Process "https://accounts.google.com/o/oauth2/v2/auth?client_id=$clientId&scope=$([string]::Join("%20", $scopes))&access_type=offline&response_type=code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"
+    Start-Process "https://accounts.google.com/o/oauth2/v2/auth?client_id=$clientId&scope=$([string]::Join("%20", $scope))&access_type=offline&response_type=code&redirect_uri=urn:ietf:wg:oauth:2.0:oob"
+     
+    $code = Read-Host "Please enter the code"
+       
+    $response = Invoke-WebRequest https://www.googleapis.com/oauth2/v4/token -ContentType application/x-www-form-urlencoded -Method POST -Body "client_id=$clientid&client_secret=$clientSecret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&code=$code&grant_type=authorization_code"
+      
+    # Write-Output "Refresh token obtained: " ($response.Content | ConvertFrom-Json).refresh_token
+    $myRefreshToken = ($response.Content | ConvertFrom-Json).refresh_token
+    return $myRefreshToken
+}
+
+$jsonPath = "C:\Users\winnd\OneDrive\Documents\Anguish\CanineComparatorCreds.json"
+$myRefreshToken = Get-GSheetsToken -jsonPath $jsonPath
+```
+
 
 
 
