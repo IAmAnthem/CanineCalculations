@@ -12,19 +12,19 @@
 - v0.90 - Refactor everything using Windows Presentation Framework (WPF)
   
 
-# How To Get and Run the Script (Canine-Comparator-GUI.ps1)
-If you're already familiar with github, you don't need directions!
+# How To Get and Run the Script
+If you're already familiar with github, you don't need directions!  
 If you are not, try this.  
 
-Pet-Relations.ps1 is just a starter and isn't really deeply tested.
+`Pet-Relations.ps1` is just a starter and isn't really deeply tested.
 
-Canine-Comparator-GUI.ps1 should be working if you have good data to start from
+`Canine-Comparator-GUI.ps1` should be working if you have good data to start from
 - From the repository main page: https://github.com/IAmAnthem/CanineCalculations
 - Look for the Code button and click the down-carat
 - Select the Download ZIP option
 - Extract the zipfile contents to wherever
 - Navigate to that folder in Windows Explorer
-- Open KNOWNS.csv and copy the formatting out to a new file like MyPets.csv or something is a good idea
+- Open `KNOWNS.csv` and copy the formatting out to a new file like MyPets.csv or something is a good idea
   - Partially known pets should now be working (i.e. if a trait is "10-20" or "10 to 20" I mark it unsolved and skip during comparison)
 - Right click on `Canine-Comparator-GUI.ps1` and select Run with PowerShell
   - If you get a warning that the script is unsigned and you can't run it, you need to change the ExecutionPolicy
