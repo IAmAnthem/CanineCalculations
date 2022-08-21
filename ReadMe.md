@@ -26,7 +26,7 @@ Canine-Comparator-GUI.ps1 should be working if you have good data to start from
 - Navigate to that folder in Windows Explorer
 - Open KNOWNS.csv and copy the formatting out to a new file like MyPets.csv or something is a good idea
   - Partially known pets should now be working (i.e. if a trait is "10-20" or "10 to 20" I mark it unsolved and skip during comparison)
-- Right click on Canine-Comparator-GUI.ps1 and select Run with PowerShell
+- Right click on `Canine-Comparator-GUI.ps1` and select Run with PowerShell
   - If you get a warning that the script is unsigned and you can't run it, you need to change the ExecutionPolicy
   - Right Click the Windows Start button
   - Click Windows PowerShell
@@ -228,7 +228,9 @@ Once a character has had MANY litters, the compare ability also reports the rela
 Any player can get the lineage tree for their canine at the bottom of the character's [Player Info Page](http://anguish.org/tools/player_info.php_)
 
 ## What do the scripts do (right now)?
-- Stat-Canine.ps1
+- Canine-Comparator-GUI.ps1
+  - Everything that Stat-Canine did, but in a single pane of glass, windows UI
+- Stat-Canine.ps1 (mostly-console with some Windows Forms - deprecated)
   - Pick from a list of pets with known values
   - Paste in the comparison text (shortcut, hit ENTER after paste - mudders ARE keyboard warriors)
   - Report the number of traits 'solved'
@@ -258,6 +260,9 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 ## PoshGUI
 - Can this all happen in a single pane of glass?  Stay Tuned.
+  - Oh yeah, you can
+  - FYSA, having absolutely zero experience in UI work, WPF, Forms, etc - this is about 20 hours of labor
+    - That's a GREAT result.  Really amazing how fast you can work up things in WPF
 
 ## New-BreedingPlan.ps1
 - Take a set of knowns and devise a three-stage breeding plan
@@ -304,32 +309,15 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 
 ## Source Data (Import-CSV)
-- User request - add logic to allow inclusion of partially-solved canines in KNOWNS.csv
-  - Logic something like (if $arr.field matches any non-numeric (\D), set field value to UNSOLVED)
-  - Changed code but don't have data to test against, have to mock up something from my actual-knowns
-- Added a column for active/inactive
-- Added file-picker to select CSV, but this doesn't work in VSCode
-  - Figure out why
-- Starting to get a little clunky with > 20 pets in PRIVATE-KNOWNS.csv
-- I really hate dealing with GUI elements in powershell, just get the logic all sorted then consider a web-enabled approach
-- WISHLIST: Some people like to store their data pivoted so it's easy to copy/paste into AA, WebApp would need to provide a filtered / pivoted data view
-  - Cheat: Borrow users source-data and write the view code in Google Sheets?  
-  Inelegant and not portable.  *Why am I considering this?*
-
+- Look at Google APIs and pulling / pushing to a source spreadsheet
+  - Estimate 40 hours, I know nothing about Google APIs!
 
 ## Selecting Known Pet
-- Would you prefer a GUI pick-list?
-  - Click to select a known pet, click OK to proceed with inputting the comparison
-- CHANGES
-  - Source data now includes a STATUS field, and I filter on import, selecting only **Active** canines
-  - Allows CSV to contain historical data
-    - You're going to need a lot of historical data if you want to make educated guesses at the breeding calculation formulas
-
+- Nothing outstanding currently
 
 ## Verbosity
-- Currently I use an inelegant '# DEBUG: Write-Host "Some Message"' and uncomment the write-host messages
-  - This is not the way.
-  - Read up on The Way.  Probably Write-Verbose
+- Currently spitting out a lot of noise (Write-Verbose) messages in the console
+  - Disable this when I reach v1.0
 
 
 # LICENSE
