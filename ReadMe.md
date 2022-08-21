@@ -317,37 +317,37 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 ### Walkthrough of setup (Careful what goes into the repo!)
 1. Go to Google developer console [API dashboard](https://console.cloud.google.com/projectselector2/apis/dashboard?supportedpurview=project)
 2. Create `Create Project`
-  1. Set Name to `CanineComparatorTest`
-  2. Select `Create`
+  - Set Name to `CanineComparatorTest`
+  - Select `Create`
 3. On Dashboard, click ENABLE APIS AND SERVICES
 4. In the search box, enter sheets and click Google Sheets API
-  1. click ENABLE
+  - click ENABLE
 5. On Dashboard, click Credentials in the left navigation pane 
-  1. click CONFIGURE CONSENT SCREEN. 
-  2. If asked to select a User Type, select External, then click Create
-  3. Enter data in the App Name name field (for example, `Canine Comparator Test`)
-  4. Enter your email in the fields that ask for it, then click SAVE AND CONTINUE
-  5. Click ADD OR REMOVE SCOPES
-    1. Select Google Sheets API
-    2. click Update
-  6. Click SAVE AND CONTINUE
-  7. Click ADD USERS
-    1. enter your Google email and click ADD
-  8. Click Save and Continue
-  9. Review Oath consent screen summary and click Back to Dashboard
+  - click CONFIGURE CONSENT SCREEN. 
+  - If asked to select a User Type, select External, then click Create
+  - Enter data in the App Name name field (for example, `Canine Comparator Test`)
+  - Enter your email in the fields that ask for it, then click SAVE AND CONTINUE
+  - Click ADD OR REMOVE SCOPES
+    - Select Google Sheets API
+    - click Update
+  - Click SAVE AND CONTINUE
+  - Click ADD USERS
+    - enter your Google email and click ADD
+  - Click Save and Continue
+  - Review Oath consent screen summary and click Back to Dashboard
 6. On Dashboard, click Credentials in the left navigation pane
 7. Click Create credentials (dropdown) and select Oauth client ID
-  1. From Application type dropdown
-    1. Select Desktop app application type
-    2. Enter a name for the client(for example, Canine Comparator creds)
-    3. Click Create
-  2. Copy your client ID and client secret to a file on your computer
-    1. PROTECT THIS - it will have fill access to your data!
-    2. BACK THIS UP - keep it in more than one secure location
-  3. Download the JSON file too, because maybe we'll use that too
-    1. PROTECT / BACK UP as above
+  - From Application type dropdown
+    - Select Desktop app application type
+    - Enter a name for the client(for example, Canine Comparator creds)
+    - Click Create
+  - Copy your client ID and client secret to a file on your computer
+    - PROTECT THIS - it will have fill access to your data!
+    - BACK THIS UP - keep it in more than one secure location
+  - Download the JSON file too, because maybe we'll use that too
+    - PROTECT / BACK UP as above
 8. Create a PowerShell script to get user consent and a refresh token.
-  1. Create this script
+  - Create this script
 
 ```
 # Develop Auth
