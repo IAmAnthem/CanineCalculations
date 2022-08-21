@@ -311,6 +311,17 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 ## Source Data (Import-CSV)
 - Look at Google APIs and pulling / pushing to a source spreadsheet
   - Estimate 40 hours, I know nothing about Google APIs!
+  - PowerShell
+- Set up Google API Access
+  - References:
+    - [UMN Google Module](https://github.com/umn-microsoft-automation/UMN-Google)
+      - From what I can tell, didn't refactor to remove Internet Explorer requirement
+    - https://docs.microsoft.com/en-us/advertising/scripts/examples/authenticating-with-google-services#option3
+      - Microsoft provides some help here I think
+
+### Walkthrough of setup (Careful what goes into the repo!)
+
+
 
 ## Selecting Known Pet
 - Nothing outstanding currently
