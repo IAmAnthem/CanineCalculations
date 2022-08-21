@@ -256,18 +256,13 @@ Some players may choose to not reveal their pet lineage or stats for whatever re
 - Skills: I'm a systems engineer by trade and at heart, I learn enough code to do what I need to do.  
 Currently that's PowerShell, not something sexy like a [Serverless Web Application](https://aws.amazon.com/serverless/build-a-web-app/).  Or some PHP/MySQL web app?  But maybe someday?
 
-# Progress Notes - what am I working on?
-
-## PoshGUI
-- Can this all happen in a single pane of glass?  Stay Tuned.
-  - Oh yeah, you can
-  - FYSA, having absolutely zero experience in UI work, WPF, Forms, etc - this is about 20 hours of labor
-    - That's a GREAT result.  Really amazing how fast you can work up things in WPF
+# Progress Notes
 
 ## New-BreedingPlan.ps1
 - Take a set of knowns and devise a three-stage breeding plan
   - Challenges: gender decisions
   - Query: last-step gender?
+  - Decision: Do I want to expose this algorithm?  Lot of hours went into figuring it out
 
 ## Data collection - an analysis of uncertain canine comparisons
 - Need new characters (maybe 10? 12?) with traited canines of known stat (or at least very close to known).
@@ -280,20 +275,16 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - Does the group of 'feel' statters reach a consensus stat?
   - If so how do they compare to true values?
 
-
 ## Check the knowledge level
-
   - `if $knowledge -ne certain, abort` Well we can't do that because "listeners" can't see relationships, pinged Paldin
   - Future development: Determine the variations in think/feel
     - Is this predictable?
     - redshift/blueshift the results based on (whatever)
 
-
 ## Check the relationship level
   - not really relevant at this point
   - Futureproofing for some other need
   - Trying to decide between One Big Table and different tables for Traits / Relationships
-
 
 ## Work on Menu functionality
 - WISHLIST
@@ -301,12 +292,16 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - This is a long way off and I don't relish the idea
     - Would mean users also need the ability to mark existing records inactive
 
-
 ## Working on Update-Unknown (Get-Traits and Get-Overall)
 - Validation: larger data set, Unknown to Known looks good
 - Validation: larger data set, Known to Unknown looks good
 - Validation: mixed mode comparisons (KtoU, then UtoK, etc etc - seems OK from limited test)
 
+## Verbosity
+- Currently spitting out a lot of noise (Write-Verbose) messages in the console
+  - Disable this when I reach v1.0
+
+---
 
 ## Source Data (Import-CSV)
 - Look at Google APIs and pulling / pushing to a source spreadsheet
@@ -320,15 +315,8 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
       - Microsoft provides some help here I think
 
 ### Walkthrough of setup (Careful what goes into the repo!)
+- 
 
-
-
-## Selecting Known Pet
-- Nothing outstanding currently
-
-## Verbosity
-- Currently spitting out a lot of noise (Write-Verbose) messages in the console
-  - Disable this when I reach v1.0
 
 
 # LICENSE
