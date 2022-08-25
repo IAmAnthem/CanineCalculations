@@ -4,3 +4,4 @@ PRIVATE-BREEDERS.csv
 !Validation-*.txt
 *.json
 *.log
+*.p12
