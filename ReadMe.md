@@ -230,15 +230,6 @@ Any player can get the lineage tree for their canine at the bottom of the charac
 ## What do the scripts do (right now)?
 - Canine-Comparator-GUI.ps1
   - Everything that Stat-Canine did, but in a single pane of glass, windows UI
-- Stat-Canine.ps1 (mostly-console with some Windows Forms - deprecated)
-  - Pick from a list of pets with known values
-  - Paste in the comparison text (shortcut, hit ENTER after paste - mudders ARE keyboard warriors)
-  - Report the number of traits 'solved'
-  - Continue adding comparisons to refine
-  - Report the known values and ranges for unknown values
-- PetRelations.ps1
-  - Compare the lineage of two pets to see if they are related
-  - If unrelated, report the lineage of any output puppies
 
 ## Limitations of Scripts
 I'm starting with some assumptions and haven't really tested the workflow in the wild with someone not heavily invested in canine breeding. 
@@ -258,17 +249,6 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
 
 # Progress Notes - what am I working on?
 
-## PoshGUI
-- Can this all happen in a single pane of glass?  Stay Tuned.
-  - Oh yeah, you can
-  - FYSA, having absolutely zero experience in UI work, WPF, Forms, etc - this is about 20 hours of labor
-    - That's a GREAT result.  Really amazing how fast you can work up things in WPF
-
-## New-BreedingPlan.ps1
-- Take a set of knowns and devise a three-stage breeding plan
-  - Challenges: gender decisions
-  - Query: last-step gender?
-
 ## Data collection - an analysis of uncertain canine comparisons
 - Need new characters (maybe 10? 12?) with traited canines of known stat (or at least very close to known).
   - Figure out more alt names, because OCD
@@ -280,49 +260,18 @@ Currently that's PowerShell, not something sexy like a [Serverless Web Applicati
   - Does the group of 'feel' statters reach a consensus stat?
   - If so how do they compare to true values?
 
-
 ## Check the knowledge level
-
   - `if $knowledge -ne certain, abort` Well we can't do that because "listeners" can't see relationships, pinged Paldin
   - Future development: Determine the variations in think/feel
     - Is this predictable?
     - redshift/blueshift the results based on (whatever)
 
-
-## Check the relationship level
-  - not really relevant at this point
-  - Futureproofing for some other need
-  - Trying to decide between One Big Table and different tables for Traits / Relationships
-
-
-## Work on Menu functionality
-- WISHLIST
-  - Insert this pet into database (prompt for fields to fill in for real name/owner/whatnot?) and updatecsv
-  - This is a long way off and I don't relish the idea
-    - Would mean users also need the ability to mark existing records inactive
-
-
-## Working on Update-Unknown (Get-Traits and Get-Overall)
-- Validation: larger data set, Unknown to Known looks good
-- Validation: larger data set, Known to Unknown looks good
-- Validation: mixed mode comparisons (KtoU, then UtoK, etc etc - seems OK from limited test)
-
-
-## Source Data (Import-CSV)
-- Look at Google APIs and pulling / pushing to a source spreadsheet
-  - Estimate 40 hours, I know nothing about Google APIs!
-
-## Selecting Known Pet
-- Nothing outstanding currently
-
 ## Verbosity
 - Currently spitting out a lot of noise (Write-Verbose) messages in the console
   - Disable this when I reach v1.0
 
-
 # LICENSE
 This project is licensed under the terms of the MIT license.
-
 
 Repository image credit: Image by <a href="https://pixabay.com/users/sarahrichterart-1546275/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3833915">Sarah Richter</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3833915">Pixabay</a>
 
