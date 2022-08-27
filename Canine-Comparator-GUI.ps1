@@ -57,7 +57,7 @@ $Xaml = @"
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
 </StackPanel>
 <StackPanel HorizontalAlignment="Left" Height="730" VerticalAlignment="Top" Width="437" Margin="240,51,0,0">
-<Label HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Paste in comparison text below" Height="24" Width="388" Name="InputBoxLabel"/>
+<Label HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Paste in comparison text below" Height="24" Width="388" Name="InputBoxLabel" Margin="0,-1,0,0"/>
 <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="413" Width="430" TextWrapping="Wrap" Name="InputBox" AcceptsReturn="True"/>
 <Button Content="Process Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="430" Margin="0,5,0,0" Height="27" Name="ProcessCompButton" Background="LimeGreen" BorderThickness="2,2,2,2"/>
 <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Latest Status Here" Margin="0,10,0,0" Width="430" Height="195" Name="DebugTextBox" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
@@ -67,7 +67,7 @@ $Xaml = @"
 <ProgressBar HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="300" Margin="5,5,0,0" Name="StatusBar" IsIndeterminate="False" ToolTip="Progress Meter" Background="Red" Value="0" BorderThickness="2,2,2,2"/>
 <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="5,10,0,0" Name="DebugLabel" Width="150" Height="190" BorderThickness="2,2,2,2" Background="Yellow" Foreground="Black"/>
 </StackPanel>
-<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1184" Height="65" Margin="5,0,0,7" Name="CSVGrid"/>
+<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1205" Height="65" Margin="2,0,0,7" Name="CSVGrid"/>
 </Grid>
 </Window>
 "@
@@ -739,13 +739,10 @@ $Window = [Windows.Markup.XamlReader]::Parse($Xaml)
 $xml.SelectNodes("//*[@Name]") | ForEach-Object { Set-Variable -Name $_.Name -Value $Window.FindName($_.Name) }
 
 
-$MyWindow.Add_Initialized({undefined $this $_})
 $MyWindow.Add_Loaded({Set-UtoK $this $_})
 $LoadDbButton.Add_Click({File-Picker $this $_})
 $UtoKButton.Add_Checked({Set-UtoK $this $_})
-$UtoKButton.Add_Click({undefined $this $_})
 $KtoUButton.Add_Checked({Set-KtoU $this $_})
-$KtoUButton.Add_Click({undefined $this $_})
 $CharSelect.Add_DropDownClosed({Select-Known $this $_})
 $SetNameButton.Add_Click({Update-ReportPetName $this $_})
 $ExportTableButton.Add_Click({Export-MyTable $this $_})
