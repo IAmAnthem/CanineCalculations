@@ -1,4 +1,4 @@
-$verbosePreference = "Continue"
+﻿$verbosePreference = "Continue"
 $lowPet = [ordered]@{Name="dummy"}
 $highPet = [ordered]@{Name="dummy"}
 $reportPet = [ordered]@{Name="dummy"}
@@ -46,10 +46,10 @@ $Xaml = @"
 <RadioButton HorizontalAlignment="Left" VerticalAlignment="Top" Content="Known To Unknown" Height="32" Width="179" Margin="25,0,0,0" Name="KtoUButton"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Pick Known Character/Pet" Height="24" Width="179" Margin="35,5,0,0"/>
-<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Name="CharSelect" Height="32" ItemsSource="{Binding internalJSON}" DisplayMemberPath="Name" Margin="8,12,0,0" VerticalContentAlignment="Bottom" Background="#7ed321"/>
+<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Name="CharSelect" Height="32" ItemsSource="{Binding internalJSON}" DisplayMemberPath="Name" Margin="8,12,0,0" VerticalContentAlignment="Bottom" Background="LimeGreen"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
 <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="210" TextWrapping="Wrap" Margin="8,12,0,0" Name="NameBox"/>
-<Button Content="Set Name (Unique)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="SetNameButton" Background="#f5a623"/>
+<Button Content="Set Name (Unique)" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="SetNameButton" Background="Gold"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
 <Button Content="Export Result Table" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="ExportTableButton" Opacity="0.5"/>
 <Button Content="Export Result CSV" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="ExportCSVButton" Opacity="0.5"/>
@@ -57,16 +57,18 @@ $Xaml = @"
 <Button Content="Reset Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="8,12,0,0" Height="27" Name="ResetButton" Background="#4a90e2"/>
 <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FFF4F4F5" Stroke="Black" Height="5" Width="216" Margin="5,15,0,0"/>
 </StackPanel>
-
-<StackPanel HorizontalAlignment="Left" Height="730" VerticalAlignment="Top" Width="437" Margin="240,50,0,0">
+<StackPanel HorizontalAlignment="Left" Height="730" VerticalAlignment="Top" Width="437" Margin="240,51,0,0">
 <Label HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Paste in comparison text below" Height="24" Width="388" Name="InputBoxLabel"/>
 <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="413" Width="430" TextWrapping="Wrap" Name="InputBox" AcceptsReturn="True"/>
-<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Latest Status Here" Margin="0,50,0,0" Width="430" Height="220" Name="DebugTextBox" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+<Button Content="Process Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="430" Margin="0,5,0,0" Height="27" Name="ProcessCompButton" Background="LimeGreen" BorderThickness="2,2,2,2"/>
+<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Latest Status Here" Margin="0,10,0,0" Width="430" Height="195" Name="DebugTextBox" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
 </StackPanel>
-<DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="435" Margin="700,75,0,0" AlternationCount="2" AlternatingRowBackground="Bisque" Name="ReportPetGrid" ItemsSource="{Binding emptyReportPet}"/>
-<Button Content="Process Comparison" HorizontalAlignment="Left" VerticalAlignment="Top" Width="430" Margin="241,497,0,0" Height="27" Name="ProcessCompButton" Background="#7ed321" BorderThickness="2,2,2,2"/>
-<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1184" Height="65" Margin="5,0,0,15" Name="CSVGrid"/>
-<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="700,538,0,0" Name="DebugLabel" Width="156" Height="214" Background="#dcf03f" Foreground="#000000"/>
+<StackPanel HorizontalAlignment="Left" Height="730" VerticalAlignment="Top" Width="437" Margin="679,51,0,0">
+<DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="413" Margin="5,25,0,0" AlternationCount="2" AlternatingRowBackground="Bisque" Name="ReportPetGrid" ItemsSource="{Binding emptyReportPet}" ColumnWidth="Auto"/>
+<ProgressBar HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="300" Margin="5,5,0,0" Name="StatusBar" IsIndeterminate="False" ToolTip="Progress Meter" Background="Red" Value="50" BorderThickness="2,2,2,2"/>
+<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="5,10,0,0" Name="DebugLabel" Width="150" Height="190" BorderThickness="2,2,2,2" Background="Yellow" Foreground="Black"/>
+</StackPanel>
+<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1184" Height="65" Margin="5,0,0,7" Name="CSVGrid"/>
 </Grid>
 </Window>
 "@
@@ -736,19 +738,7 @@ $Window = [Windows.Markup.XamlReader]::Parse($Xaml)
 $xml.SelectNodes("//*[@Name]") | ForEach-Object { Set-Variable -Name $_.Name -Value $Window.FindName($_.Name) }
 
 
-$MyWindow.Add_Loaded({Set-UtoK $this $_})
 $LoadDbButton.Add_Click({File-Picker $this $_})
-$UtoKButton.Add_Checked({Set-UtoK $this $_})
-$UtoKButton.Add_Initialized({Set-UtoK $this $_})
-$KtoUButton.Add_Checked({Set-KtoU $this $_})
-$CharSelect.Add_DropDownClosed({Select-Known $this $_})
-$SetNameButton.Add_Click({Update-ReportPetName $this $_})
-$ExportTableButton.Add_Click({Export-MyTable $this $_})
-$ExportCSVButton.Add_Click({Export-MyRow $this $_})
-$ResetButton.Add_Click({Reset-Result $this $_})
-$DebugTextBox.Add_TextChanged({Update-DebugTextBoxPosition $this $_})
-$ProcessCompButton.Add_Click({New-Comparison $this $_})
-$DebugLabel.Add_Click({Clear-DebugTextBox $this $_})
 
 $State = [PSCustomObject]@{}
 
@@ -779,7 +769,10 @@ function FillDataContext($props){
        }
    }
 
+
+
 $DataObject =  ConvertFrom-Json @"
+
 {
 "emptyReportPet": [
     {"Key":"Name","Value":"No Comparisons Started"},
@@ -832,6 +825,7 @@ $DataObject =  ConvertFrom-Json @"
     }
 ]
 }
+
 "@
 
 $DataContext = New-Object System.Collections.ObjectModel.ObservableCollection[Object]
@@ -841,3 +835,5 @@ $Window.DataContext = $DataContext
 Set-Binding -Target $CharSelect -Property $([System.Windows.Controls.ComboBox]::ItemsSourceProperty) -Index 1 -Name "internalJSON"  
 Set-Binding -Target $ReportPetGrid -Property $([System.Windows.Controls.DataGrid]::ItemsSourceProperty) -Index 0 -Name "emptyReportPet"  
 $Window.ShowDialog()
+
+
