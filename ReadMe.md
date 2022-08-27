@@ -1,5 +1,5 @@
 # Glam Shot
-![alt text](https://github.com/IAmAnthem/CanineCalculations/blob/15c73ac96f3e9b0a71748816fea11ca41bc6c353/GUI-v0.90.PNG)
+![alt text](https://github.com/IAmAnthem/CanineCalculations/blob/79897d0c9ec1c1ae7b841d6059e237df79e797e7/GUI-v0.90.PNG)
 
 
 # Release History
@@ -10,6 +10,7 @@
 - v0.82 - Fix incorrect casting of Nimbleness, still need test for partial-knowns
 - v0.83 - Add GUI selector to pick character / pet before pasting in comparison
 - v0.90 - Refactor everything using Windows Presentation Framework (WPF)
+- v0.91 - Cleanup broken stuff from Google Sheets integration tests
   
 
 # How To Get and Run the Script (Canine-Comparator-GUI.ps1)
