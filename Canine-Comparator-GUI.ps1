@@ -33,7 +33,7 @@ $traits = @(
 Add-Type -AssemblyName PresentationCore, PresentationFramework
 
 $Xaml = @"
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="1210" Height="950" Title="Canine Comparator" WindowStartupLocation="CenterScreen" Name="MyWindow">
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="1220" Height="950" Title="Canine Comparator" WindowStartupLocation="CenterScreen" Name="MyWindow">
 <Grid Name="MasterGrid" Margin="0,0,0,0">
 
 <Label VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Canine Comparator" Margin="0,0,0,0" Name="RightTopLabel" Height="39" Background="#473e72" Foreground="#e2eeed" FontFamily="Consolas" FontSize="26"/>
@@ -67,7 +67,7 @@ $Xaml = @"
 <ProgressBar HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="300" Margin="5,5,0,0" Name="StatusBar" IsIndeterminate="False" ToolTip="Progress Meter" Background="Red" Value="0" BorderThickness="2,2,2,2"/>
 <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="5,10,0,0" Name="DebugLabel" Width="150" Height="190" BorderThickness="2,2,2,2" Background="Yellow" Foreground="Black"/>
 </StackPanel>
-<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1205" Height="65" Margin="2,0,0,7" Name="CSVGrid"/>
+<DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1200" Height="70" Margin="2,0,0,7" Name="CSVGrid"/>
 </Grid>
 </Window>
 "@
