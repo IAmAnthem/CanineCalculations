@@ -748,6 +748,7 @@ $KtoUButton.Add_Checked({Set-KtoU $this $_})
 $KtoUButton.Add_Click({undefined $this $_})
 $CharSelect.Add_DropDownClosed({Select-Known $this $_})
 $ProcessCompButton.Add_Click({New-Comparison $this $_})
+$DebugTextBox.Add_TextChanged({Update-DebugTextBoxPosition $this $_})
 
 $State = [PSCustomObject]@{}
 
