@@ -719,7 +719,7 @@ Function Update-DebugTextBoxPosition(){
 #endregion 
 #region ExportData
 Function Export-MyTable(){
-    Write-Status -Message "Export-MyData: Button not yet implemented"
+    Write-Status -Message "Export-MyTable: Button not yet implemented"
 }
 
 Function Export-MyRow(){
@@ -747,8 +747,13 @@ $UtoKButton.Add_Click({undefined $this $_})
 $KtoUButton.Add_Checked({Set-KtoU $this $_})
 $KtoUButton.Add_Click({undefined $this $_})
 $CharSelect.Add_DropDownClosed({Select-Known $this $_})
+$SetNameButton.Add_Click({Update-ReportPetName $this $_})
+$ExportTableButton.Add_Click({Export-MyTable $this $_})
+$ExportCSVButton.Add_Click({Export-MyRow $this $_})
+$ResetButton.Add_Click({Reset-Result $this $_})
 $ProcessCompButton.Add_Click({New-Comparison $this $_})
 $DebugTextBox.Add_TextChanged({Update-DebugTextBoxPosition $this $_})
+$DebugLabel.Add_Click({Clear-DebugTextBox $this $_})
 
 $State = [PSCustomObject]@{}
 
