@@ -26,7 +26,6 @@ $traits = @(
     'Patience','Procreation','Sufficiency','Targeting','Toughness'
     )
 
-
 #-------------------------------------------------------------#
 #----Initial Declarations-------------------------------------#
 #-------------------------------------------------------------#
@@ -65,7 +64,7 @@ $Xaml = @"
 </StackPanel>
 <StackPanel HorizontalAlignment="Left" Height="730" VerticalAlignment="Top" Width="437" Margin="679,51,0,0">
 <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="413" Margin="5,25,0,0" AlternationCount="2" AlternatingRowBackground="Bisque" Name="ReportPetGrid" ItemsSource="{Binding emptyReportPet}" ColumnWidth="Auto"/>
-<ProgressBar HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="300" Margin="5,5,0,0" Name="StatusBar" IsIndeterminate="False" ToolTip="Progress Meter" Background="Red" Value="50" BorderThickness="2,2,2,2"/>
+<ProgressBar HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="300" Margin="5,5,0,0" Name="StatusBar" IsIndeterminate="False" ToolTip="Progress Meter" Background="Red" Value="0" BorderThickness="2,2,2,2"/>
 <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="CLEAR DEBUG MESSAGES" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="5,10,0,0" Name="DebugLabel" Width="150" Height="190" BorderThickness="2,2,2,2" Background="Yellow" Foreground="Black"/>
 </StackPanel>
 <DataGrid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1184" Height="65" Margin="5,0,0,7" Name="CSVGrid"/>
@@ -590,6 +589,8 @@ function Get-Status {
     $total = $traits.Count
     Write-Verbose "Get-Status: Completed low/high comparison"
     Write-Status -Message "Get-Status: --- --- Solved $i of $total --- ---"
+    Write-Status -Message "Get-Status: Updating Progress Bar"
+    $StatusBar.Value = ($i / $total)*100
 }
 
 function New-ReportPet {
@@ -738,7 +739,15 @@ $Window = [Windows.Markup.XamlReader]::Parse($Xaml)
 $xml.SelectNodes("//*[@Name]") | ForEach-Object { Set-Variable -Name $_.Name -Value $Window.FindName($_.Name) }
 
 
+$MyWindow.Add_Initialized({undefined $this $_})
+$MyWindow.Add_Loaded({Set-UtoK $this $_})
 $LoadDbButton.Add_Click({File-Picker $this $_})
+$UtoKButton.Add_Checked({Set-UtoK $this $_})
+$UtoKButton.Add_Click({undefined $this $_})
+$KtoUButton.Add_Checked({Set-KtoU $this $_})
+$KtoUButton.Add_Click({undefined $this $_})
+$CharSelect.Add_DropDownClosed({Select-Known $this $_})
+$ProcessCompButton.Add_Click({New-Comparison $this $_})
 
 $State = [PSCustomObject]@{}
 
