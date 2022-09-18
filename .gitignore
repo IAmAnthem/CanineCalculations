@@ -1,5 +1,6 @@
 PRIVATE-KNOWNS.csv
 PRIVATE-BREEDERS.csv
+PRIVATE*.csv
 *.txt
 !Validation-*.txt
 launch.json
