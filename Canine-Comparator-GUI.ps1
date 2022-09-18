@@ -352,8 +352,6 @@ function Get-Traits {
         Write-Verbose "Get-Traits: Comparing in direction $direction"
         if($knownValue -eq "UNSOLVED"){
             Write-Verbose "Get-Traits: Known pet does not have value for $trait - skipping"
-            Write-Message -Message "Get-Traits: Known pet does not have a value for $trait - skipping"
-            return
         } else {
         #Strip down to get the comparison text
         $diffDesc = foreach ($str in $evalText){

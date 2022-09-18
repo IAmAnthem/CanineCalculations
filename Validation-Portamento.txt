@@ -523,6 +523,28 @@ Treehugger says: They seem to be unrelated.
 A very large mist light grey trained fox runs off in search of Treehugger.
 Treehugger left the game.
 
+Grogu Gen1 M
+Grogu looks hard at a tiny light grey puppy and then again at a very large
+slate grey trained dog comparing them.
+Grogu says: Alertness seems better.
+Grogu says: Appetite seems better.
+Grogu says: Brutality seems marginally better.
+Grogu says: Development seems better.
+Grogu says: Eluding seems barely inferior.
+Grogu says: Energy seems better.
+Grogu says: Evasion seems better.
+Grogu says: Ferocity seems better.
+Grogu says: Fortitude seems better.
+Grogu says: Insight seems barely inferior.
+Grogu says: Might seems better.
+Grogu says: Nimbleness seems much better.
+Grogu says: Patience seems slightly better.
+Grogu says: Procreation seems better.
+Grogu says: Sufficiency seems better.
+Grogu says: Targeting seems much better.
+Grogu says: Toughness seems better.
+Grogu says: Overall he seems to be outstandingly better.
+Grogu says: They seem to be unrelated.
 Name                           dummy                                                                                                          
 Alertness                      11 - 12                                                                                                        
 Appetite                       5 - 9                                                                                                          
